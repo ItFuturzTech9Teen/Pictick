@@ -1,0 +1,195 @@
+﻿
+@{
+    ViewBag.Title = "Portfolio";
+}
+
+<script src="~/assets/dragdropfileupload/filereader.js"></script>
+<script src="~/Js/InstaAlbum/Services/HomeService.js"></script>
+<script src="~/Js/InstaAlbum/Controllers/Portfolio.js"></script>
+<link href="~/assets/dragdropfileupload/style.css" rel="stylesheet" />
+
+<div class="content-wrapper" ng-controller="PortfolioController">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <div class="page-title col-lg-12">
+                <a data-popup="tooltip" title="Bank Data" class="pull-right" ng-click="Clear()" data-toggle="modal" data-target="#myModal">
+                    <button type="button" class="btn btn-warning">
+                        <i class="icon-plus2"></i> New Category
+                    </button>
+                </a>
+                <div class="col-md-6 pull-left">
+                    <input type="text" ng-model="Search" placeholder="Search..." class="form-control" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Content area -->
+    <div class="content">
+        <!-- Basic tabs -->
+        <div class="row">
+            <div class="col-lg-4" ng-repeat="data in DataList | filter:Search">
+                <div class="panel border-grey invoice-grid timeline-content">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <span class="f-s-20">{{data.Title}}</span><br />
+                            </div>
+                            <hr class="col-sm-11" style="margin-top: 3px;margin-bottom: 5px;" />
+                            <div class="col-sm-12">
+                                <div class="col-sm-7">
+                                    <img ng-src='~/{{data.Image}}'
+                                         style="width:100%;height:160px;" />
+                                </div>
+                                <div class="col-sm-5 pull-right">
+                                    <button type="button" class="btn btn-info col-sm-12 mt-5" ng-click="EditData(data)">
+                                        <i class="icon-pencil7"></i> Edit Category
+                                    </button>
+                                    <button type="button" class="btn btn-danger col-sm-12 mt-5" ng-click="DeleteData(data.Id)">
+                                        <i class="icon-trash"></i> Delete Category
+                                    </button>
+                                    <button type="button" class="btn btn-success col-sm-12 mt-5" ng-click="GetPhotoData(data.Id)">
+                                        <i class="icon-image3"></i> Category Photo
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /basic tabs -->
+    </div>
+    <!-- /content area -->
+    <!--Add Modal Popup-->
+    <div class="container ">
+        <div class="modal fade col-md-12 col-sm-12 col-xs-12" id="myModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add Category</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal form-validate-jquery" ng-submit="SaveData()">
+                            <fieldset class="content-group">
+                                <div class="form-group col-lg-6" ng-show="showStudio">
+                                    <label class="control-label col-lg-12">Studio <span class="text-danger">*</span></label>
+                                    <div class=" col-lg-12">
+                                        <select class="form-control ng-pristine ng-valid ng-touched" ng-model="StudioId" ng-change="GetData()"
+                                                ng-options="data.Id as data.Name for data in StudioList">
+                                            <option value="" disabled="" ng-selected="true" class="" selected="selected"> Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label class="control-label  col-lg-12">Name <span class="text-danger">*</span></label>
+                                    <div class=" col-lg-12">
+                                        <input type="text" name="basic" ng-model="Title" class="form-control"
+                                               required="required" placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label class="control-label col-lg-12">Cover Image <span class="text-danger">*</span></label>
+                                    <div class="col-lg-12">
+                                        <input id="File1" type="file" file-model="myFile" />
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="text-right">
+                                <button type="button" class="btn btn-danger" ng-click="Clear()" data-dismiss="modal">Close <i class="icon-stack-cancel position-right"></i></button>
+                                <button type="submit" class="btn btn-primary">Submit <i class="icon-arrow-right14 position-right"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--Add Modal Popup End-->
+    <!--Image Modal Popup-->
+    <div class="container">
+        <div class="modal fade col-md-12 col-sm-12 col-xs-12" id="myPhotoModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    @*<div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Album Photo</h4>
+                        </div>*@
+                    <div class="modal-body">
+                        <div class="navbar navbar-default navbar-xs content-group">
+                            <ul class="nav navbar-nav visible-xs-block">
+                                <li class="full-width text-center"><a data-toggle="collapse" data-target="#navbar-filter"><i class="icon-menu7"></i></a></li>
+                            </ul>
+                            <div class="navbar-collapse collapse" id="navbar-filter">
+                                <ul class="nav navbar-nav bg-col-designmaster">
+                                    <li class="active">
+                                        <a id="togList" href="#ViewPhoto" data-toggle="tab">
+                                            <i class="icon-images3 position-left"></i> All Photo
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a id="togAdd" href="#AddPhoto" data-toggle="tab">
+                                            <i class="icon-plus22 position-left"></i> Add Photo
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tabbable">
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="ViewPhoto">
+                                    <div class="panel panel-flat">
+                                        @*<div class="panel-heading">
+                                                <h6 class="panel-title">Basic Information</h6>
+                                            </div>*@
+                                        <div class="panel-body">
+                                            <div class="raw">
+                                                <div class="col-lg-3 mb-10" ng-repeat="data in PortfolioList">
+                                                    <a ng-href='~/{{data.Image}}' target="_blank">
+                                                        <img ng-src='~/{{data.Image}}' width="100%" />
+                                                    </a>
+                                                    <button type="button" class="btn btn-danger mt-5"
+                                                            ng-click="DeletePhoto(data.Id)">
+                                                        <i class="icon-trash"></i> Delete
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="tab-pane fade in" id="AddPhoto">
+                                    <div class="panel panel-flat">
+                                        @*<div class="panel-heading">
+                                                <h6 class="panel-title">Basic Information</h6>
+                                            </div>*@
+                                        <div class="panel-body">
+                                            <div id="dropbox">
+                                                <div class="text">
+                                                    Drop Images Here
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="icon-stack-cancel position-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Add Modal Popup End-->
+</div>
+

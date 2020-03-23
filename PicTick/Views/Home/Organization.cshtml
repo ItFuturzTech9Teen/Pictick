@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Organization";
+}
+
+<script src="~/assets/dragdropfileupload/filereader.js"></script>
+<script src="~/Js/InstaAlbum/Services/HomeService.js"></script>
+<script src="~/Js/InstaAlbum/Controllers/Organization.js"></script>
+<link href="~/assets/dragdropfileupload/style.css" rel="stylesheet" />
+
+<style>
+    .titleFont {
+        font-size: 15px;
+        font-weight: 700;
+    }
+
+    .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+        color: #fff;
+        background-color: darkgray;
+    }
+</style>
+<div class="content-wrapper" ng-controller="OrganizationController">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Home</span> - Organization</h4>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-default navbar-xs content-group">
+        <ul class="nav navbar-nav visible-xs-block">
+            <li class="full-width text-center"><a data-toggle="collapse" data-target="#navbar-filter"><i class="icon-menu7"></i></a></li>
+        </ul>
+        <div class="navbar-collapse collapse" id="navbar-filter">
+            <ul class="nav navbar-nav bg-col-designmaster">
+                <li><a id="togList" href="#basic" data-toggle="tab"><i class="icon-eye position-left"></i> Basic Information</a></li>
+                <li><a id="togSoc" href="#link" data-toggle="tab"><i class="icon-plus22 position-left"></i> Social Profile Link</a></li>
+                <li><a id="togApo" href="#appointmentSlot" data-toggle="tab"><i class="icon-plus22 position-left"></i> Appointment Slot</a></li>
+                <li class="active"><a id="togWat" href="#waterMark" data-toggle="tab"><i class="icon-plus22 position-left"></i> WaterMark</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Content area -->
+    <div class="content">
+        <!-- Basic tabs -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tabbable">
+                    <div class="tab-content">
+                        <div class="tab-pane fade" id="basic">
+                            @Html.Partial("OrganizationDetail")
+                        </div>
+                        <div class="tab-pane fade " id="link">
+                            @Html.Partial("OrganizationLink")
+                        </div>
+                        <div class="tab-pane fade " id="appointmentSlot">
+                            @Html.Partial("AppointmentSlot")
+                        </div>
+                        <div class="tab-pane fade in active" id="waterMark">
+                            @Html.Partial("OrganizationWaterMark")
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /basic tabs -->
+    </div>
+    <!-- /content area -->
+</div>
+
+

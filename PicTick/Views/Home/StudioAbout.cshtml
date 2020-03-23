@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "StudioAbout";
+}
+
+<script src="~/Js/InstaAlbum/Services/HomeService.js"></script>
+<script src="~/Js/InstaAlbum/Controllers/StudioAbout.js"></script>
+
+<div class="content-wrapper" ng-controller="StudioAboutController">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Home</span> - Studio About</h4>
+            </div>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Content area -->
+    <div class="content">
+        <!-- Basic tabs -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-flat">
+                    <div class="panel-heading">
+                        <h6 class="panel-title">Add Studio About</h6>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal form-validate-jquery" ng-submit="SaveData()">
+                            <fieldset class="content-group">
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">Title <span class="text-danger">*</span></label>
+                                    <div class="col-lg-9">
+                                        <input type="text" name="basic" ng-model="Title" class="form-control"
+                                               required="required" placeholder="Title">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">Description <span class="text-danger">*</span></label>
+                                    <div class="col-lg-9">
+                                        <textarea rows="5" cols="20" name="basic" ng-model="Description" class="form-control"
+                                                  required="required" placeholder="Description"></textarea>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                            <div class="text-right">
+                                <button type="reset" ng-click="Clear()" class="btn btn-default" id="reset">
+                                    Cancel <i class="icon-reload-alt position-right"></i>
+                                </button>
+                                <button type="submit" class="btn btn-primary">Submit <i class="icon-arrow-right14 position-right"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="panel panel-flat">
+                    <div class="panel-heading">
+                        <h5 class="panel-title">Studio List About</h5>
+                    </div>
+                    <div class="table-responsive">
+                        <div class="col-md-5 float-right">
+                            <input type="text" ng-model="Search" placeholder="Search..." class="form-control" />
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr class="border-solid bg-col-Grey">
+                                    <th>No</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th style="min-width:130px;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in DataList | filter:Search">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{data.Title}}</td>
+                                    <td>{{data.Description}}</td>
+                                    <td>
+                                        <ul class="icons-list">
+                                            <li ng-click="EditData(data)">
+                                                <a data-popup="tooltip" title="Edit">
+                                                    <i class="icon-pencil7"></i>
+                                                </a>
+                                            </li>
+                                            <li ng-click="DeleteData(data.Id)">
+                                                <a data-popup="tooltip" title="Remove">
+                                                    <i class="icon-trash"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /basic tabs -->
+    </div>
+    <!-- /content area -->
+</div>
+

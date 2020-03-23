@@ -1,0 +1,167 @@
+﻿<script src="~/assets/dragdropfileupload/filereader.js"></script>
+<script src="~/Js/InstaAlbum/Services/HomeService.js"></script>
+<script src="~/Js/InstaAlbum/Controllers/Organization.js"></script>
+
+<style>
+    .top-left {
+        text-align: left;
+    }
+
+    .top-center {
+        text-align: center;
+    }
+
+    .top-right {
+        text-align: right;
+    }
+
+    .middle-left {
+        text-align: left;
+        padding-top: 120px;
+    }
+
+    .middle-center {
+        text-align: center;
+        padding-top: 120px;
+    }
+
+    .middle-right {
+        text-align: right;
+        padding-top: 120px;
+    }
+
+    .bottom-left {
+        text-align: left;
+        padding-top: 250px;
+    }
+
+    .bottom-center {
+        text-align: center;
+        padding-top: 250px;
+    }
+
+    .bottom-right {
+        text-align: right;
+        padding-top: 250px;
+    }
+</style>
+
+<div class="panel panel-flat" ng-controller="OrganizationController">
+    <div class="panel-heading">
+        <h6 class="panel-title">WaterMark Detail</h6>
+    </div>
+    <div class="panel-body">
+        <form class=" form-validate-jquery" ng-submit="UpdateStudioWaterMarkData()">
+            @*<fieldset class="content-group">*@
+
+            <div class="col-sm-12 col-lg-12">
+
+                <div class="form-group col-sm-4 col-lg-4">
+                    <label class="titleFont">WaterMark Text</label>
+                    <div>
+                        <input type="text" name="basic" ng-model="WaterMark" class="form-control"
+                               required="required" placeholder="Name">
+                    </div>
+                </div>
+                <div class="form-group col-sm-4 col-lg-4">
+                    <label class="titleFont">Position </label>
+                    <div>
+                        <select class="form-control " ng-model="Position" ng-init="Position='TopLeft'" required>
+                            <option value="TopLeft"> Top Left</option>
+                            <option value="TopRight"> Top Right</option>
+                            <option value="TopMiddle"> Top Middle</option>
+                            <option value="BottomLeft"> Bottom Left</option>
+                            <option value="BottomRight"> Bottom Right</option>
+                            <option value="BottomMiddle"> Bottom Middle</option>
+                            <option value="MiddleLeft"> Middle Left</option>
+                            <option value="MiddleRight"> Middle Right</option>
+                            <option value="Center"> Center</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4 col-lg-4">
+                    <label class="titleFont">Font </label>
+                    <div>
+                        <select class="form-control ng-pristine ng-valid ng-touched" ng-model="FontName" ng-init="FontName='Arial'" required
+                                ng-options="data for data in FontList">
+                            <option value="" disabled="" ng-selected="true" class="" selected="selected"> Select</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4 col-lg-4">
+                    <label class="titleFont">Font Style </label>
+                    <div>
+                        <select class="form-control " ng-model="FontStyle" ng-init="FontStyle='Regular'" required>
+                            <option value="Regular"> Regular</option>
+                            <option value="Bold"> Bold</option>
+                            <option value="Italic"> Italic</option>
+                            <option value="Underline"> Underline</option>
+                            <option value="Strikeout"> Strikeout</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4 col-lg-4">
+                    <label class="titleFont">Opacity </label>
+                    <div>
+                        <select class="form-control " ng-model="Opacity" ng-init="Opacity='50%'" required>
+                            <option value="100%"> 100%</option>
+                            <option value="75%"> 75%</option>
+                            <option value="50%"> 50%</option>
+                            <option value="25%"> 25%</option>
+                            <option value="10%"> 10%</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4 col-lg-4">
+                    <label class="titleFont">Font Size </label>
+                    <div>
+                        <select class="form-control " ng-model="FontSize" ng-init="FontSize='35px'" required>
+                            <option value="15px"> 15</option>
+                            <option value="20px"> 20</option>
+                            <option value="25px"> 25</option>
+                            <option value="30px"> 30</option>
+                            <option value="35px"> 35</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4 col-lg-4">
+                    <label class="titleFont">Watermark Type </label>
+                    <div>
+                        <select class="form-control " ng-model="WaterMarkType" ng-init="WaterMarkType='TextWatermark'" required>
+                            <option value="TextWatermark"> Text Watermark</option>
+                            <option value="ImageWatermark"> Image Watermark</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4 col-lg-4">
+                    <label class="titleFont">Watermark Logo </label>
+                    <div>
+                        <input id="File1" type="file" file-model="myFile" />
+                    </div>
+                </div>
+                <div class="form-group col-sm-4 col-lg-4">
+                    <img ng-src='{{WaterMarkImage}}' height="70" width="70" />
+                </div>
+            </div>
+            <div style="background-image:url('https://www.ritualsweddingcompany.com/wp-content/uploads/2019/05/g020.jpg');height:300px;width:600px;background-size: cover;"
+                 class="col-sm-12 col-lg-12"
+                 ng-class="Position == 'TopLeft' ? 'top-left' : (Position == 'TopMiddle' ? 'top-center' : (Position == 'TopRight' ? 'top-right' : Position == 'MiddleLeft' ? 'middle-left' : (Position == 'Center' ? 'middle-center' : (Position == 'MiddleRight' ? 'middle-right' : Position == 'BottomLeft' ? 'bottom-left' : (Position == 'BottomMiddle' ? 'bottom-center' : (Position == 'BottomRight' ? 'bottom-right' : ''))))))">
+
+                <label ng-show="WaterMarkType == 'TextWatermark' ? true : false" style="font-family:{{FontName}};font-style:{{FontStyle}};font-size:{{FontSize}};
+                          opacity:{{Opacity}};text-decoration: {{FontStyle}};font-weight: {{FontStyle}};
+                      text-decoration: {{FontStyle == 'Strikeout' ? 'line-through' : ''}};">{{WaterMark}}</label>
+
+                <img ng-show="WaterMarkType == 'ImageWatermark' ? true : false" ng-src='{{WaterMarkImage}}' height="50" width="50" 
+                     style="opacity:{{Opacity}};"/>
+
+            </div>
+
+            @*</fieldset>*@
+            <div class="text-right">
+                <button type="reset" ng-click="Clear()" class="btn btn-default" id="reset">Cancel <i class="icon-reload-alt position-right"></i></button>
+                <button type="submit" class="btn btn-primary">Submit <i class="icon-arrow-right14 position-right"></i></button>
+            </div>
+        </form>
+    </div>
+</div>
+

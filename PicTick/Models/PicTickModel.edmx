@@ -1,0 +1,1229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PicTickModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Advertisement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="250" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ExpDate" Type="date" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="VideoLink" Type="nvarchar" MaxLength="250" />
+          <Property Name="Location" Type="nvarchar" MaxLength="100" />
+          <Property Name="StudioId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="AdvertisementPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdvertisementId" Type="bigint" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="200" />
+          <Property Name="GalleryId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AlbumPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlbumId" Type="bigint" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="500" />
+          <Property Name="PhotoThumb" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsSelected" Type="bit" />
+        </EntityType>
+        <EntityType Name="AlbumPhotoComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="bigint" />
+          <Property Name="AlbumPhotoId" Type="bigint" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AlbumVideo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlbumId" Type="bigint" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="Video" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppointmentSlotId" Type="bigint" />
+          <Property Name="StudioId" Type="bigint" />
+          <Property Name="Date" Type="date" />
+          <Property Name="CustomerId" Type="bigint" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AppointmentSlot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudioId" Type="bigint" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" />
+          <Property Name="StudioId" Type="bigint" />
+          <Property Name="Image" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateId" Type="bigint" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentId" Type="bigint" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsVerified" Type="bit" />
+          <Property Name="StudioId" Type="bigint" />
+          <Property Name="FCMToken" Type="nvarchar" MaxLength="200" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="InviteStatus" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ErrorMessage" Type="nvarchar(max)" />
+          <Property Name="StackTrace" Type="nvarchar" MaxLength="500" />
+          <Property Name="EventName" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Gallery">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="GalleryPin" Type="nvarchar" MaxLength="50" />
+          <Property Name="SelectionPin" Type="nvarchar" MaxLength="50" />
+          <Property Name="AllowDownload" Type="bit" />
+          <Property Name="GalleryCover" Type="nvarchar" MaxLength="200" />
+          <Property Name="WatterMark" Type="nvarchar" MaxLength="50" />
+          <Property Name="StudioId" Type="bigint" Nullable="false" />
+          <Property Name="IsSelectionDone" Type="bit" />
+        </EntityType>
+        <EntityType Name="GalleryCustomer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="bigint" />
+          <Property Name="GalleryId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="CustomerId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Portfolio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="bigint" />
+          <Property Name="Image" Type="nvarchar" MaxLength="250" />
+          <Property Name="ImageThumb" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="SlideShowSound">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sound" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Studio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateId" Type="bigint" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="StudioLogo" Type="nvarchar" MaxLength="250" />
+          <Property Name="About" Type="nvarchar(max)" />
+          <Property Name="Services" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="Website" Type="nvarchar" MaxLength="200" />
+          <Property Name="StudioOwner" Type="nvarchar" MaxLength="200" />
+          <Property Name="Country" Type="nvarchar" MaxLength="100" />
+          <Property Name="CityId" Type="bigint" />
+          <Property Name="PinCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="InviteMessage" Type="nvarchar(max)" />
+          <Property Name="WaterMark" Type="nvarchar" MaxLength="200" />
+          <Property Name="Position" Type="nvarchar" MaxLength="50" />
+          <Property Name="Font" Type="nvarchar" MaxLength="200" />
+          <Property Name="FontStyle" Type="nvarchar" MaxLength="50" />
+          <Property Name="Opacity" Type="nvarchar" MaxLength="50" />
+          <Property Name="FontSize" Type="nvarchar" MaxLength="50" />
+          <Property Name="WaterMarkImage" Type="nvarchar" MaxLength="250" />
+          <Property Name="WaterMarkType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StudioAbout">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="StudioId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="StudioSocialLink">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudioId" Type="bigint" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="Link" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Function Name="GetAlbumCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AlbumId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetAlbumPhotoComment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AlbumPhotoId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetAlbumSelectedCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AlbumId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetAppointmentData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudioId" Type="bigint" Mode="In" />
+          <Parameter Name="Date" Type="date" Mode="In" />
+        </Function>
+        <Function Name="GetAppointmentSlot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudioId" Type="bigint" Mode="In" />
+          <Parameter Name="date" Type="date" Mode="In" />
+        </Function>
+        <Function Name="GetCustomerAlbum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetCustomerAlbumByAlbumId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AlbumId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetCustomerAlbumByCustomerId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetCustomerAlbumByGalleryId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GalleryId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetCustomerAssignGallery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerId" Type="bigint" Mode="In" />
+          <Parameter Name="StudioId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetCustomerFcmTokenByGallery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GalleryId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetCustomerGallery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetGalleryCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GalleryId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetGallerySelectedCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GalleryId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetStudioAdvertisement" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudioId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="UpdateCustomerInviteStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerId" Type="bigint" Mode="In" />
+          <Parameter Name="InviteStatus" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateCustomerVerification" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="UpdateFCMToken" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerId" Type="bigint" Mode="In" />
+          <Parameter Name="FCMToken" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="PicTickModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Advertisement" EntityType="Self.Advertisement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdvertisementPhoto" EntityType="Self.AdvertisementPhoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AlbumPhoto" EntityType="Self.AlbumPhoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AlbumPhotoComment" EntityType="Self.AlbumPhotoComment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AlbumVideo" EntityType="Self.AlbumVideo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppointmentSlot" EntityType="Self.AppointmentSlot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gallery" EntityType="Self.Gallery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GalleryCustomer" EntityType="Self.GalleryCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Portfolio" EntityType="Self.Portfolio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SlideShowSound" EntityType="Self.SlideShowSound" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Studio" EntityType="Self.Studio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudioAbout" EntityType="Self.StudioAbout" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudioSocialLink" EntityType="Self.StudioSocialLink" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PicTickModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Advertisement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ExpDate" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="VideoLink" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StudioId" Type="Int64" />
+        </EntityType>
+        <EntityType Name="AdvertisementPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdvertisementId" Type="Int64" />
+          <Property Name="Photo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Photo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="GalleryId" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AlbumPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlbumId" Type="Int64" />
+          <Property Name="Photo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoThumb" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsSelected" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="AlbumPhotoComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int64" />
+          <Property Name="AlbumPhotoId" Type="Int64" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AlbumVideo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlbumId" Type="Int64" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Video" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppointmentSlotId" Type="Int64" />
+          <Property Name="StudioId" Type="Int64" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="CustomerId" Type="Int64" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AppointmentSlot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudioId" Type="Int64" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StudioId" Type="Int64" />
+          <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateId" Type="Int64" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentId" Type="Int64" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsVerified" Type="Boolean" />
+          <Property Name="StudioId" Type="Int64" />
+          <Property Name="FCMToken" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InviteStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StackTrace" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="EventName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Gallery">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="GalleryPin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SelectionPin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AllowDownload" Type="Boolean" />
+          <Property Name="GalleryCover" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="WatterMark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StudioId" Type="Int64" Nullable="false" />
+          <Property Name="IsSelectionDone" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="GalleryCustomer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int64" />
+          <Property Name="GalleryId" Type="Int64" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerId" Type="Int64" />
+        </EntityType>
+        <EntityType Name="Portfolio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int64" />
+          <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ImageThumb" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SlideShowSound">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sound" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Studio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateId" Type="Int64" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StudioLogo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="About" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Services" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="StudioOwner" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CityId" Type="Int64" />
+          <Property Name="PinCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InviteMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WaterMark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Font" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FontStyle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Opacity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FontSize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WaterMarkImage" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="WaterMarkType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="StudioAbout">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StudioId" Type="Int64" />
+        </EntityType>
+        <EntityType Name="StudioSocialLink">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudioId" Type="Int64" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Link" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="PicTickEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Advertisements" EntityType="Self.Advertisement" />
+          <EntitySet Name="AdvertisementPhotoes" EntityType="Self.AdvertisementPhoto" />
+          <EntitySet Name="Albums" EntityType="Self.Album" />
+          <EntitySet Name="AlbumPhotoes" EntityType="Self.AlbumPhoto" />
+          <EntitySet Name="AlbumPhotoComments" EntityType="Self.AlbumPhotoComment" />
+          <EntitySet Name="AlbumVideos" EntityType="Self.AlbumVideo" />
+          <EntitySet Name="Appointments" EntityType="Self.Appointment" />
+          <EntitySet Name="AppointmentSlots" EntityType="Self.AppointmentSlot" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="ErrorLogs" EntityType="Self.ErrorLog" />
+          <EntitySet Name="Galleries" EntityType="Self.Gallery" />
+          <EntitySet Name="GalleryCustomers" EntityType="Self.GalleryCustomer" />
+          <EntitySet Name="Notifications" EntityType="Self.Notification" />
+          <EntitySet Name="Portfolios" EntityType="Self.Portfolio" />
+          <EntitySet Name="SlideShowSounds" EntityType="Self.SlideShowSound" />
+          <EntitySet Name="States" EntityType="Self.State" />
+          <EntitySet Name="Studios" EntityType="Self.Studio" />
+          <EntitySet Name="StudioAbouts" EntityType="Self.StudioAbout" />
+          <EntitySet Name="StudioSocialLinks" EntityType="Self.StudioSocialLink" />
+          <FunctionImport Name="GetAlbumPhotoComment" ReturnType="Collection(PicTickModel.GetAlbumPhotoComment_Result)">
+          <Parameter Name="AlbumPhotoId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetAlbumSelectedCount" ReturnType="Collection(PicTickModel.GetAlbumSelectedCount_Result)">
+          <Parameter Name="AlbumId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetAppointmentData" ReturnType="Collection(PicTickModel.GetAppointmentData_Result)">
+            <Parameter Name="StudioId" Mode="In" Type="Int64" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetAppointmentSlot" ReturnType="Collection(PicTickModel.GetAppointmentSlot_Result)">
+            <Parameter Name="StudioId" Mode="In" Type="Int64" />
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetCustomerAlbum">
+          <Parameter Name="CustomerId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetCustomerAlbumByAlbumId" ReturnType="Collection(PicTickModel.GetCustomerAlbumByAlbumId_Result)">
+          <Parameter Name="AlbumId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetCustomerAlbumByCustomerId" ReturnType="Collection(PicTickModel.GetCustomerAlbumByCustomerId_Result)">
+          <Parameter Name="CustomerId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetCustomerAlbumByGalleryId" ReturnType="Collection(PicTickModel.GetCustomerAlbumByGalleryId_Result)">
+          <Parameter Name="GalleryId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetCustomerAssignGallery" ReturnType="Collection(PicTickModel.GetCustomerAssignGallery_Result)">
+            <Parameter Name="CustomerId" Mode="In" Type="Int64" />
+            <Parameter Name="StudioId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetCustomerFcmTokenByGallery" ReturnType="Collection(PicTickModel.GetCustomerFcmTokenByGallery_Result)">
+          <Parameter Name="GalleryId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetCustomerGallery" ReturnType="Collection(PicTickModel.GetCustomerGallery_Result)">
+          <Parameter Name="CustomerId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetGalleryCustomer" ReturnType="Collection(PicTickModel.GetGalleryCustomer_Result)">
+          <Parameter Name="GalleryId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetGallerySelectedCount" ReturnType="Collection(PicTickModel.GetGallerySelectedCount_Result)">
+          <Parameter Name="GalleryId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetStudioAdvertisement" ReturnType="Collection(PicTickModel.GetStudioAdvertisement_Result)">
+          <Parameter Name="StudioId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateCustomerInviteStatus">
+            <Parameter Name="CustomerId" Mode="In" Type="Int64" />
+            <Parameter Name="InviteStatus" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateCustomerVerification">
+          <Parameter Name="CustomerId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateFCMToken">
+            <Parameter Name="CustomerId" Mode="In" Type="Int64" />
+            <Parameter Name="FCMToken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAlbumCustomer" ReturnType="Collection(PicTickModel.GetAlbumCustomer_Result)">
+            <Parameter Name="AlbumId" Mode="In" Type="Int64" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetAlbumPhotoComment_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="CustomerId" Nullable="true" />
+          <Property Type="Int64" Name="AlbumPhotoId" Nullable="true" />
+          <Property Type="String" Name="Comment" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="GetAlbumSelectedCount_Result">
+          <Property Type="Int32" Name="AlbumPhotoCount" Nullable="true" />
+          <Property Type="Int32" Name="SelectedAlbumPhotoCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetAppointmentData_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="AppointmentSlotId" Nullable="true" />
+          <Property Type="Int64" Name="StudioId" Nullable="true" />
+          <Property Type="DateTime" Name="Date" Nullable="true" />
+          <Property Type="Int64" Name="CustomerId" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="GetAppointmentSlot_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="StudioId" Nullable="true" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IsBooked" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetCustomerAlbumByAlbumId_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="Date" Nullable="true" />
+          <Property Type="String" Name="Photo" Nullable="true" MaxLength="200" />
+          <Property Type="Int64" Name="GalleryId" Nullable="false" />
+          <Property Type="Int32" Name="SelectedPhotoCount" Nullable="true" />
+          <Property Type="Int32" Name="NoOfPhoto" Nullable="true" />
+          <Property Type="DateTime" Name="ExpDate" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GetCustomerAlbumByCustomerId_Result">
+          <Property Type="Int64" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="Date" Nullable="true" />
+          <Property Type="String" Name="Photo" Nullable="true" MaxLength="200" />
+          <Property Type="Int64" Name="GalleryId" Nullable="true" />
+          <Property Type="Int32" Name="SelectedPhotoCount" Nullable="true" />
+          <Property Type="Int32" Name="NoOfPhoto" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetCustomerAlbumByGalleryId_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="Date" Nullable="true" />
+          <Property Type="String" Name="Photo" Nullable="true" MaxLength="200" />
+          <Property Type="Int64" Name="GalleryId" Nullable="false" />
+          <Property Type="Int32" Name="SelectedPhotoCount" Nullable="true" />
+          <Property Type="Int32" Name="NoOfPhoto" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetCustomerAssignGallery_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="GalleryPin" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SelectionPin" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="AllowDownload" Nullable="true" />
+          <Property Type="String" Name="GalleryCover" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="WatterMark" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="StudioId" Nullable="false" />
+          <Property Type="Boolean" Name="IsSelectionDone" Nullable="true" />
+          <Property Type="Int32" Name="IsSelected" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetCustomerFcmTokenByGallery_Result">
+          <Property Type="Int64" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="FcmToken" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="GetCustomerGallery_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="GalleryPin" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SelectionPin" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="AllowDownload" Nullable="true" />
+          <Property Type="String" Name="GalleryCover" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="WatterMark" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="StudioId" Nullable="false" />
+          <Property Type="Boolean" Name="IsSelectionDone" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetGalleryCustomer_Result">
+          <Property Type="Int64" Name="Id" Nullable="true" />
+          <Property Type="Int64" Name="ParentId" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsVerified" Nullable="true" />
+          <Property Type="Int64" Name="StudioId" Nullable="true" />
+          <Property Type="String" Name="FCMToken" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="InviteStatus" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="GetGallerySelectedCount_Result">
+          <Property Type="Int32" Name="GalleryPhotoCount" Nullable="true" />
+          <Property Type="Int32" Name="SelectedAlbumPhotoCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetStudioAdvertisement_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="GetAlbumCustomer_Result">
+          <Property Type="Int64" Name="Id" Nullable="true" />
+          <Property Type="Int64" Name="ParentId" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsVerified" Nullable="true" />
+          <Property Type="Int64" Name="StudioId" Nullable="true" />
+          <Property Type="String" Name="FCMToken" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="InviteStatus" Nullable="true" MaxLength="20" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PicTickModelStoreContainer" CdmEntityContainer="PicTickEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="PicTickModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Advertisements">
+            <EntityTypeMapping TypeName="PicTickModel.Advertisement">
+              <MappingFragment StoreEntitySet="Advertisement">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ExpDate" ColumnName="ExpDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="VideoLink" ColumnName="VideoLink" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdvertisementPhotoes">
+            <EntityTypeMapping TypeName="PicTickModel.AdvertisementPhoto">
+              <MappingFragment StoreEntitySet="AdvertisementPhoto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AdvertisementId" ColumnName="AdvertisementId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Albums">
+            <EntityTypeMapping TypeName="PicTickModel.Album">
+              <MappingFragment StoreEntitySet="Album">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="GalleryId" ColumnName="GalleryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlbumPhotoes">
+            <EntityTypeMapping TypeName="PicTickModel.AlbumPhoto">
+              <MappingFragment StoreEntitySet="AlbumPhoto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="PhotoThumb" ColumnName="PhotoThumb" />
+                <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlbumPhotoComments">
+            <EntityTypeMapping TypeName="PicTickModel.AlbumPhotoComment">
+              <MappingFragment StoreEntitySet="AlbumPhotoComment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="AlbumPhotoId" ColumnName="AlbumPhotoId" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlbumVideos">
+            <EntityTypeMapping TypeName="PicTickModel.AlbumVideo">
+              <MappingFragment StoreEntitySet="AlbumVideo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Video" ColumnName="Video" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Appointments">
+            <EntityTypeMapping TypeName="PicTickModel.Appointment">
+              <MappingFragment StoreEntitySet="Appointment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AppointmentSlotId" ColumnName="AppointmentSlotId" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppointmentSlots">
+            <EntityTypeMapping TypeName="PicTickModel.AppointmentSlot">
+              <MappingFragment StoreEntitySet="AppointmentSlot">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="PicTickModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="PicTickModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="PicTickModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="FCMToken" ColumnName="FCMToken" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="InviteStatus" ColumnName="InviteStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLogs">
+            <EntityTypeMapping TypeName="PicTickModel.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Galleries">
+            <EntityTypeMapping TypeName="PicTickModel.Gallery">
+              <MappingFragment StoreEntitySet="Gallery">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="GalleryPin" ColumnName="GalleryPin" />
+                <ScalarProperty Name="SelectionPin" ColumnName="SelectionPin" />
+                <ScalarProperty Name="AllowDownload" ColumnName="AllowDownload" />
+                <ScalarProperty Name="GalleryCover" ColumnName="GalleryCover" />
+                <ScalarProperty Name="WatterMark" ColumnName="WatterMark" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="IsSelectionDone" ColumnName="IsSelectionDone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GalleryCustomers">
+            <EntityTypeMapping TypeName="PicTickModel.GalleryCustomer">
+              <MappingFragment StoreEntitySet="GalleryCustomer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="GalleryId" ColumnName="GalleryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="PicTickModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Portfolios">
+            <EntityTypeMapping TypeName="PicTickModel.Portfolio">
+              <MappingFragment StoreEntitySet="Portfolio">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ImageThumb" ColumnName="ImageThumb" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SlideShowSounds">
+            <EntityTypeMapping TypeName="PicTickModel.SlideShowSound">
+              <MappingFragment StoreEntitySet="SlideShowSound">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Sound" ColumnName="Sound" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="PicTickModel.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Studios">
+            <EntityTypeMapping TypeName="PicTickModel.Studio">
+              <MappingFragment StoreEntitySet="Studio">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="StudioLogo" ColumnName="StudioLogo" />
+                <ScalarProperty Name="About" ColumnName="About" />
+                <ScalarProperty Name="Services" ColumnName="Services" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="StudioOwner" ColumnName="StudioOwner" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="InviteMessage" ColumnName="InviteMessage" />
+                <ScalarProperty Name="WaterMark" ColumnName="WaterMark" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Font" ColumnName="Font" />
+                <ScalarProperty Name="FontStyle" ColumnName="FontStyle" />
+                <ScalarProperty Name="Opacity" ColumnName="Opacity" />
+                <ScalarProperty Name="FontSize" ColumnName="FontSize" />
+                <ScalarProperty Name="WaterMarkImage" ColumnName="WaterMarkImage" />
+                <ScalarProperty Name="WaterMarkType" ColumnName="WaterMarkType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudioAbouts">
+            <EntityTypeMapping TypeName="PicTickModel.StudioAbout">
+              <MappingFragment StoreEntitySet="StudioAbout">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudioSocialLinks">
+            <EntityTypeMapping TypeName="PicTickModel.StudioSocialLink">
+              <MappingFragment StoreEntitySet="StudioSocialLink">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAlbumPhotoComment" FunctionName="PicTickModel.Store.GetAlbumPhotoComment">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PicTickModel.GetAlbumPhotoComment_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="AlbumPhotoId" ColumnName="AlbumPhotoId" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAlbumSelectedCount" FunctionName="PicTickModel.Store.GetAlbumSelectedCount">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PicTickModel.GetAlbumSelectedCount_Result">
+                <ScalarProperty Name="AlbumPhotoCount" ColumnName="AlbumPhotoCount" />
+                <ScalarProperty Name="SelectedAlbumPhotoCount" ColumnName="SelectedAlbumPhotoCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAppointmentData" FunctionName="PicTickModel.Store.GetAppointmentData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PicTickModel.GetAppointmentData_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AppointmentSlotId" ColumnName="AppointmentSlotId" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAppointmentSlot" FunctionName="PicTickModel.Store.GetAppointmentSlot">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PicTickModel.GetAppointmentSlot_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="IsBooked" ColumnName="IsBooked" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCustomerAlbum" FunctionName="PicTickModel.Store.GetCustomerAlbum" />
+          <FunctionImportMapping FunctionImportName="GetCustomerAlbumByAlbumId" FunctionName="PicTickModel.Store.GetCustomerAlbumByAlbumId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PicTickModel.GetCustomerAlbumByAlbumId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="GalleryId" ColumnName="GalleryId" />
+                <ScalarProperty Name="SelectedPhotoCount" ColumnName="SelectedPhotoCount" />
+                <ScalarProperty Name="NoOfPhoto" ColumnName="NoOfPhoto" />
+                <ScalarProperty Name="ExpDate" ColumnName="ExpDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCustomerAlbumByCustomerId" FunctionName="PicTickModel.Store.GetCustomerAlbumByCustomerId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PicTickModel.GetCustomerAlbumByCustomerId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="GalleryId" ColumnName="GalleryId" />
+                <ScalarProperty Name="SelectedPhotoCount" ColumnName="SelectedPhotoCount" />
+                <ScalarProperty Name="NoOfPhoto" ColumnName="NoOfPhoto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCustomerAlbumByGalleryId" FunctionName="PicTickModel.Store.GetCustomerAlbumByGalleryId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PicTickModel.GetCustomerAlbumByGalleryId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="GalleryId" ColumnName="GalleryId" />
+                <ScalarProperty Name="SelectedPhotoCount" ColumnName="SelectedPhotoCount" />
+                <ScalarProperty Name="NoOfPhoto" ColumnName="NoOfPhoto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCustomerAssignGallery" FunctionName="PicTickModel.Store.GetCustomerAssignGallery">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PicTickModel.GetCustomerAssignGallery_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="GalleryPin" ColumnName="GalleryPin" />
+                <ScalarProperty Name="SelectionPin" ColumnName="SelectionPin" />
+                <ScalarProperty Name="AllowDownload" ColumnName="AllowDownload" />
+                <ScalarProperty Name="GalleryCover" ColumnName="GalleryCover" />
+                <ScalarProperty Name="WatterMark" ColumnName="WatterMark" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="IsSelectionDone" ColumnName="IsSelectionDone" />
+                <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCustomerFcmTokenByGallery" FunctionName="PicTickModel.Store.GetCustomerFcmTokenByGallery">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PicTickModel.GetCustomerFcmTokenByGallery_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FcmToken" ColumnName="FcmToken" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCustomerGallery" FunctionName="PicTickModel.Store.GetCustomerGallery">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PicTickModel.GetCustomerGallery_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="GalleryPin" ColumnName="GalleryPin" />
+                <ScalarProperty Name="SelectionPin" ColumnName="SelectionPin" />
+                <ScalarProperty Name="AllowDownload" ColumnName="AllowDownload" />
+                <ScalarProperty Name="GalleryCover" ColumnName="GalleryCover" />
+                <ScalarProperty Name="WatterMark" ColumnName="WatterMark" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="IsSelectionDone" ColumnName="IsSelectionDone" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetGalleryCustomer" FunctionName="PicTickModel.Store.GetGalleryCustomer">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PicTickModel.GetGalleryCustomer_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="FCMToken" ColumnName="FCMToken" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="InviteStatus" ColumnName="InviteStatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetGallerySelectedCount" FunctionName="PicTickModel.Store.GetGallerySelectedCount">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PicTickModel.GetGallerySelectedCount_Result">
+                <ScalarProperty Name="GalleryPhotoCount" ColumnName="GalleryPhotoCount" />
+                <ScalarProperty Name="SelectedAlbumPhotoCount" ColumnName="SelectedAlbumPhotoCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetStudioAdvertisement" FunctionName="PicTickModel.Store.GetStudioAdvertisement">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PicTickModel.GetStudioAdvertisement_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateCustomerInviteStatus" FunctionName="PicTickModel.Store.UpdateCustomerInviteStatus" />
+          <FunctionImportMapping FunctionImportName="UpdateCustomerVerification" FunctionName="PicTickModel.Store.UpdateCustomerVerification" />
+          <FunctionImportMapping FunctionImportName="UpdateFCMToken" FunctionName="PicTickModel.Store.UpdateFCMToken" />
+          <FunctionImportMapping FunctionImportName="GetAlbumCustomer" FunctionName="PicTickModel.Store.GetAlbumCustomer">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PicTickModel.GetAlbumCustomer_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="FCMToken" ColumnName="FCMToken" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="InviteStatus" ColumnName="InviteStatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

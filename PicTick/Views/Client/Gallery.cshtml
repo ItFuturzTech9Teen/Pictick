@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Gallery";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+<script src="~/Js/InstaAlbum/Services/HomeService.js"></script>
+<script src="~/Js/InstaAlbum/ClientControllers/ClientGallery.js"></script>
+
+
+<div class="content-wrapper" ng-controller="ClientGalleryController">
+    <div class="aurel_container">
+        <div class="aurel_content_wrapper row aurel_no_sidebar">
+            <div class="aurel_content col col-12">
+                <div class="aurel_tiny">
+                    <div class="row aurel_js_bg_image aurel_js_min_height aurel_bg_center_center aurel_bg_size_cover aurel_pf_fullwidth aurel_mb_40" data-src="http://localhost:54109/UploadImages/GalleryCover/YASH5795.jpg" data-min-height="650">
+                        <div class=" col col-12 push-middle aurel_sm_pl_20 aurel_sm_pr_20">
+
+                            <div class="aurel_post_meta aurel_text_align_center aurel_mb_20">
+                                <div class="aurel_post_meta_item aurel_js_font_size aurel_sm_font_16" data-font-size="25px" data-line-height="28px"><i>{{GalleryData.Title}}</i></div>
+                            
+                                <center><br /><br />
+                                    <select class=" " ng-model="AlbumId" style="color:black;font-size:17px;width:300px;border-right: double;border-left: double;border-radius: 10px;font-family: fantasy;"
+                                            ng-options="data.Id as data.Name for data in DataList" ng-change="GetAlbumPhotoList()">
+                                        <option value="" disabled="" ng-selected="true" class="" selected="selected"> Select Album</option>
+                                    </select>
+                                </center>
+                                @*<div class="aurel_post_meta_item aurel_js_font_size aurel_sm_font_16" data-font-size="18px" data-line-height="28px"><i>Date: 11/06/2018</i></div>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row aurel_pf_fullwidth">
+                        <div class="col col-12 aurel_pl_30 aurel_pr_30">
+                            <div class="aurel_widget_pm_proofing_gallery">
+                                <div class="aurel_widget_container">
+                                    <div class="aurel_front_end_display" >
+                                        <ul id="filters" class="aurel_grid_filter">
+                                            <li class="aurel_filter-item is-checked"><a href="javascript:void(0)" data-category="*" ng-click="myFilter = {}">All</a></li>
+                                            <li class="aurel_filter-item"><a href="javascript:void(0)" data-category=".approved" ng-click="myFilter = {IsSelected: true}">Selected</a></li>
+                                            <li class="aurel_filter-item"><a href="javascript:void(0)" data-category=".unapproved" ng-click="myFilter = {IsSelected: false}">Pending</a></li>
+                                        </ul>
+                                        <div class="aurel_grid_wrapper aurel_photoswipe_wrapper aurel_grid_3368 aurel_no_select aurel_dp" data-uniqid="3368" >
+                                            <div class="aurel_grid_inner aurel_proofing_grid grid_columns4 side_paddings_off" data-pad="30" style="height: auto;">
+                                                <!-- Item 1 -->
+                                                <div class="grid-item grid-item-proofing element grid_b2p" ng-repeat="data in AlbumPhotoList | filter:myFilter"
+                                                     ng-class="SetClass(data,$index)"
+                                                     @*ng-init="{'approved': data.IsSelected == true, 'unviewed': data.IsSelected == false || data.IsSelected == null}"*@ id="parent{{$index}}">
+                                                    <div class="grid-item-inner">
+                                                        <div class="aurel_proofing_grid_item">
+                                                            <img ng-src="~/{{data.Photo}}" class="grid_thmb" alt="" />
+
+                                                            <div class="grid-item-overlay aurel_js_bg_color" data-bgcolor="rgba(17,17,17,0.5)"></div>
+                                                            <div class="grid-item-controls">
+                                                                <a class="aurel_pswp_slide grid-item-button-zoom" href="../../{{data.Photo}}" data-size="1200x1400" data-count="0"><i class="fa fa-search"></i></a>
+                                                                <a class="grid-item-button-download" href="~/{{data.Photo}}" download><i class="fa fa-download"></i></a>
+                                                                <a class="grid-item-button-approve" data-moduleid="3368" data-uniqid="01" ng-click="SelectPhoto(data)"><i class="fa fa-minus-circle"></i></a>
+                                                            </div>
+                                                            <div class="grid-icon-state grid-icon-approve"><i class="fa fa-check"></i></div>
+                                                            <div class="grid-icon-state grid-icon-unaprove"><i class="fa fa-times"></i></div>
+                                                        </div>
+                                                        <div class="aurel-img-preloader"></div>
+                                                    </div>
+                                                </div>
+                                              
+                                            </div>
+                                            <div class="aurel_photo_proofing_notified_wrapper aurel_sm_mb_25">
+                                                <a class="aurel_button " ng-click="UpdatePhotoSelection()">Notify Photographer</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,171 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<head>
+    <script src="~/Js/InstaAlbum/Services/HomeService.js"></script>
+    <script src="~/Js/InstaAlbum/Controllers/DashBoard.js"></script>
+</head>
+<div class="content-wrapper" ng-controller="DashBoardController">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-home position-left"></i> <span class="text-semibold">Dashboard</span></h4>
+            </div>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Content area -->
+    <div class="content">
+        <div class="row">
+            <a href="~/Studio" ng-show="IsAdmin">
+                <div class="col-lg-3">
+                    <div class="panel border-grey invoice-grid timeline-content">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h2 class="text-semibold no-margin-top">
+                                        <i class="icon-video-camera icon-2x"></i>
+                                    </h2>
+                                    <span class="f-s-20">Studio</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="~/Gallery" ng-hide="IsAdmin">
+                <div class="col-lg-2">
+                    <div class="panel border-grey invoice-grid timeline-content">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h2 class="text-semibold no-margin-top">
+                                        <i class="icon-images2 icon-2x"></i>
+                                    </h2>
+                                    <span class="f-s-20">Event</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            @*<a href="~/Gallery" ng-hide="IsAdmin">
+                <div class="col-lg-2">
+                    <div class="panel border-grey invoice-grid timeline-content">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h2 class="text-semibold no-margin-top">
+                                        <i class="icon-image2 icon-2x"></i>
+                                    </h2>
+                                    <span class="f-s-20">Album</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>*@
+            <a href="~/Customer" ng-hide="IsAdmin">
+                <div class="col-lg-2">
+                    <div class="panel border-grey invoice-grid timeline-content">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h2 class="text-semibold no-margin-top">
+                                        <i class="icon-user-tie icon-2x"></i>
+                                    </h2>
+                                    <span class="f-s-20">Customer</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="~/StudioAbout" ng-hide="IsAdmin">
+                <div class="col-lg-2">
+                    <div class="panel border-grey invoice-grid timeline-content">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h2 class="text-semibold no-margin-top">
+                                        <i class="icon-design icon-2x"></i>
+                                    </h2>
+                                    <span class="f-s-20">Studio Description</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="~/Portfolio" ng-hide="IsAdmin">
+                <div class="col-lg-2">
+                    <div class="panel border-grey invoice-grid timeline-content">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h2 class="text-semibold no-margin-top">
+                                        <i class="icon-portfolio icon-2x"></i>
+                                    </h2>
+                                    <span class="f-s-20">Portfolio</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="~/Organization" ng-hide="IsAdmin">
+                <div class="col-lg-2">
+                    <div class="panel border-grey invoice-grid timeline-content">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h2 class="text-semibold no-margin-top">
+                                        <i class="icon-make-group icon-2x"></i>
+                                    </h2>
+                                    <span class="f-s-20">Organization</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="~/Appointment" ng-hide="IsAdmin">
+                <div class="col-lg-2">
+                    <div class="panel border-grey invoice-grid timeline-content">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h2 class="text-semibold no-margin-top">
+                                        <i class="icon-calendar icon-2x"></i>
+                                    </h2>
+                                    <span class="f-s-20">Appointments</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="row" ng-hide="IsAdmin">
+            <div class="col-lg-3" ng-repeat="data in DataList">
+                <div class="panel border-grey invoice-grid timeline-content">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <span class="f-s-20">{{data.Name}}</span><br />
+                                <label class="f-s-20">{{data.SelectedAlbumPhotoCount}} / {{data.AlbumPhotoCount}}</label>
+                            </div>
+                            <hr class="col-sm-11" style="margin-top: 3px;margin-bottom: 5px;" />
+                            <div class="col-sm-12" ng-repeat="customer in data.CustomerList">
+                                <span>{{customer.Name}}</span><br />
+                                <label style="font-size:15px;">{{customer.Mobile}}</label>
+                            </div><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /content area -->
+</div>

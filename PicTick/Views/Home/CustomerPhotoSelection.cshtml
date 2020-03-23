@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "CustomerPhotoSelection";
+}
+
+<script src="~/Js/InstaAlbum/Services/HomeService.js"></script>
+<script src="~/Js/InstaAlbum/Controllers/CustomerPhotoSelection.js"></script>
+
+<div class="content-wrapper" ng-controller="CustomerPhotoSelectionController">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Home</span> - Album Selected Photos</h4>
+            </div>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Content area -->
+    <div class="content">
+        <!-- Basic tabs -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-flat">
+                    <div class="panel-heading">
+                        <h5 class="panel-title">Album Selected Photos List</h5>
+                    </div>
+                    <div class="row pl-20 pr-20">
+                        <div class="form-group col-md-3" ng-show="showStudio">
+                            <label class="control-label">Studio </label>
+                            <select class="form-control ng-pristine ng-valid ng-touched" ng-model="StudioId" ng-change="GetAlbumList()"
+                                    ng-options="data.Id as data.Name for data in StudioList">
+                                <option value="" disabled="" ng-selected="true" class="" selected="selected"> Select</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Album </label>
+                            <select class="form-control ng-pristine ng-valid ng-touched" ng-model="AlbumId" ng-change="GetData()"
+                                    ng-options="data.Id as data.Name for data in AlbumList">
+                                <option value="" disabled="" ng-selected="true" class="" selected="selected"> Select</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2" ng-show="DataList.length > 0 ? true : false">
+                            <label class="control-label">Export To File </label>
+                            <button type="button" class="form-control btn btn-primary"
+                                    ng-click="ExportFile()">
+                                <i class="icon-file-download position-left"></i>
+                                Export
+                                <i ng-show="expbtn" class="ng-hide">
+                                    <img src="../../../../AssetsNew/images/loading.gif" height="20">
+                                </i>
+                            </button>
+                        </div>
+                        @*<div class="col-md-3">
+                                <label class="control-label">Search </label>
+                                <input type="text" ng-model="Search" placeholder="Search..." class="form-control" />
+                            </div>*@
+                    </div>
+                    <div class="raw">
+                        <div class="col-lg-3 mb-10" ng-repeat="data in DataList">
+                            <a ng-href='{{data.Photo}}' target="_blank">
+                                <img ng-src='{{data.Photo}}' width="100%" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /basic tabs -->
+    </div>
+    <!-- /content area -->
+</div>

@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "AlbumPhoto";
+}
+
+<script src="~/assets/dragdropfileupload/filereader.js"></script>
+<script src="~/Js/InstaAlbum/Services/HomeService.js"></script>
+<script src="~/Js/InstaAlbum/Controllers/AlbumPhoto.js"></script>
+
+
+@*<script src="~/assets/dragdropfileupload/script.js"></script>*@
+<link href="~/assets/dragdropfileupload/style.css" rel="stylesheet" />
+
+<div class="content-wrapper" ng-controller="AlbumPhotoController">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Home</span> - Album Photos</h4>
+            </div>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Content area -->
+    <div class="content">
+        <!-- Basic tabs -->
+        <div class="row">
+            <div id="dropbox">
+                <div class="text">
+                    Drop Images Here
+                </div>
+            </div>
+            <span class="upload-progress"></span>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-flat">
+                    <div class="panel-heading">
+                        <h6 class="panel-title">Add Album Photos</h6>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal form-validate-jquery" ng-submit="SaveData()">
+                            <fieldset class="content-group">
+                                <div class="form-group" ng-show="showStudio">
+                                    <label class="control-label col-lg-3">Studio <span class="text-danger">*</span></label>
+                                    <div class="col-lg-9">
+                                        <select class="form-control ng-pristine ng-valid ng-touched" ng-model="StudioId" ng-change="GetAlbumList()"
+                                                ng-options="data.Id as data.Name for data in StudioList">
+                                            <option value="" disabled="" ng-selected="true" class="" selected="selected"> Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">Album <span class="text-danger">*</span></label>
+                                    <div class="col-lg-9">
+                                        <select class="form-control ng-pristine ng-valid ng-touched" ng-model="AlbumId" ng-change="GetData()"
+                                                ng-options="data.Id as data.Name for data in AlbumList">
+                                            <option value="" disabled="" ng-selected="true" class="" selected="selected"> Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">Image <span class="text-danger">*</span></label>
+                                    <div class="col-lg-9">
+                                        <input id="File1" type="file" multiple file-model="myFile" />
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="text-right">
+                                <button type="reset" ng-click="Clear()" class="btn btn-default" id="reset">
+                                    Cancel <i class="icon-reload-alt position-right"></i>
+                                </button>
+                                <button type="submit" class="btn btn-primary">Submit <i class="icon-arrow-right14 position-right"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="panel panel-flat">
+                    <div class="panel-heading">
+                        <h5 class="panel-title">Album Photos List</h5>
+                    </div>
+                    <div class="table-responsive">
+                        <div class="col-md-5 float-right">
+                            <input type="text" ng-model="Search" placeholder="Search..." class="form-control" />
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr class="border-solid bg-col-Grey">
+                                    <th>No</th>
+                                    <th>Image</th>
+                                    <th style="min-width:130px;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in DataList | filter:Search">
+                                    <td>{{$index+1}}</td>
+                                    <td>
+                                        <span>
+                                            <a ng-href="{{data.Photo}}" target="_blank">
+                                                <img ng-src='{{data.Photo}}' height="70" width="140" />
+                                            </a>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <ul class="icons-list">
+                                            <li ng-click="DeleteData(data.Id)">
+                                                <a data-popup="tooltip" title="Remove">
+                                                    <i class="icon-trash"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /basic tabs -->
+    </div>
+    <!-- /content area -->
+</div>

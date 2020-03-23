@@ -1,0 +1,145 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<!-- Mirrored from demo.interface.club/limitless/layout_2/LTR/default/login_tabbed.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 16 Sep 2016 15:19:05 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PicTick - Studio Login</title>
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/core.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/components.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/colors.css" rel="stylesheet" type="text/css">
+    <link href="~/Css/ng-tags-input.css" rel="stylesheet" />
+    <!-- /global stylesheets -->
+    <!-- Core JS files -->
+    <script type="text/javascript" src="assets/js/plugins/loaders/pace.min.js"></script>
+    <script type="text/javascript" src="assets/js/core/libraries/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/core/libraries/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/loaders/blockui.min.js"></script>
+    <!-- /core JS files -->
+    <!-- Theme JS files -->
+    <script type="text/javascript" src="assets/js/plugins/forms/styling/uniform.min.js"></script>
+    @*<script type="text/javascript" src="assets/js/core/app.js"></script>*@
+    <script type="text/javascript" src="assets/js/pages/login.js"></script>
+    <!-- /theme JS files -->
+    <script src="~/Js/angular.min.js"></script>
+
+    @* For D3 JS Charts*@
+    <script src="~/scripts/d3/d3.js"></script>
+    <script src="~/scripts/nv.d3.js"></script>
+    <script src="~/scripts/angular-nvd3.js"></script>
+    <link href="~/Content/nv.d3.css" rel="stylesheet" />
+
+    @* End D3 JS Charts*@
+
+    <script src="~/Js/ng-tags-input.js"></script>
+    <script src="~/Js/angular-filter.js"></script>
+    <script src="~/Js/angular-touch.min.js"></script>
+    <script src="~/Js/angular-cookies.js"></script>
+    <script src="~/Js/angular-ipcookies.js"></script>
+    <script src="~/Js/angular-local-storage.js"></script>
+    <script src="~/Js/msc-script.js"></script>
+    <script src="~/Js/angular-drag-and-drop-lists.js"></script>
+    <script src="~/Js/paging.js"></script>
+    <script src="~/Js/autocomplete.js"></script>
+    <script src="~/assets/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <link href="~/assets/ui.select/dist/selectize.default.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.6.10/angular-sanitize.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.20.0/select.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.20.0/select.js"></script>
+    @* App JS *@
+    <script src="~/Js/InstaAlbum/InstaAlbum.js"></script>
+    <script src="~/Js/InstaAlbum/Services/HomeService.js"></script>
+    <script src="~/Js/InstaAlbum/Filter.js"></script>
+    <script src="~/Js/InstaAlbum/Directive.js"></script>
+    <script src="~/Js/InstaAlbum/Notification.js"></script>
+    <script src="~/Js/InstaAlbum/Services/AccountService.js"></script>
+    <script src="~/Js/InstaAlbum/Controllers/Login.js"></script>
+</head>
+<body class="login-container login-cover" ng-app="InstaAlbumModule">
+    <!-- Page container -->
+    <div class="page-container">
+        <!-- Page content -->
+        <div class="page-content">
+            <!-- Main content -->
+            <div class="content-wrapper">
+                <!-- Content area -->
+                <div class="content pb-20">
+                    <!-- Tabbed form -->
+                    <div class="panel login-form width-400">
+                        <div class="panel-body" ng-controller="LoginController">
+                            <form ng-submit="LoginStudio()">
+                                <div class="text-center">
+                                    <div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
+                                    <h5 class="content-group">Login to your account <small class="display-block">Your credentials</small></h5>
+                                </div>
+                                <div class="form-group has-feedback has-feedback-left">
+                                    <input type="text" class="form-control" ng-model="UserName" placeholder="User Name" name="UserName" required="required">
+                                    <div class="form-control-feedback">
+                                        <i class="icon-user text-muted"></i>
+                                    </div>
+                                </div>
+                                <div class="form-group has-feedback has-feedback-left">
+                                    <input type="password" class="form-control" ng-model="Password" placeholder="Password" name="password" required="required">
+                                    <div class="form-control-feedback">
+                                        <i class="icon-lock2 text-muted"></i>
+                                    </div>
+                                </div>
+                                @*<div class="form-group login-options">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" ng-model="IsRemember" class="styled" checked="checked">
+                            Remember
+                        </label>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <a href="login_password_recover.html">Forgot password?</a>
+                    </div>
+                </div>
+            </div>*@
+                                <div class="form-group">
+                                    <button type="submit" class="btn bg-blue btn-block">Login <i class="icon-arrow-right14 position-right"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /tabbed form -->
+                    <div id="notificationContaner" class="top-right jGrowl" style="position:fixed">
+                        <div class="jGrowl-notification"></div>
+                        <div id="notificationBlock" class="jGrowl-notification alert ui-state-highlight ui-corner-all">
+                            @*<button class="jGrowl-close">×</button>*@
+                            @*<div class="jGrowl-header">Well done!</div>*@
+                            <div id="notificationMsg" class="jGrowl-message">Notification</div>
+                        </div>
+                    </div>
+                    <div id="loaderContaner" class="center jGrowl" style="position:fixed;width: 175px !important;">
+                        <div class="jGrowl-notification"></div>
+                        <div id="loaderBlock" class="jGrowl-notification alert ui-state-highlight ui-corner-all bg-teal-400">
+                            @*<button class="jGrowl-close">×</button>*@
+                            @*<div class="jGrowl-header">Well done!</div>*@
+                            <button type="button" class="btn bg-teal-400" id="spinner-dark-6">
+                                <i class="icon-spinner9 spinner position-left"></i> Please Wait...
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /content area -->
+            </div>
+            <!-- /main content -->
+        </div>
+        <!-- /page content -->
+    </div>
+    <!-- /page container -->
+</body>
+<!-- Mirrored from demo.interface.club/limitless/layout_2/LTR/default/login_tabbed.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 16 Sep 2016 15:19:05 GMT -->
+</html>

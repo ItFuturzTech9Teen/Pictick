@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PickTick</title>
+    <link rel="icon" type="image/png" href="~/Img/SE-Black.png">
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="~/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/css/core.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/css/components.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/css/colors.css" rel="stylesheet" type="text/css">
+    <link href="~/Css/angucomplete.css" rel="stylesheet" />
+    <link href="~/Css/msc-style.css" rel="stylesheet" />
+    <link href="~/Css/Stylee.css" rel="stylesheet" />
+    <!-- /global stylesheets -->
+    <!-- Core JS files -->
+    <script type="text/javascript" src="~/assets/js/plugins/loaders/pace.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/core/libraries/jquery.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/core/libraries/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/loaders/blockui.min.js"></script>
+    <script src="~/Js/jquery.timeago.js"></script>
+
+    <!-- /core JS files -->
+    <!-- For Google Map -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPaIWlrt93EZc2p-LWZDF_jgvniQmuHog"></script>
+    <!--End Google Map-->
+    <link rel="stylesheet" href="http://mbenford.github.io/ngTagsInput/css/ng-tags-input.min.css" />
+    <script src="~/Js/angular1_4_2.js"></script>
+    <script src="~/Js/ng-tags-input.js"></script>
+    <script src="~/Js/angular-filter.js"></script>
+    <script src="~/Js/angular-touch.min.js"></script>
+    <script src="~/Js/angular-cookies1_4_0.js"></script>
+    <script src="~/Js/angular-ipcookies.js"></script>
+    <script src="~/Js/angular-local-storage.js"></script>
+    <script src="~/Js/msc-script.js"></script>
+    <script src="~/Js/angular-drag-and-drop-lists.js"></script>
+    <script src="~/Js/paging.js"></script>
+    <script src="~/assets/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <link href="~/assets/ui.select/dist/selectize.default.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.6.10/angular-sanitize.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.20.0/select.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.20.0/select.js"></script>
+    <script src="~/Js/InstaAlbum/InstaAlbum.js"></script>
+    <script src="~/Js/InstaAlbum/Services/AccountService.js"></script>
+    <script src="~/Js/InstaAlbum/Controllers/Home.js"></script>
+    <script src="~/Js/InstaAlbum/Filter.js"></script>
+    <script src="~/Js/InstaAlbum/Directive.js"></script>
+    <script src="~/Js/InstaAlbum/Notification.js"></script>
+    <link rel="stylesheet" href="~/Css/lightbox.css">
+</head>
+<body ng-app="InstaAlbumModule" ng-cloak>
+    <!-- Main navbar -->
+    <div class="navbar navbar-inverse" ng-controller="HomeController">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+                @*<img src="~/Img/logo_web.png" alt="CoralSquare">*@
+                <span class="brand">
+                    Insta
+                    <span class="brand-tip">Album</span>
+                </span>
+            </a>
+            <ul class="nav navbar-nav pull-right visible-xs-block">
+                <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-collapse collapse" id="navbar-mobile">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown dropdown-user">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="~/assets/images/demo/users/face11.jpg" alt="">
+                        <span>{{LoginUser.Name}}</span>
+                        <i class="caret"></i>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-right bg-col-Purple-light">
+                        @*<li><a href="#"><span class="badge badge-warning pull-right">58</span> <i class="icon-comment-discussion"></i> Messages</a></li>*@
+                        <li><a ng-click="logOutUser()"><i class="icon-switch2"></i> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /main navbar -->
+    <!-- Second navbar -->
+    <div class="navbar navbar-default bg-col-Purple" id="navbar-second" ng-controller="HomeController">
+        <ul class="nav navbar-nav no-border visible-xs-block">
+            <li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-second-toggle"><i class="icon-menu7"></i></a></li>
+        </ul>
+
+        <div class="navbar-collapse collapse" id="navbar-second-toggle">
+            <ul class="nav navbar-nav">
+                <li><a href="~/"><i class="icon-display4 position-left"></i> Dashboard</a></li>
+
+
+                @*<li ng-show="IsAdmin"><a href="~/Studio"><i class="icon-video-camera"></i> Studio</a></li>
+                    <li ng-hide="IsAdmin"><a href="~/Album"><i class="icon-gallery"></i> Album</a></li>
+                    <li ng-hide="IsAdmin"><a href="~/AlbumPhoto"><i class="icon-camera"></i> Album Photo</a></li>
+                    <li ng-hide="IsAdmin"><a href="~/Customer"><i class="icon-user-tie"></i> Customer</a></li>
+                    <li ng-hide="IsAdmin"><a href="~/SortListedAlbum"><i class="icon-select2"></i> SortListedAlbum</a></li>*@
+
+            </ul>
+        </div>
+    </div>
+    <!-- /second navbar -->
+    <!-- Page container -->
+    <div class="page-container">
+
+        <!-- Page content -->
+        <div class="page-content">
+            @RenderBody()
+            <div id="notificationContaner" class="top-right jGrowl" style="position:fixed">
+                <div class="jGrowl-notification"></div>
+                <div id="notificationBlock" class="jGrowl-notification alert ui-state-highlight ui-corner-all">
+                    @*<button class="jGrowl-close">×</button>*@
+                    @*<div class="jGrowl-header">Well done!</div>*@
+                    <div id="notificationMsg" class="jGrowl-message">Notification</div>
+                </div>
+            </div>
+            <div id="loaderContaner" class="center jGrowl" style="position:fixed;width: 175px !important;">
+                <div class="jGrowl-notification"></div>
+                <div id="loaderBlock" class="jGrowl-notification alert ui-state-highlight ui-corner-all bg-teal-400">
+                    @*<button class="jGrowl-close">×</button>*@
+                    @*<div class="jGrowl-header">Well done!</div>*@
+                    <button type="button" class="btn bg-teal-400" id="spinner-dark-6">
+                        <i class="icon-spinner9 spinner position-left"></i> Please Wait...
+                    </button>
+                </div>
+            </div>
+            @* For Report Popup *@
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="footer text-muted">
+        &copy; 2018. InstaAlbum by <a href="http://studyfield.com" target="_blank">Study Field Technology PVT LTD</a>
+    </div>
+    <!-- /footer -->
+</body>
+</html>
