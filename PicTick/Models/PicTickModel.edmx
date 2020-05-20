@@ -109,6 +109,17 @@
           <Property Name="StateId" Type="bigint" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="Contest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContestName" Type="nvarchar" MaxLength="100" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="Fees" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="Id" />
@@ -125,6 +136,8 @@
           <Property Name="FCMToken" Type="nvarchar" MaxLength="200" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
           <Property Name="InviteStatus" Type="nvarchar" MaxLength="20" />
+          <Property Name="PhotographerId" Type="bigint" />
+          <Property Name="Image" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ErrorLog">
           <Key>
@@ -167,6 +180,22 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="CustomerId" Type="bigint" />
         </EntityType>
+        <EntityType Name="Photographer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudioId" Type="bigint" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="ReferalCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobileNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="BranchId" Type="bigint" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsVerified" Type="bit" />
+          <Property Name="FCMToken" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Portfolio">
           <Key>
             <PropertyRef Name="Id" />
@@ -195,10 +224,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StateId" Type="bigint" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" />
           <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
-          <Property Name="Address" Type="nvarchar(max)" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
           <Property Name="StudioLogo" Type="nvarchar" MaxLength="250" />
@@ -207,9 +234,6 @@
           <Property Name="Email" Type="nvarchar" MaxLength="200" />
           <Property Name="Website" Type="nvarchar" MaxLength="200" />
           <Property Name="StudioOwner" Type="nvarchar" MaxLength="200" />
-          <Property Name="Country" Type="nvarchar" MaxLength="100" />
-          <Property Name="CityId" Type="bigint" />
-          <Property Name="PinCode" Type="nvarchar" MaxLength="50" />
           <Property Name="InviteMessage" Type="nvarchar(max)" />
           <Property Name="WaterMark" Type="nvarchar" MaxLength="200" />
           <Property Name="Position" Type="nvarchar" MaxLength="50" />
@@ -228,6 +252,20 @@
           <Property Name="Title" Type="nvarchar" MaxLength="200" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="StudioId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="StudioAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="100" />
+          <Property Name="StudioId" Type="bigint" />
+          <Property Name="StateId" Type="bigint" />
+          <Property Name="CityId" Type="bigint" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="LatLong" Type="nvarchar" MaxLength="100" />
+          <Property Name="StudioName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Pincode" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="StudioSocialLink">
           <Key>
@@ -278,14 +316,33 @@
         <Function Name="GetCustomerGallery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CustomerId" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="GetCustomerGalleryData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetDashboardCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudioId" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="GetGalleryCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="GalleryId" Type="bigint" Mode="In" />
         </Function>
         <Function Name="GetGallerySelectedCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="GalleryId" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="GetPhotographerByStudioAndBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudioId" Type="bigint" Mode="In" />
+          <Parameter Name="BranchId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetStudioAddressBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudioId" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="GetStudioAdvertisement" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StudioId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="UpdateCustomerData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerId" Type="bigint" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Mobile" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="UpdateCustomerInviteStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CustomerId" Type="bigint" Mode="In" />
@@ -297,6 +354,23 @@
         <Function Name="UpdateFCMToken" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CustomerId" Type="bigint" Mode="In" />
           <Parameter Name="FCMToken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UpdatePhotographerData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PhotographerId" Type="bigint" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Mobile" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UpdatePhotographerFCMToken" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PhotographerId" Type="bigint" Mode="In" />
+          <Parameter Name="FCMToken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UpdatePhotographerVerification" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PhotographerId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="UpdaterRefearAndEarn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PhotographerId" Type="bigint" Mode="In" />
+          <Parameter Name="ReferalCode" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="PicTickModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
@@ -310,16 +384,19 @@
           <EntitySet Name="AppointmentSlot" EntityType="Self.AppointmentSlot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contest" EntityType="Self.Contest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gallery" EntityType="Self.Gallery" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GalleryCustomer" EntityType="Self.GalleryCustomer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photographer" EntityType="Self.Photographer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Portfolio" EntityType="Self.Portfolio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SlideShowSound" EntityType="Self.SlideShowSound" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Studio" EntityType="Self.Studio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudioAbout" EntityType="Self.StudioAbout" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudioAddress" EntityType="Self.StudioAddress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudioSocialLink" EntityType="Self.StudioSocialLink" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -430,23 +507,6 @@
           <Property Name="StateId" Type="Int64" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ParentId" Type="Int64" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IsVerified" Type="Boolean" />
-          <Property Name="StudioId" Type="Int64" />
-          <Property Name="FCMToken" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="InviteStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="ErrorLog">
           <Key>
             <PropertyRef Name="LogId" />
@@ -511,36 +571,6 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Studio">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StateId" Type="Int64" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="StudioLogo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="About" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Services" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Website" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="StudioOwner" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CityId" Type="Int64" />
-          <Property Name="PinCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="InviteMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="WaterMark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Font" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="FontStyle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Opacity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FontSize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="WaterMarkImage" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="WaterMarkType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="StudioAbout">
           <Key>
             <PropertyRef Name="Id" />
@@ -572,7 +602,6 @@
           <EntitySet Name="AppointmentSlots" EntityType="Self.AppointmentSlot" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Cities" EntityType="Self.City" />
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="ErrorLogs" EntityType="Self.ErrorLog" />
           <EntitySet Name="Galleries" EntityType="Self.Gallery" />
           <EntitySet Name="GalleryCustomers" EntityType="Self.GalleryCustomer" />
@@ -580,7 +609,6 @@
           <EntitySet Name="Portfolios" EntityType="Self.Portfolio" />
           <EntitySet Name="SlideShowSounds" EntityType="Self.SlideShowSound" />
           <EntitySet Name="States" EntityType="Self.State" />
-          <EntitySet Name="Studios" EntityType="Self.Studio" />
           <EntitySet Name="StudioAbouts" EntityType="Self.StudioAbout" />
           <EntitySet Name="StudioSocialLinks" EntityType="Self.StudioSocialLink" />
           <FunctionImport Name="GetAlbumPhotoComment" ReturnType="Collection(PicTickModel.GetAlbumPhotoComment_Result)">
@@ -640,8 +668,49 @@
             <Parameter Name="FCMToken" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetAlbumCustomer" ReturnType="Collection(PicTickModel.GetAlbumCustomer_Result)">
-            <Parameter Name="AlbumId" Mode="In" Type="Int64" />
+          <Parameter Name="AlbumId" Mode="In" Type="Int64" />
           </FunctionImport>
+          <FunctionImport Name="UpdateCustomerData">
+            <Parameter Name="CustomerId" Mode="In" Type="Int64" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Mobile" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetDashboardCount" ReturnType="Collection(PicTickModel.GetDashboardCount_Result)">
+          <Parameter Name="StudioId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <EntitySet Name="Photographers" EntityType="PicTickModel.Photographer" />
+          <FunctionImport Name="UpdatePhotographerVerification">
+          <Parameter Name="PhotographerId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="UpdatePhotographerFCMToken">
+            <Parameter Name="PhotographerId" Mode="In" Type="Int64" />
+            <Parameter Name="FCMToken" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Studios" EntityType="PicTickModel.Studio" />
+          <EntitySet Name="StudioAddresses" EntityType="PicTickModel.StudioAddress" />
+          <FunctionImport Name="GetPhotographerByStudioAndBranch" ReturnType="Collection(PicTickModel.GetPhotographerByStudioAndBranch_Result)">
+            <Parameter Name="StudioId" Mode="In" Type="Int64" />
+            <Parameter Name="BranchId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <EntitySet Name="Customers" EntityType="PicTickModel.Customer" />
+          <FunctionImport Name="GetStudioAddressBranch" ReturnType="Collection(PicTickModel.GetStudioAddressBranch_Result)">
+          <Parameter Name="StudioId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetCustomerGalleryData" ReturnType="Collection(PicTickModel.GetCustomerGalleryData_Result)">
+          <Parameter Name="CustomerId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="UpdatePhotographerData">
+            <Parameter Name="PhotographerId" Mode="In" Type="Int64" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Mobile" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdaterRefearAndEarn">
+            <Parameter Name="PhotographerId" Mode="In" Type="Int64" />
+            <Parameter Name="ReferalCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Contests" EntityType="PicTickModel.Contest" />
         </EntityContainer>
         <ComplexType Name="GetAlbumPhotoComment_Result">
           <Property Type="Int64" Name="Id" Nullable="false" />
@@ -762,6 +831,143 @@
           <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="InviteStatus" Nullable="true" MaxLength="20" />
         </ComplexType>
+        <ComplexType Name="GetDashboardCount_Result">
+          <Property Type="Int32" Name="StudioCount" Nullable="true" />
+          <Property Type="Int32" Name="CustomerCount" Nullable="true" />
+          <Property Type="Int32" Name="EventCount" Nullable="true" />
+          <Property Type="Int32" Name="PortfolioCount" Nullable="true" />
+          <Property Type="Decimal" Name="StudioPer" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="CustomerPer" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="EventPer" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="PortfolioPer" Nullable="true" Precision="10" Scale="2" />
+        </ComplexType>
+        <EntityType Name="Photographer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudioId" Type="Int64" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ReferalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BranchId" Type="Int64" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsVerified" Type="Boolean" />
+          <Property Name="FCMToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Studio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StudioLogo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="About" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Services" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="StudioOwner" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="InviteMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WaterMark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Font" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FontStyle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Opacity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FontSize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WaterMarkImage" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="WaterMarkType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="StudioAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StudioId" Type="Int64" />
+          <Property Name="StateId" Type="Int64" />
+          <Property Name="CityId" Type="Int64" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LatLong" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StudioName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Pincode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="GetPhotographerByStudioAndBranch_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="StudioId" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ReferalCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MobileNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="200" />
+          <Property Type="Int64" Name="BranchId" Nullable="true" />
+          <Property Type="String" Name="Image" Nullable="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="Boolean" Name="IsVerified" Nullable="true" />
+          <Property Type="String" Name="FCMToken" Nullable="true" />
+          <Property Type="String" Name="StudioName" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentId" Type="Int64" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsVerified" Type="Boolean" />
+          <Property Name="StudioId" Type="Int64" />
+          <Property Name="FCMToken" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InviteStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PhotographerId" Type="Int64" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="GetStudioAddressBranch_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="100" />
+          <Property Type="Int64" Name="StudioId" Nullable="true" />
+          <Property Type="Int64" Name="StateId" Nullable="true" />
+          <Property Type="Int64" Name="CityId" Nullable="true" />
+          <Property Type="String" Name="Address" Nullable="true" />
+          <Property Type="String" Name="LatLong" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="StudioName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Pincode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="StateName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CityName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MainStudioName" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="GetCustomerGalleryData_Result">
+          <Property Type="Int64" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="GalleryPin" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SelectionPin" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="AllowDownload" Nullable="true" />
+          <Property Type="String" Name="GalleryCover" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="WatterMark" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="StudioId" Nullable="true" />
+          <Property Type="Boolean" Name="IsSelectionDone" Nullable="true" />
+          <Property Type="Int64" Name="GalleryCustomerId" Nullable="false" />
+          <Property Type="Int64" Name="CustomerId" Nullable="true" />
+          <Property Type="Int64" Name="GalleryId" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Contest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContestName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="Fees" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -883,24 +1089,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="PicTickModel.Customer">
-              <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
-                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
-                <ScalarProperty Name="FCMToken" ColumnName="FCMToken" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="InviteStatus" ColumnName="InviteStatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ErrorLogs">
             <EntityTypeMapping TypeName="PicTickModel.ErrorLog">
               <MappingFragment StoreEntitySet="ErrorLog">
@@ -969,37 +1157,6 @@
               <MappingFragment StoreEntitySet="State">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Studios">
-            <EntityTypeMapping TypeName="PicTickModel.Studio">
-              <MappingFragment StoreEntitySet="Studio">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="StateId" ColumnName="StateId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="StudioLogo" ColumnName="StudioLogo" />
-                <ScalarProperty Name="About" ColumnName="About" />
-                <ScalarProperty Name="Services" ColumnName="Services" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Website" ColumnName="Website" />
-                <ScalarProperty Name="StudioOwner" ColumnName="StudioOwner" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
-                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
-                <ScalarProperty Name="InviteMessage" ColumnName="InviteMessage" />
-                <ScalarProperty Name="WaterMark" ColumnName="WaterMark" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
-                <ScalarProperty Name="Font" ColumnName="Font" />
-                <ScalarProperty Name="FontStyle" ColumnName="FontStyle" />
-                <ScalarProperty Name="Opacity" ColumnName="Opacity" />
-                <ScalarProperty Name="FontSize" ColumnName="FontSize" />
-                <ScalarProperty Name="WaterMarkImage" ColumnName="WaterMarkImage" />
-                <ScalarProperty Name="WaterMarkType" ColumnName="WaterMarkType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1203,6 +1360,169 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateCustomerData" FunctionName="PicTickModel.Store.UpdateCustomerData" />
+          <FunctionImportMapping FunctionImportName="GetDashboardCount" FunctionName="PicTickModel.Store.GetDashboardCount">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PicTickModel.GetDashboardCount_Result">
+                <ScalarProperty Name="StudioCount" ColumnName="StudioCount" />
+                <ScalarProperty Name="CustomerCount" ColumnName="CustomerCount" />
+                <ScalarProperty Name="EventCount" ColumnName="EventCount" />
+                <ScalarProperty Name="PortfolioCount" ColumnName="PortfolioCount" />
+                <ScalarProperty Name="StudioPer" ColumnName="StudioPer" />
+                <ScalarProperty Name="CustomerPer" ColumnName="CustomerPer" />
+                <ScalarProperty Name="EventPer" ColumnName="EventPer" />
+                <ScalarProperty Name="PortfolioPer" ColumnName="PortfolioPer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Photographers">
+            <EntityTypeMapping TypeName="PicTickModel.Photographer">
+              <MappingFragment StoreEntitySet="Photographer">
+                <ScalarProperty Name="FCMToken" ColumnName="FCMToken" />
+                <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="ReferalCode" ColumnName="ReferalCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UpdatePhotographerVerification" FunctionName="PicTickModel.Store.UpdatePhotographerVerification" />
+          <FunctionImportMapping FunctionImportName="UpdatePhotographerFCMToken" FunctionName="PicTickModel.Store.UpdatePhotographerFCMToken" />
+          <EntitySetMapping Name="Studios">
+            <EntityTypeMapping TypeName="PicTickModel.Studio">
+              <MappingFragment StoreEntitySet="Studio">
+                <ScalarProperty Name="WaterMarkType" ColumnName="WaterMarkType" />
+                <ScalarProperty Name="WaterMarkImage" ColumnName="WaterMarkImage" />
+                <ScalarProperty Name="FontSize" ColumnName="FontSize" />
+                <ScalarProperty Name="Opacity" ColumnName="Opacity" />
+                <ScalarProperty Name="FontStyle" ColumnName="FontStyle" />
+                <ScalarProperty Name="Font" ColumnName="Font" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="WaterMark" ColumnName="WaterMark" />
+                <ScalarProperty Name="InviteMessage" ColumnName="InviteMessage" />
+                <ScalarProperty Name="StudioOwner" ColumnName="StudioOwner" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Services" ColumnName="Services" />
+                <ScalarProperty Name="About" ColumnName="About" />
+                <ScalarProperty Name="StudioLogo" ColumnName="StudioLogo" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudioAddresses">
+            <EntityTypeMapping TypeName="PicTickModel.StudioAddress">
+              <MappingFragment StoreEntitySet="StudioAddress">
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="StudioName" ColumnName="StudioName" />
+                <ScalarProperty Name="LatLong" ColumnName="LatLong" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetPhotographerByStudioAndBranch" FunctionName="PicTickModel.Store.GetPhotographerByStudioAndBranch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PicTickModel.GetPhotographerByStudioAndBranch_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ReferalCode" ColumnName="ReferalCode" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
+                <ScalarProperty Name="FCMToken" ColumnName="FCMToken" />
+                <ScalarProperty Name="StudioName" ColumnName="StudioName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="PicTickModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="PhotographerId" ColumnName="PhotographerId" />
+                <ScalarProperty Name="InviteStatus" ColumnName="InviteStatus" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="FCMToken" ColumnName="FCMToken" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetStudioAddressBranch" FunctionName="PicTickModel.Store.GetStudioAddressBranch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PicTickModel.GetStudioAddressBranch_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="LatLong" ColumnName="LatLong" />
+                <ScalarProperty Name="StudioName" ColumnName="StudioName" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="MainStudioName" ColumnName="MainStudioName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCustomerGalleryData" FunctionName="PicTickModel.Store.GetCustomerGalleryData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PicTickModel.GetCustomerGalleryData_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="GalleryPin" ColumnName="GalleryPin" />
+                <ScalarProperty Name="SelectionPin" ColumnName="SelectionPin" />
+                <ScalarProperty Name="AllowDownload" ColumnName="AllowDownload" />
+                <ScalarProperty Name="GalleryCover" ColumnName="GalleryCover" />
+                <ScalarProperty Name="WatterMark" ColumnName="WatterMark" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="IsSelectionDone" ColumnName="IsSelectionDone" />
+                <ScalarProperty Name="GalleryCustomerId" ColumnName="GalleryCustomerId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="GalleryId" ColumnName="GalleryId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdatePhotographerData" FunctionName="PicTickModel.Store.UpdatePhotographerData" />
+          <FunctionImportMapping FunctionImportName="UpdaterRefearAndEarn" FunctionName="PicTickModel.Store.UpdaterRefearAndEarn" />
+          <EntitySetMapping Name="Contests">
+            <EntityTypeMapping TypeName="PicTickModel.Contest">
+              <MappingFragment StoreEntitySet="Contest">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Fees" ColumnName="Fees" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="ContestName" ColumnName="ContestName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

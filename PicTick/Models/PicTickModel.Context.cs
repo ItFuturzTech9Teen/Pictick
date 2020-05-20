@@ -38,7 +38,6 @@ namespace PicTick.Models
         public virtual DbSet<AppointmentSlot> AppointmentSlots { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<City> Cities { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
         public virtual DbSet<Gallery> Galleries { get; set; }
         public virtual DbSet<GalleryCustomer> GalleryCustomers { get; set; }
@@ -46,9 +45,13 @@ namespace PicTick.Models
         public virtual DbSet<Portfolio> Portfolios { get; set; }
         public virtual DbSet<SlideShowSound> SlideShowSounds { get; set; }
         public virtual DbSet<State> States { get; set; }
-        public virtual DbSet<Studio> Studios { get; set; }
         public virtual DbSet<StudioAbout> StudioAbouts { get; set; }
         public virtual DbSet<StudioSocialLink> StudioSocialLinks { get; set; }
+        public virtual DbSet<Photographer> Photographers { get; set; }
+        public virtual DbSet<Studio> Studios { get; set; }
+        public virtual DbSet<StudioAddress> StudioAddresses { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Contest> Contests { get; set; }
     
         public virtual ObjectResult<GetAlbumPhotoComment_Result> GetAlbumPhotoComment(Nullable<long> albumPhotoId)
         {
@@ -230,6 +233,123 @@ namespace PicTick.Models
                 new ObjectParameter("AlbumId", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAlbumCustomer_Result>("GetAlbumCustomer", albumIdParameter);
+        }
+    
+        public virtual int UpdateCustomerData(Nullable<long> customerId, string name, string mobile, string email)
+        {
+            var customerIdParameter = customerId.HasValue ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(long));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var mobileParameter = mobile != null ?
+                new ObjectParameter("Mobile", mobile) :
+                new ObjectParameter("Mobile", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCustomerData", customerIdParameter, nameParameter, mobileParameter, emailParameter);
+        }
+    
+        public virtual ObjectResult<GetDashboardCount_Result> GetDashboardCount(Nullable<long> studioId)
+        {
+            var studioIdParameter = studioId.HasValue ?
+                new ObjectParameter("StudioId", studioId) :
+                new ObjectParameter("StudioId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDashboardCount_Result>("GetDashboardCount", studioIdParameter);
+        }
+    
+        public virtual int UpdatePhotographerVerification(Nullable<long> photographerId)
+        {
+            var photographerIdParameter = photographerId.HasValue ?
+                new ObjectParameter("PhotographerId", photographerId) :
+                new ObjectParameter("PhotographerId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdatePhotographerVerification", photographerIdParameter);
+        }
+    
+        public virtual int UpdatePhotographerFCMToken(Nullable<long> photographerId, string fCMToken)
+        {
+            var photographerIdParameter = photographerId.HasValue ?
+                new ObjectParameter("PhotographerId", photographerId) :
+                new ObjectParameter("PhotographerId", typeof(long));
+    
+            var fCMTokenParameter = fCMToken != null ?
+                new ObjectParameter("FCMToken", fCMToken) :
+                new ObjectParameter("FCMToken", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdatePhotographerFCMToken", photographerIdParameter, fCMTokenParameter);
+        }
+    
+        public virtual ObjectResult<GetPhotographerByStudioAndBranch_Result> GetPhotographerByStudioAndBranch(Nullable<long> studioId, Nullable<long> branchId)
+        {
+            var studioIdParameter = studioId.HasValue ?
+                new ObjectParameter("StudioId", studioId) :
+                new ObjectParameter("StudioId", typeof(long));
+    
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPhotographerByStudioAndBranch_Result>("GetPhotographerByStudioAndBranch", studioIdParameter, branchIdParameter);
+        }
+    
+        public virtual ObjectResult<GetStudioAddressBranch_Result> GetStudioAddressBranch(Nullable<long> studioId)
+        {
+            var studioIdParameter = studioId.HasValue ?
+                new ObjectParameter("StudioId", studioId) :
+                new ObjectParameter("StudioId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetStudioAddressBranch_Result>("GetStudioAddressBranch", studioIdParameter);
+        }
+    
+        public virtual ObjectResult<GetCustomerGalleryData_Result> GetCustomerGalleryData(Nullable<long> customerId)
+        {
+            var customerIdParameter = customerId.HasValue ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCustomerGalleryData_Result>("GetCustomerGalleryData", customerIdParameter);
+        }
+    
+        public virtual int UpdatePhotographerData(Nullable<long> photographerId, string name, string mobile, string email)
+        {
+            var photographerIdParameter = photographerId.HasValue ?
+                new ObjectParameter("PhotographerId", photographerId) :
+                new ObjectParameter("PhotographerId", typeof(long));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var mobileParameter = mobile != null ?
+                new ObjectParameter("Mobile", mobile) :
+                new ObjectParameter("Mobile", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdatePhotographerData", photographerIdParameter, nameParameter, mobileParameter, emailParameter);
+        }
+    
+        public virtual int UpdaterRefearAndEarn(Nullable<long> photographerId, string referalCode)
+        {
+            var photographerIdParameter = photographerId.HasValue ?
+                new ObjectParameter("PhotographerId", photographerId) :
+                new ObjectParameter("PhotographerId", typeof(long));
+    
+            var referalCodeParameter = referalCode != null ?
+                new ObjectParameter("ReferalCode", referalCode) :
+                new ObjectParameter("ReferalCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdaterRefearAndEarn", photographerIdParameter, referalCodeParameter);
         }
     }
 }

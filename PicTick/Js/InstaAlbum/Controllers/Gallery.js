@@ -58,6 +58,10 @@
         $('#myModal').modal('hide');
     }
 
+    $scope.OpenPopUp = function () {
+        $scope.Clear();
+    }
+
     $scope.DeleteData = function (id) {
         var result = confirm("Are you sure you want to delete this ?");
         if (result) {

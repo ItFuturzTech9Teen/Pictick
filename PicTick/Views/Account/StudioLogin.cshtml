@@ -3,44 +3,55 @@
 }
 <!DOCTYPE html>
 <html lang="en">
-<!-- Mirrored from demo.interface.club/limitless/layout_2/LTR/default/login_tabbed.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 16 Sep 2016 15:19:05 GMT -->
+<!-- Mirrored from atmos.atomui.com/light/login by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 08 May 2020 07:08:04 GMT -->
 <!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PicTick - Studio Login</title>
-    <!-- Global stylesheets -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
-    <link href="assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/core.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/components.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/colors.css" rel="stylesheet" type="text/css">
-    <link href="~/Css/ng-tags-input.css" rel="stylesheet" />
-    <!-- /global stylesheets -->
-    <!-- Core JS files -->
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" name="viewport">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta content="" name="author" />
+    <meta content="atlas is Bootstrap 4 based admin panel.It comes with 100's widgets,charts and icons" name="description" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title"
+          content="atlas is Bootstrap 4 based admin panel.It comes with 100's widgets,charts and icons" />
+    <meta property="og:description"
+          content="atlas is Bootstrap 4 based admin panel.It comes with 100's widgets,charts and icons" />
+    <meta property="og:site_name" content="atlas " />
+    <title>PicTik Studio Panel</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/logo.png" />
+    <link rel="icon" href="assets/img/logo.png" type="image/png" sizes="16x16">
+    <link rel='stylesheet' href='~/assets/newcss/478ccdc1892151837f9e7163badb055b8a1833a5/crisp/assets/vendor/pace/pace.css' />
+    <script src='~/assets/newjs/3d1965f9e8e63c62b671967aafcad6603deec90c/theme/html/assets/js/pace.min.js'></script>
     <script type="text/javascript" src="assets/js/plugins/loaders/pace.min.js"></script>
     <script type="text/javascript" src="assets/js/core/libraries/jquery.min.js"></script>
     <script type="text/javascript" src="assets/js/core/libraries/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/plugins/loaders/blockui.min.js"></script>
     <!-- /core JS files -->
-    <!-- Theme JS files -->
-    <script type="text/javascript" src="assets/js/plugins/forms/styling/uniform.min.js"></script>
+    <!--vendors-->
+    <link rel='stylesheet' type='text/css' href='~/assets/newcss/291bbeead57f19651f311362abe809b67adc3fb5.css' />
+    <link rel='stylesheet' href='~/assets/newcss/30bc673ce76f73ecf02568498f6b139269f6e4c7.css' />
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,600" rel="stylesheet">
+    <!--Material Icons-->
+    <link rel='stylesheet' type='text/css' href='~/assets/newcss/548117a22d5d22545a0ab2dddf8940a2e32c04ed/default/assets/fonts/materialdesignicons/materialdesignicons.min.css' />
+    <!--Material Icons-->
+    <link rel='stylesheet' type='text/css' href='~/assets/newcss/0940f25997c8e50e65e95510b30245d116f639f0/light/assets/fonts/feather/feather-icons.css' />
+    <!--Bootstrap + atmos Admin CSS-->
+    <link rel='stylesheet' type='text/css' href='~/assets/newcss/16e33a95bb46f814f87079394f72ef62972bd197/light/assets/css/atmos.min.css' />
+    
+    
+    <script type="text/javascript" src="~/assets/js/plugins/forms/styling/uniform.min.js"></script>
     @*<script type="text/javascript" src="assets/js/core/app.js"></script>*@
-    <script type="text/javascript" src="assets/js/pages/login.js"></script>
+    <script type="text/javascript" src="~/assets/js/pages/login.js"></script>
     <!-- /theme JS files -->
     <script src="~/Js/angular.min.js"></script>
 
-    @* For D3 JS Charts*@
-    <script src="~/scripts/d3/d3.js"></script>
-    <script src="~/scripts/nv.d3.js"></script>
-    <script src="~/scripts/angular-nvd3.js"></script>
-    <link href="~/Content/nv.d3.css" rel="stylesheet" />
 
-    @* End D3 JS Charts*@
-
+    
     <script src="~/Js/ng-tags-input.js"></script>
     <script src="~/Js/angular-filter.js"></script>
     <script src="~/Js/angular-touch.min.js"></script>
@@ -52,6 +63,7 @@
     <script src="~/Js/paging.js"></script>
     <script src="~/Js/autocomplete.js"></script>
     <script src="~/assets/ui-bootstrap-tpls-2.5.0.min.js"></script>
+
     <link href="~/assets/ui.select/dist/selectize.default.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.6.10/angular-sanitize.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.20.0/select.css" rel="stylesheet" />
@@ -64,82 +76,57 @@
     <script src="~/Js/InstaAlbum/Notification.js"></script>
     <script src="~/Js/InstaAlbum/Services/AccountService.js"></script>
     <script src="~/Js/InstaAlbum/Controllers/Login.js"></script>
+
+    <!-- Additional library for page -->
 </head>
-<body class="login-container login-cover" ng-app="InstaAlbumModule">
-    <!-- Page container -->
-    <div class="page-container">
-        <!-- Page content -->
-        <div class="page-content">
-            <!-- Main content -->
-            <div class="content-wrapper">
-                <!-- Content area -->
-                <div class="content pb-20">
-                    <!-- Tabbed form -->
-                    <div class="panel login-form width-400">
-                        <div class="panel-body" ng-controller="LoginController">
-                            <form ng-submit="LoginStudio()">
-                                <div class="text-center">
-                                    <div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
-                                    <h5 class="content-group">Login to your account <small class="display-block">Your credentials</small></h5>
-                                </div>
-                                <div class="form-group has-feedback has-feedback-left">
-                                    <input type="text" class="form-control" ng-model="UserName" placeholder="User Name" name="UserName" required="required">
-                                    <div class="form-control-feedback">
-                                        <i class="icon-user text-muted"></i>
+<body class="jumbo-page" ng-app="InstaAlbumModule">
+    <main class="admin-main  ">
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="col-lg-4  bg-white"  ng-controller="LoginController">
+                    <div class="row align-items-center m-h-100">
+                        <div class="mx-auto col-md-8">
+                            <div class="p-b-20 text-center">
+                                <p>
+                                    <img src="~/assets/images/picticklogo.png" width="150" alt="">
+                                </p>
+                                <p class="admin-brand-content">
+                                    PicTik
+                                </p>
+                            </div>
+                            <h3 class="text-center p-b-20 fw-400">Login</h3>
+                            <form class="needs-validation" ng-submit="LoginStudio()">
+                                <div class="form-row">
+                                    <div class="form-group floating-label col-md-12">
+                                        <label>UserName</label>
+                                        <input type="text" class="form-control" ng-model="UserName" placeholder="User Name" name="UserName" required="required">
+                                    </div>
+                                    <div class="form-group floating-label col-md-12">
+                                        <label>Password</label>
+                                        <input type="password" class="form-control" ng-model="Password" placeholder="Password" name="password" required="required">
                                     </div>
                                 </div>
-                                <div class="form-group has-feedback has-feedback-left">
-                                    <input type="password" class="form-control" ng-model="Password" placeholder="Password" name="password" required="required">
-                                    <div class="form-control-feedback">
-                                        <i class="icon-lock2 text-muted"></i>
-                                    </div>
-                                </div>
-                                @*<div class="form-group login-options">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label class="checkbox-inline">
-                            <input type="checkbox" ng-model="IsRemember" class="styled" checked="checked">
-                            Remember
-                        </label>
-                    </div>
-                    <div class="col-sm-6 text-right">
-                        <a href="login_password_recover.html">Forgot password?</a>
-                    </div>
-                </div>
-            </div>*@
-                                <div class="form-group">
-                                    <button type="submit" class="btn bg-blue btn-block">Login <i class="icon-arrow-right14 position-right"></i></button>
-                                </div>
+                                <button type="submit" class="btn btn-primary btn-block btn-lg">Login</button><br />
+                                
                             </form>
-                        </div>
-                    </div>
-                    <!-- /tabbed form -->
-                    <div id="notificationContaner" class="top-right jGrowl" style="position:fixed">
-                        <div class="jGrowl-notification"></div>
-                        <div id="notificationBlock" class="jGrowl-notification alert ui-state-highlight ui-corner-all">
-                            @*<button class="jGrowl-close">×</button>*@
-                            @*<div class="jGrowl-header">Well done!</div>*@
-                            <div id="notificationMsg" class="jGrowl-message">Notification</div>
-                        </div>
-                    </div> 
-                    <div id="loaderContaner" class="center jGrowl" style="position:fixed;width: 175px !important;">
-                        <div class="jGrowl-notification"></div>
-                        <div id="loaderBlock" class="jGrowl-notification alert ui-state-highlight ui-corner-all bg-teal-400">
-                            @*<button class="jGrowl-close">×</button>*@
-                            @*<div class="jGrowl-header">Well done!</div>*@
-                            <button type="button" class="btn bg-teal-400" id="spinner-dark-6">
-                                <i class="icon-spinner9 spinner position-left"></i> Please Wait...
-                            </button>
+                            <p class="text-right p-t-10">
+
+                            </p>
                         </div>
                     </div>
                 </div>
-                <!-- /content area -->
+                <div class="col-lg-8 d-none d-md-block bg-cover" style="background-image: url('../../assets/images/backgrounds/loginback.jpg');">
+                </div>
             </div>
-            <!-- /main content -->
         </div>
-        <!-- /page content -->
-    </div>
-    <!-- /page container -->
+    </main>
+
+
+    <script src='~/assets/newjs/9556cd6744b0b19628598270bd385082cda6a269.js'></script>
+    <!--page specific scripts for demo-->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-66116118-3"></script>
+    <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-66116118-3'); </script>
 </body>
-<!-- Mirrored from demo.interface.club/limitless/layout_2/LTR/default/login_tabbed.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 16 Sep 2016 15:19:05 GMT -->
+<!-- Mirrored from atmos.atomui.com/light/login by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 08 May 2020 07:08:04 GMT -->
 </html>

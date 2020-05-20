@@ -33,6 +33,7 @@ namespace PicTick
             routes.MapRoute(name: "City", url: "City", defaults: new { Controller = "Home", Action = "City" });
             routes.MapRoute(name: "AppointmentSlot", url: "AppointmentSlot", defaults: new { Controller = "Home", Action = "AppointmentSlot" });
             routes.MapRoute(name: "Appointment", url: "Appointment", defaults: new { Controller = "Home", Action = "Appointment" });
+            routes.MapRoute(name: "CustomerList", url: "CustomerList", defaults: new { Controller = "Home", Action = "CustomerList" });
 
             //Client Controller
             routes.MapRoute(name: "ClientGallery", url: "ClientGallery/{id}", defaults: new { Controller = "Client", Action = "Gallery", id = UrlParameter.Optional });

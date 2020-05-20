@@ -508,6 +508,56 @@ namespace PicTick.Models
                             //filepaths[i] = FilePath;
                             //i++;
                         }
+                        else if (fileType == Constants.FileTypePhotographer)
+                        {
+                            string folderPath = "~/UploadImages/Photographer/";
+                            bool exists = System.IO.Directory.Exists(HttpContext.Current.Server.MapPath(folderPath));
+                            if (!exists)
+                                System.IO.Directory.CreateDirectory(HttpContext.Current.Server.MapPath(folderPath));
+
+                            if (Extension.Contains("jpg") || Extension.Contains("png") || Extension.Contains("jpeg"))
+                            {
+                                //ResizeStream(500, 500, httpPostedFile.InputStream, Path.Combine(HttpContext.Current.Server.MapPath(folderPath), FileName));
+                                //FilePath = "UploadImages/Album/" + FolderName + "/" + FileName;
+                                string path = Path.Combine(HttpContext.Current.Server.MapPath(folderPath), FileName);
+                                httpPostedFile.SaveAs(path);
+                                FilePath = "UploadImages/Photographer/" + FileName;
+                            }
+                            else
+                            {
+                                string path = Path.Combine(HttpContext.Current.Server.MapPath(folderPath), FileName);
+                                httpPostedFile.SaveAs(path);
+                                FilePath = "UploadImages/Photographer/" + FileName;
+                            }
+
+                            filepaths[i] = FilePath;
+                            i++;
+                        }
+                        else if (fileType == Constants.FileTypeCustomer)
+                        {
+                            string folderPath = "~/UploadImages/Customer/";
+                            bool exists = System.IO.Directory.Exists(HttpContext.Current.Server.MapPath(folderPath));
+                            if (!exists)
+                                System.IO.Directory.CreateDirectory(HttpContext.Current.Server.MapPath(folderPath));
+
+                            if (Extension.Contains("jpg") || Extension.Contains("png") || Extension.Contains("jpeg"))
+                            {
+                                //ResizeStream(500, 500, httpPostedFile.InputStream, Path.Combine(HttpContext.Current.Server.MapPath(folderPath), FileName));
+                                //FilePath = "UploadImages/Album/" + FolderName + "/" + FileName;
+                                string path = Path.Combine(HttpContext.Current.Server.MapPath(folderPath), FileName);
+                                httpPostedFile.SaveAs(path);
+                                FilePath = "UploadImages/Customer/" + FileName;
+                            }
+                            else
+                            {
+                                string path = Path.Combine(HttpContext.Current.Server.MapPath(folderPath), FileName);
+                                httpPostedFile.SaveAs(path);
+                                FilePath = "UploadImages/Customer/" + FileName;
+                            }
+
+                            filepaths[i] = FilePath;
+                            i++;
+                        }
                     }
                 }
             }

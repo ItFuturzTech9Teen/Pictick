@@ -21,6 +21,45 @@ namespace PicTick.Controllers
         #region Dashboard
 
         [HttpGet]
+        public ResultData GetDashboardCount(long studioId)
+        {
+            ResultData resultData = new ResultData();
+            try
+            {
+
+                List<GetDashboardCount_Result> studioList = new List<GetDashboardCount_Result>();
+                studioList = db.GetDashboardCount(studioId).ToList();
+                if (studioList != null)
+                {
+                    resultData.Message = "Data Get Successfully";
+                    resultData.IsSuccess = true;
+                    resultData.Data = studioList;
+                    return resultData;
+                }
+                else
+                {
+                    resultData.Message = "No Data Found";
+                    resultData.IsSuccess = true;
+                    resultData.Data = 0;
+                    return resultData;
+                }
+            }
+            catch (Exception ex)
+            {
+                resultData.Message = ex.Message.ToString();
+                resultData.IsSuccess = false;
+                resultData.Data = 0;
+
+                ErrorLog errorLog = new ErrorLog();
+                errorLog.ErrorMessage = ex.Message.ToString();
+                errorLog.StackTrace = ex.StackTrace.ToString();
+                errorLog.EventName = "GetDashboardCount";
+
+                return resultData;
+            }
+        }
+
+        [HttpGet]
         public ResultData GetDashboardAlbumList(long StudioId)
         {
             ResultData resultData = new ResultData();
@@ -180,7 +219,6 @@ namespace PicTick.Controllers
                     {
                         oldStudio.Name = data.Name;
                         oldStudio.Mobile = data.Mobile;
-                        oldStudio.Address = data.Address;
                         oldStudio.UserName = data.UserName;
                         oldStudio.Password = data.Password;
 
@@ -2288,15 +2326,11 @@ namespace PicTick.Controllers
                     string Name = Convert.ToString(requestObject.Form["Name"]);
                     string About = Convert.ToString(requestObject.Form["About"]);
                     string Mobile = Convert.ToString(requestObject.Form["Mobile"]);
-                    string Address = Convert.ToString(requestObject.Form["Address"]);
                     string Services = Convert.ToString(requestObject.Form["Services"]);
                     string Email = Convert.ToString(requestObject.Form["Email"]);
                     string Website = Convert.ToString(requestObject.Form["Website"]);
                     string StudioOwner = Convert.ToString(requestObject.Form["StudioOwner"]);
-                    string PinCode = Convert.ToString(requestObject.Form["PinCode"]);
                     string InviteMessage = Convert.ToString(requestObject.Form["InviteMessage"]);
-                    long StateId = Convert.ToInt64(requestObject.Form["StateId"]);
-                    long CityId = Convert.ToInt64(requestObject.Form["CityId"]);
 
                     string StudioLogo = "";
                     if (paths != null && paths.Length > 0)
@@ -2304,15 +2338,11 @@ namespace PicTick.Controllers
 
                     dbStudio.Name = Name;
                     dbStudio.Mobile = Mobile;
-                    dbStudio.Address = Address;
                     dbStudio.About = About;
                     dbStudio.Services = Services;
                     dbStudio.Email = Email;
                     dbStudio.Website = Website;
                     dbStudio.StudioOwner = StudioOwner;
-                    dbStudio.StateId = StateId;
-                    dbStudio.CityId = CityId;
-                    dbStudio.PinCode = PinCode;
                     dbStudio.StudioLogo = StudioLogo;
                     dbStudio.InviteMessage = InviteMessage;
 
@@ -2675,6 +2705,317 @@ namespace PicTick.Controllers
             }
         }
 
+        #endregion
+
+        #region Photographer
+
+        [ActionName("SavePhotographer")]
+        public ResultData SavePhotographer()
+        {
+            ResultData resultData = new ResultData();
+            try
+            {
+                var properties = Request.Properties as Dictionary<string, object>;
+                var requestObject = ((System.Web.HttpContextWrapper)(properties["MS_HttpContext"])).Request;
+                string[] paths = sf.Upload(requestObject, Constants.FileTypePhotographer, "");
+
+                long Id = Convert.ToInt64(requestObject.Form["Id"]);
+                string Name = Convert.ToString(requestObject.Form["Name"]);
+                string Email = Convert.ToString(requestObject.Form["Email"]);
+                string MobileNo = Convert.ToString(requestObject.Form["MobileNo"]);
+                Boolean IsActive = Convert.ToBoolean(requestObject.Form["IsActive"]);
+                long StudioId = Convert.ToInt64(requestObject.Form["StudioId"]);
+                long BranchId = Convert.ToInt64(requestObject.Form["BranchId"]);
+
+                Random generator = new Random();
+                String Uniqno = generator.Next(1000, 9999).ToString();
+                string Code = Name.Substring(0, 4);
+                string ReferalCode = Code + Uniqno;
+
+
+                string Image = "";
+                if (paths != null && paths.Length > 0)
+                    Image = paths[0];
+                if (Id != null && Id == 0)
+                {
+                    Photographer photographer = new Photographer();
+                    photographer.Name = Name;
+                    photographer.Email = Email;
+                    photographer.MobileNo = MobileNo;
+                    photographer.Image = Image;
+                    photographer.IsActive = IsActive;
+                    photographer.StudioId = StudioId;
+                    photographer.BranchId = BranchId;
+                    photographer.ReferalCode = ReferalCode;
+
+                    db.Photographers.Add(photographer);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    Photographer oldPhotographer = db.Photographers.Where(g => g.Id == Id).FirstOrDefault();
+                    if (oldPhotographer != null)
+                    {
+                        oldPhotographer.Name = Name;
+                        oldPhotographer.Email = Email;
+                        oldPhotographer.MobileNo = MobileNo;
+                        oldPhotographer.IsActive = IsActive;
+                        oldPhotographer.StudioId = StudioId;
+                        oldPhotographer.BranchId = BranchId;
+                        if (Image != "")
+                        {
+                            string filePath = "~/" + oldPhotographer.Image;
+                            bool exists = System.IO.File.Exists(HttpContext.Current.Server.MapPath(filePath));
+                            if (exists)
+                                System.IO.File.Delete(HttpContext.Current.Server.MapPath(filePath));
+
+                            oldPhotographer.Image = Image;
+                        }
+
+                        db.SaveChanges();
+                    }
+                }
+                resultData.Message = "Data Saved Successfully";
+                resultData.IsSuccess = true;
+                resultData.Data = "1";
+                return resultData;
+            }
+            catch (Exception ex)
+            {
+                resultData.Message = ex.Message.ToString();
+                resultData.IsSuccess = false;
+                resultData.Data = 0;
+
+                ErrorLog errorLog = new ErrorLog();
+                errorLog.ErrorMessage = ex.Message.ToString();
+                errorLog.StackTrace = ex.StackTrace.ToString();
+                errorLog.EventName = "SavePhotographer";
+
+                return resultData;
+            }
+        }
+
+
+        [HttpGet]
+        public ResultData DeletePhotographer(long id)
+        {
+            ResultData resultData = new ResultData();
+            try
+            {
+                Photographer photographer = db.Photographers.Where(t => t.Id == id).FirstOrDefault();
+                if (photographer != null)
+                {
+                    db.Photographers.Remove(photographer);
+                    db.SaveChanges();
+                }
+
+                resultData.Message = "Data Deleted Successfully !";
+                resultData.IsSuccess = true;
+                resultData.Data = 1;
+                return resultData;
+            }
+            catch (Exception ex)
+            {
+                resultData.Message = ex.Message.ToString();
+                resultData.IsSuccess = false;
+                resultData.Data = 0;
+
+                ErrorLog errorLog = new ErrorLog();
+                errorLog.ErrorMessage = ex.Message.ToString();
+                errorLog.StackTrace = ex.StackTrace.ToString();
+                errorLog.EventName = "DeletePhotographer";
+
+                return resultData;
+            }
+        }
+
+        [HttpGet]
+        public ResultData GetPhotographer()
+        {
+            ResultData resultData = new ResultData();
+            try
+            {
+                List<Photographer> photographer = new List<Photographer>();
+                photographer = db.Photographers.ToList();
+                if (photographer != null)
+                {
+                    resultData.Message = "Data Get Successfully !";
+                    resultData.IsSuccess = true;
+                    resultData.Data = photographer;
+                    return resultData;
+                }
+                else
+                {
+                    resultData.Message = "No Data Found !";
+                    resultData.IsSuccess = true;
+                    resultData.Data = 0;
+                    return resultData;
+                }
+            }
+            catch (Exception ex)
+            {
+                resultData.Message = ex.Message.ToString();
+                resultData.IsSuccess = false;
+                resultData.Data = 0;
+
+                ErrorLog errorLog = new ErrorLog();
+                errorLog.ErrorMessage = ex.Message.ToString();
+                errorLog.StackTrace = ex.StackTrace.ToString();
+                errorLog.EventName = "GetContest";
+
+                return resultData;
+            }
+
+        }
+
+        #endregion
+
+        #region Contest
+        [ActionName("SaveContest")]
+        public ResultData SaveContest()
+        {
+            ResultData resultData = new ResultData();
+            try
+            {
+               
+                var properties = Request.Properties as Dictionary<string, object>;
+                var requestObject = ((System.Web.HttpContextWrapper)(properties["MS_HttpContext"])).Request;
+                string[] paths = sf.Upload(requestObject, Constants.FileTypeContest, "");
+
+                long Id = Convert.ToInt64(requestObject.Form["Id"]);
+                string ContestName = Convert.ToString(requestObject.Form["ContestName"]);
+                DateTime StartDate = Convert.ToDateTime(requestObject.Form["StartDate"]);
+                DateTime EndDate = Convert.ToDateTime(requestObject.Form["EndDate"]);
+                string Fees = Convert.ToString(requestObject.Form["Fees"]);
+
+                string Image = "";
+                if (paths != null && paths.Length > 0)
+                    Image = paths[0];
+                if (Id != null && Id == 0)
+                {
+                    Contest contest = new Contest();
+                    contest.ContestName = ContestName;
+                    contest.StartDate = StartDate;
+                    contest.EndDate = EndDate;
+                    contest.Fees = Fees;
+
+                    db.Contests.Add(contest);
+                    db.SaveChanges();
+                    
+                }
+                else
+                {
+                    Contest oldContest = db.Contests.Where(g => g.Id == Id).FirstOrDefault();
+                    if (oldContest != null)
+                    {
+                        oldContest.ContestName = ContestName;
+                        oldContest.StartDate = StartDate;
+                        oldContest.EndDate = EndDate;
+                        oldContest.Fees = Fees;
+                        if (Image != "")
+                        {
+                            string filePath = "~/" + oldContest.Image;
+                            bool exists = System.IO.File.Exists(HttpContext.Current.Server.MapPath(filePath));
+                            if (exists)
+                                System.IO.File.Delete(HttpContext.Current.Server.MapPath(filePath));
+
+                            oldContest.Image = Image;
+                        }
+
+                        db.SaveChanges();
+                    }
+                }
+
+                resultData.IsSuccess = true;
+                resultData.Data = "1";
+                return resultData;
+            }
+            catch (Exception ex)
+            {
+                resultData.Message = ex.Message.ToString();
+                resultData.IsSuccess = false;
+                resultData.Data = 0;
+
+                ErrorLog errorLog = new ErrorLog();
+                errorLog.ErrorMessage = ex.Message.ToString();
+                errorLog.StackTrace = ex.StackTrace.ToString();
+                errorLog.EventName = "SaveAlbumPhoto";
+
+                return resultData;
+            }
+        }
+
+        [HttpGet]
+        public ResultData DeleteContest(long id)
+        {
+            ResultData resultData = new ResultData();
+            try
+            {
+                Contest contest = db.Contests.Where(t => t.Id == id).FirstOrDefault();
+                if (contest != null)
+                {
+                    db.Contests.Remove(contest);
+                    db.SaveChanges();
+                }
+
+                resultData.Message = "Data Deleted Successfully !";
+                resultData.IsSuccess = true;
+                resultData.Data = 1;
+                return resultData;
+            }
+            catch (Exception ex)
+            {
+                resultData.Message = ex.Message.ToString();
+                resultData.IsSuccess = false;
+                resultData.Data = 0;
+
+                ErrorLog errorLog = new ErrorLog();
+                errorLog.ErrorMessage = ex.Message.ToString();
+                errorLog.StackTrace = ex.StackTrace.ToString();
+                errorLog.EventName = "DeleteContest";
+
+                return resultData;
+            }
+        }
+
+        [HttpGet]
+        public ResultData GetContest()
+        {
+            ResultData resultData = new ResultData();
+            try
+            {
+                List<Contest> contest = new List<Contest>();
+                contest = db.Contests.ToList();
+                if (contest != null)
+                {
+                    resultData.Message = "Data Get Successfully !";
+                    resultData.IsSuccess = true;
+                    resultData.Data = contest;
+                    return resultData;
+                }
+                else
+                {
+                    resultData.Message = "No Data Found !";
+                    resultData.IsSuccess = true;
+                    resultData.Data = 0;
+                    return resultData;
+                }
+            }
+            catch (Exception ex)
+            {
+                resultData.Message = ex.Message.ToString();
+                resultData.IsSuccess = false;
+                resultData.Data = 0;
+
+                ErrorLog errorLog = new ErrorLog();
+                errorLog.ErrorMessage = ex.Message.ToString();
+                errorLog.StackTrace = ex.StackTrace.ToString();
+                errorLog.EventName = "GetContest";
+
+                return resultData;
+            }
+
+        }
         #endregion
 
         public void SendPushNotification(string deviceId, string message, string title)

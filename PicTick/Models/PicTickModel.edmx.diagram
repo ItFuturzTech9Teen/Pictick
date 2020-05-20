@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="PicTickModel.AppointmentSlot" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PicTickModel.Category" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PicTickModel.City" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PicTickModel.Customer" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PicTickModel.ErrorLog" Width="1.5" PointX="8.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PicTickModel.Gallery" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PicTickModel.GalleryCustomer" Width="1.5" PointX="2.75" PointY="9.75" IsExpanded="true" />
@@ -24,9 +23,13 @@
         <EntityTypeShape EntityType="PicTickModel.Portfolio" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PicTickModel.SlideShowSound" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PicTickModel.State" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PicTickModel.Studio" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PicTickModel.StudioAbout" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PicTickModel.StudioSocialLink" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PicTickModel.Photographer" Width="1.5" PointX="11.375" PointY="9.75" />
+        <EntityTypeShape EntityType="PicTickModel.Studio" Width="1.5" PointX="3.375" PointY="12.75" />
+        <EntityTypeShape EntityType="PicTickModel.StudioAddress" Width="1.5" PointX="5.375" PointY="12.75" />
+        <EntityTypeShape EntityType="PicTickModel.Customer" Width="1.5" PointX="7.375" PointY="12.75" />
+        <EntityTypeShape EntityType="PicTickModel.Contest" Width="1.5" PointX="13.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,15 +1,48 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
+<!-- Mirrored from atmos.atomui.com/light/dashboard-02 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 08 May 2020 07:05:42 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PickTick</title>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" name="viewport">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta content="" name="author" />
+    <meta content="atlas is Bootstrap 4 based admin panel.It comes with 100's widgets,charts and icons" name="description" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title"
+          content="atlas is Bootstrap 4 based admin panel.It comes with 100's widgets,charts and icons" />
+    <meta property="og:description"
+          content="atlas is Bootstrap 4 based admin panel.It comes with 100's widgets,charts and icons" />
+    <meta property="og:site_name" content="atlas " />
+    <title>PicTik Admin Panel</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/logo.png" />
+    <link rel="icon" href="assets/img/logo.png" type="image/png" sizes="16x16">
+    <link rel='stylesheet' href='~/assets/newcss/478ccdc1892151837f9e7163badb055b8a1833a5/crisp/assets/vendor/pace/pace.css' />
+    <script src='~/assets/newjs/3d1965f9e8e63c62b671967aafcad6603deec90c/theme/html/assets/js/pace.min.js'></script>
+    <!--vendors-->
+    <link rel='stylesheet' type='text/css' href='~/assets/newcss/291bbeead57f19651f311362abe809b67adc3fb5.css' />
+    <link rel='stylesheet' href='~/assets/newcss/d33wubrfki0l68.cloudfront.net/bundles/30bc673ce76f73ecf02568498f6b139269f6e4c7.css' />
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,600" rel="stylesheet">
+    <!--Material Icons-->
+    <link rel='stylesheet' type='text/css' href='~/assets/newcss/548117a22d5d22545a0ab2dddf8940a2e32c04ed/default/assets/fonts/materialdesignicons/materialdesignicons.min.css' />
+    <!--Material Icons-->
+    <link rel='stylesheet' type='text/css' href='~/assets/newcss/0940f25997c8e50e65e95510b30245d116f639f0/light/assets/fonts/feather/feather-icons.css' />
+    <!--Bootstrap + atmos Admin CSS-->
+    <link rel='stylesheet' type='text/css' href='~/assets/newcss/16e33a95bb46f814f87079394f72ef62972bd197/light/assets/css/atmos.min.css' />
+
+    <link rel='stylesheet' type='text/css' href='~/assets/newcss/13fc3abb600e389b43865b1fa1697fc8f5ebf063.css' />
+    <!-- Additional library for page -->
+
     <link rel="icon" type="image/png" href="~/Img/SE-Black.png">
     <!-- Global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
     <link href="~/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
-    <link href="~/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    
     <link href="~/assets/css/core.css" rel="stylesheet" type="text/css">
     <link href="~/assets/css/components.css" rel="stylesheet" type="text/css">
     <link href="~/assets/css/colors.css" rel="stylesheet" type="text/css">
@@ -17,17 +50,9 @@
     <link href="~/Css/msc-style.css" rel="stylesheet" />
     <link href="~/Css/Stylee.css" rel="stylesheet" />
     <!-- /global stylesheets -->
-    <!-- Core JS files -->
-    <script type="text/javascript" src="~/assets/js/plugins/loaders/pace.min.js"></script>
-    <script type="text/javascript" src="~/assets/js/core/libraries/jquery.min.js"></script>
-    <script type="text/javascript" src="~/assets/js/core/libraries/bootstrap.min.js"></script>
-    <script type="text/javascript" src="~/assets/js/plugins/loaders/blockui.min.js"></script>
-    <script src="~/Js/jquery.timeago.js"></script>
 
-    <!-- /core JS files -->
-    <!-- For Google Map -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPaIWlrt93EZc2p-LWZDF_jgvniQmuHog"></script>
-    <!--End Google Map-->
+
+
     <link rel="stylesheet" href="http://mbenford.github.io/ngTagsInput/css/ng-tags-input.min.css" />
     <script src="~/Js/angular1_4_2.js"></script>
     <script src="~/Js/ng-tags-input.js"></script>
@@ -51,93 +76,279 @@
     <script src="~/Js/InstaAlbum/Directive.js"></script>
     <script src="~/Js/InstaAlbum/Notification.js"></script>
     <link rel="stylesheet" href="~/Css/lightbox.css">
+
 </head>
-<body ng-app="InstaAlbumModule" ng-cloak>
-    <!-- Main navbar -->
-    <div class="navbar navbar-inverse" ng-controller="HomeController">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">
-                @*<img src="~/Img/logo_web.png" alt="CoralSquare">*@
-                <span class="brand">
-                    Insta
-                    <span class="brand-tip">Album</span>
-                </span>
-            </a>
-            <ul class="nav navbar-nav pull-right visible-xs-block">
-                <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
-            </ul>
+<body class="sidebar-pinned" ng-app="InstaAlbumModule" ng-cloak>
+    <aside class="admin-sidebar"   style="background: linear-gradient(45deg, #F26D3F, #ED3168);">
+        <div class="admin-sidebar-brand">
+            <!-- begin sidebar branding-->
+            <img class="admin-brand-logo" src="~/assets/images/picticklogo.png" width="110" alt="atmos Logo">
+            <!-- end sidebar branding-->
+            <div class="ml-auto">
+                <!-- sidebar pin-->
+                <a href="#" class="admin-pin-sidebar btn-ghost btn btn-rounded-circle"></a>
+                <!-- sidebar close for mobile device-->
+                <a href="#" class="admin-close-sidebar"></a>
+            </div>
         </div>
-
-        <div class="navbar-collapse collapse" id="navbar-mobile">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown dropdown-user">
-                    <a class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="~/assets/images/demo/users/face11.jpg" alt="">
-                        <span>{{LoginUser.Name}}</span>
-                        <i class="caret"></i>
+        <div class="admin-sidebar-wrapper js-scrollbar" ng-controller="HomeController"  style="background: linear-gradient(45deg, #F26D3F, #ED3168);">
+            <ul class="menu">
+                <li class="menu-item active ">
+                    <a href="~/" class="menu-link">
+                        <span class="menu-label">
+                            <span class="menu-name" style="color:#33000F;">
+                                Dashboard
+                                
+                            </span>
+                        </span>
+                        <span class="menu-icon"  style="color:#33000F;">
+                            <i class="icon-placeholder fe fe-activity "  style="color:#33000F;"></i>
+                        </span>
                     </a>
+                    <!--submenu-->
+                    
+                </li>
 
-                    <ul class="dropdown-menu dropdown-menu-right bg-col-Purple-light">
-                        @*<li><a href="#"><span class="badge badge-warning pull-right">58</span> <i class="icon-comment-discussion"></i> Messages</a></li>*@
-                        <li><a ng-click="logOutUser()"><i class="icon-switch2"></i> Logout</a></li>
-                    </ul>
+                <li class="menu-item "  ng-hide="IsAdmin">
+                    <a href="/Customer" class="menu-link">
+                        <span class="menu-label">
+                            <span class="menu-name" style="color:#33000F;">
+                                Customer List
+                                <span class="menu-person"></span>
+                            </span>
+                        </span>
+                        <span class="menu-icon" style="color:#33000F;">
+                            <i class="icon-placeholder fe fe-users " style="color:#33000F;"></i>
+                        </span>
+                    </a>
+                    <!--submenu-->
+
+                </li>
+
+
+                <li class="menu-item " ng-hide="IsAdmin">
+                    <a href="/StudioAbout" class="menu-link">
+                        <span class="menu-label">
+                            <span class="menu-name" style="color:#33000F;">
+                                Studio Desicription
+                                <span class="menu-person"></span>
+                            </span>
+                        </span>
+                        <span class="menu-icon" style="color:#33000F;">
+                            <i class="icon-design" style="color:#33000F;"></i>
+                            
+                        </span>
+                    </a>
+                    <!--submenu-->
+
+                </li>
+
+                <li class="menu-item " ng-hide="IsAdmin">
+                    <a href="/Organization" class="menu-link">
+                        <span class="menu-label">
+                            <span class="menu-name" style="color:#33000F;">
+                               Organization
+                                <span class="menu-person"></span>
+                            </span>
+                        </span>
+                        <span class="menu-icon" style="color:#33000F;">
+                            <i class="icon-make-group" style="color:#33000F;"></i>
+
+                        </span>
+                    </a>
+                    <!--submenu-->
+
+                </li>
+
+                <li class="menu-item " ng-hide="IsAdmin">
+                    <a href="/Appointment" class="menu-link">
+                        <span class="menu-label">
+                            <span class="menu-name" style="color:#33000F;">
+                                Appointment
+                                <span class="menu-person"></span>
+                            </span>
+                        </span>
+                        <span class="menu-icon" style="color:#33000F;">
+                            <i class="icon-placeholder fe fe-calendar" style="color:#33000F;"></i>
+
+                        </span>
+                    </a>
+                    <!--submenu-->
+
                 </li>
             </ul>
+
+
         </div>
-    </div>
-    <!-- /main navbar -->
-    <!-- Second navbar -->
-    <div class="navbar navbar-default bg-col-Purple" id="navbar-second" ng-controller="HomeController">
-        <ul class="nav navbar-nav no-border visible-xs-block">
-            <li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-second-toggle"><i class="icon-menu7"></i></a></li>
-        </ul>
-
-        <div class="navbar-collapse collapse" id="navbar-second-toggle">
-            <ul class="nav navbar-nav">
-                <li><a href="~/"><i class="icon-display4 position-left"></i> Dashboard</a></li>
-
-
-                @*<li ng-show="IsAdmin"><a href="~/Studio"><i class="icon-video-camera"></i> Studio</a></li>
-                    <li ng-hide="IsAdmin"><a href="~/Album"><i class="icon-gallery"></i> Album</a></li>
-                    <li ng-hide="IsAdmin"><a href="~/AlbumPhoto"><i class="icon-camera"></i> Album Photo</a></li>
-                    <li ng-hide="IsAdmin"><a href="~/Customer"><i class="icon-user-tie"></i> Customer</a></li>
-                    <li ng-hide="IsAdmin"><a href="~/SortListedAlbum"><i class="icon-select2"></i> SortListedAlbum</a></li>*@
-
-            </ul>
-        </div>
-    </div>
-    <!-- /second navbar -->
-    <!-- Page container -->
-    <div class="page-container">
-
-        <!-- Page content -->
-        <div class="page-content">
-            @RenderBody()
-            <div id="notificationContaner" class="top-right jGrowl" style="position:fixed">
-                <div class="jGrowl-notification"></div>
-                <div id="notificationBlock" class="jGrowl-notification alert ui-state-highlight ui-corner-all">
-                    @*<button class="jGrowl-close">×</button>*@
-                    @*<div class="jGrowl-header">Well done!</div>*@
-                    <div id="notificationMsg" class="jGrowl-message">Notification</div>
+    </aside>
+    <main class="admin-main">
+        <!--site header begins-->
+        <header class="admin-header"   style="background: linear-gradient(-113deg, #F26D3F, #ED3168);">
+            <a href="#" class="sidebar-toggle" data-toggleclass="sidebar-open" data-target="body"> </a>
+            <nav class=" mr-auto my-auto">
+                <ul class="nav align-items-center">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Dashboard">
+                            <img class="admin-brand-logo" src="~/assets/images/piclogo.png" width="110" alt="atmos Logo">
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <nav class="ml-auto" ng-controller="HomeController">
+                <ul class="nav align-items-center">
+                   
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <div class="avatar avatar-sm avatar-online" style="width:6.5rem;height:5.5rem;">
+                                <span class="avatar-title rounded-circle bg-dark">{{LoginUser.Name}}</span>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu  dropdown-menu-right" style="height:40px;">
+                          
+                            @*<a class="dropdown-item" href="#">  Reset Password</a>
+                            <a class="dropdown-item" href="#">  Help </a>
+                            <div class="dropdown-divider"></div>*@
+                            <a class="dropdown-item" ng-click="logOutUser()" style="font-size:medium;">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+       
+        <!--site header ends -->
+        @RenderBody()
+        @*<section class="admin-content ">
+            <div class="jumbotron">
+              
+                <div class="row">
+                    <div class="col-xlg-12  m-b-30 col-lg-12">
+                        <div class="row">
+                           
+                            @*<div class=" col-md-4">
+                                <!--widget card begin-->
+                                <div class="card m-b-30">
+                                    <div class="card-body ">
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <h6 class="fw-600">Revenue</h6>
+                                                <p class="text-muted">
+                                                    All Sales
+                                                </p>
+                                            </div>
+                                            <div class="col-md-5 my-auto text-right">
+                                                <h4 class="text-danger">$1M</h4>
+                                            </div>
+                                        </div>
+                                        <div class="progress" style="height: 5px">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 82%" aria-valuenow="0"
+                                                 aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <div class="row m-t-10">
+                                            <div class="col-md-7">
+                                                <p class="text-muted">
+                                                    Monthly
+                                                </p>
+                                            </div>
+                                            <div class="col-md-5 text-right">
+                                                <p class="text-danger">82%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--widget card ends-->
+                            </div>
+                            <div class=" col-md-4">
+                                <!--widget card begin-->
+                                <div class="card m-b-30">
+                                    <div class="card-body ">
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <h6 class="fw-600">Affiliates</h6>
+                                                <p class="text-muted">
+                                                    Direct
+                                                </p>
+                                            </div>
+                                            <div class="col-md-5 my-auto text-right">
+                                                <h4 class="text-success">$25K</h4>
+                                            </div>
+                                        </div>
+                                        <div class="progress" style="height: 5px">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 37%" aria-valuenow="0"
+                                                 aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <div class="row m-t-10">
+                                            <div class="col-md-7">
+                                                <p class="text-muted">
+                                                    Monthly
+                                                </p>
+                                            </div>
+                                            <div class="col-md-5 text-right">
+                                                <p class="text-success">37%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--widget card ends-->
+                            </div>
+                            <div class=" col-md-4">
+                                <!--widget card begin-->
+                                <div class="card m-b-30">
+                                    <div class="card-body ">
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <h6 class="fw-600">Burn Rate</h6>
+                                                <p class="text-muted">
+                                                    Overview
+                                                </p>
+                                            </div>
+                                            <div class="col-md-5 my-auto text-right">
+                                                <h4 class="text-primary">$16K</h4>
+                                            </div>
+                                        </div>
+                                        <div class="progress" style="height: 5px">
+                                            <div class="progress-bar" role="progressbar" style="width: 45%" aria-valuenow="0"
+                                                 aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <div class="row m-t-10">
+                                            <div class="col-md-7">
+                                                <p class="text-muted">
+                                                    Monthly
+                                                </p>
+                                            </div>
+                                            <div class="col-md-5 text-right">
+                                                <p class="text-primary">45%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--widget card ends-->
+                            </div>*
+                        </div>
+                        
+                        
+                    </div>
+                    
                 </div>
             </div>
-            <div id="loaderContaner" class="center jGrowl" style="position:fixed;width: 175px !important;">
-                <div class="jGrowl-notification"></div>
-                <div id="loaderBlock" class="jGrowl-notification alert ui-state-highlight ui-corner-all bg-teal-400">
-                    @*<button class="jGrowl-close">×</button>*@
-                    @*<div class="jGrowl-header">Well done!</div>*@
-                    <button type="button" class="btn bg-teal-400" id="spinner-dark-6">
-                        <i class="icon-spinner9 spinner position-left"></i> Please Wait...
-                    </button>
-                </div>
-            </div>
-            @* For Report Popup *@
-        </div>
-    </div>
-    <!-- Footer -->
-    <div class="footer text-muted">
-        &copy; 2018. InstaAlbum by <a href="http://studyfield.com" target="_blank">Study Field Technology PVT LTD</a>
-    </div>
-    <!-- /footer -->
+        </section>*@
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.1/angular.js"></script>
+    <script src="app/app.js"></script>
+
+    <script src='~/assets/newjs/9556cd6744b0b19628598270bd385082cda6a269.js'></script>
+    <!--page specific scripts for demo-->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-66116118-3"></script>
+    <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-66116118-3'); </script>
+    <!--Additional Page includes-->
+    <script src='~/assets/newjs/c36248babf70a3c7ad1dcd98d4250fa60842eea9/crisp/assets/vendor/apexchart/apexcharts.min.js'></script>
+    <!--chart data for current dashboard-->
+    <script type='text/javascript' src='~/assets/newjs/67402a3f617470ab013a6bebaa4dd07784dd9948/light/assets/js/dashboard-02.js'></script>
+    <script type='text/javascript' src='~/assets/newjs/ba78fede76f682cd388ed2abbfd1e1568e76f8a4.js'></script>
+    <script type='text/javascript' src='~/assets/newjs/d2615b2cee9677b0a037aa64fdcf79f8a72312ac/crisp/assets/js/modal-data.js'></script>
+
 </body>
+<!-- Mirrored from atmos.atomui.com/light/dashboard-02 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 08 May 2020 07:06:50 GMT -->
 </html>

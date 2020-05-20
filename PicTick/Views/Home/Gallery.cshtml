@@ -5,180 +5,193 @@
 <script src="~/Js/InstaAlbum/Services/HomeService.js"></script>
 <script src="~/Js/InstaAlbum/Controllers/Gallery.js"></script>
 
-<div class="content-wrapper" ng-controller="GalleryController">
-    <!-- Page header -->
-    <div class="page-header">
-        <div class="page-header-content">
-            <div class="page-title col-lg-12">
-                <a data-popup="tooltip" title="Bank Data" class="pull-right"
-                   ng-click="Clear()" data-toggle="modal" data-target="#myModal">
-                    <button type="button" class="btn btn-warning">
-                        <i class="icon-plus2"></i> New Event
-                    </button>
-                </a>
-                <div class="col-md-6 pull-left">
-                    <input type="text" ng-model="Search" placeholder="Search..." class="form-control" />
+<section class="admin-content" ng-controller="GalleryController">
+    <div class="bg-dark" style="background-color:#33000F;">
+        <div class="container  m-b-30">
+            <div class="row">
+                <div class="col-8 text-white p-t-40 p-b-90">
+                   
+                </div>
+                <div class="col-md-4 text-white p-t-40 p-b-90">
+                    <div class="text-md-right">
+                        
+                            <button type="button" class="btn btn-primary" data-toggle="modal" ng-click="OpenPopUp()"
+                                    data-target="#myModal">
+                                <i class="mdi mdi-plus"></i> New Event
+                            </button>
+                        
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /page header -->
-    <!-- Content area -->
-    <div class="content">
-        <!-- Basic tabs -->
+    <div class="container  pull-up">
         <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-flat">
-                    <div class="panel-heading">
-                        <h5 class="panel-title">Event List</h5>
-                    </div>
-                    <div class="table-responsive">
-                        <div class="col-md-5 pull-right">
-                            <input type="text" ng-model="Search" placeholder="Search..." class="form-control" />
-                        </div>
-                        <table class="table">
-                            <thead>
-                                <tr class="border-solid bg-col-Grey">
-                                    <th>No</th>
-                                    <th>Photo</th>
-                                    <th>Name</th>
-                                    @*<th>Gallery Pin</th>
-                                    <th>Selection Pin</th>*@
-                                    <th>Allow Download</th>
-                                    <th>WatterMark </th>
-                                    <th style="min-width:130px;">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="data in DataList | filter:Search">
-                                    <td>{{$index+1}}</td>
-                                    <td>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive p-t-10">
+                            <table id="example" class="table" style="width:100%">
+                                <thead>
+                                    <tr style="color:#F05352;">
+                                        <th>No</th>
+                                        <th>Photo</th>
+                                        <th>Name</th>
+                                        <th>Allow Download</th>
+                                        <th>WatterMark </th>
+                                        <th style="min-width:180px;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="data in DataList | filter:Search">
+                                        <td>{{$index+1}}</td>
+                                        <td>
                                             <span>
                                                 <a ng-href="{{data.GalleryCover}}" target="_blank">
                                                     <img ng-src='{{data.GalleryCover}}' height="70" width="140" />
                                                 </a>
                                             </span>
                                         </td>
-                                    <td>{{data.Title}}</td>
-                                    @*<td>{{data.GalleryPin}}</td>
-                                    <td>{{data.SelectionPin}}</td>*@
-                                    <td>{{data.AllowDownload == false ? 'No' : 'Yes'}}</td>
-                                    <td>{{data.WatterMark}}</td>
-                                    <td>
-                                        <ul class="icons-list">
-                                            @*<li ng-click="EditData(data)">
-                                                    <a data-popup="tooltip" title="Edit">
-                                                        <i class="icon-pencil7"></i>
+                                        <td>{{data.Title}}</td>
+                                        @*<td>{{data.GalleryPin}}</td>
+                                            <td>{{data.SelectionPin}}</td>*@
+                                        <td>{{data.AllowDownload == false ? 'No' : 'Yes'}}</td>
+                                        <td>{{data.WatterMark}}</td>
+                                        <td>
+                                            <ul class="icons-list">
+                                                @*<li ng-click="EditData(data)">
+                                                        <a data-popup="tooltip" title="Edit">
+                                                            <i class="icon-pencil7"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li ng-click="DeleteData(data.Id)">
+                                                        <a data-popup="tooltip" title="Remove">
+                                                            <i class="icon-trash"></i>
+                                                        </a>
+                                                    </li>*@
+                                                <li class="mt-10">
+                                                    <button type="button" class="btn btn-info">
+                                                        <i class="icon-share3"></i> Share
+                                                    </button>
+                                                </li>
+                                                <li class="mt-10">
+                                                    <button type="button" class="btn btn-warning">
+                                                        <i class="icon-eye"></i> Live Preview
+                                                    </button>
+                                                </li>
+                                                <li class="mt-10">
+                                                    <a ng-href="~/Album/{{data.Id}}">
+                                                        <button type="button" class="btn btn-success">
+                                                            <i class="icon-image2"></i> View Folder
+                                                        </button>
                                                     </a>
                                                 </li>
-                                                <li ng-click="DeleteData(data.Id)">
-                                                    <a data-popup="tooltip" title="Remove">
-                                                        <i class="icon-trash"></i>
-                                                    </a>
-                                                </li>*@
-                                            <li class="mt-10">
-                                                <button type="button" class="btn btn-info">
-                                                    <i class="icon-share3"></i> Share
-                                                </button>
-                                            </li>
-                                            <li class="mt-10">
-                                                <button type="button" class="btn btn-warning">
-                                                    <i class="icon-eye"></i> Live Preview
-                                                </button>
-                                            </li>
-                                            <li class="mt-10">
-                                                <a ng-href="~/Album/{{data.Id}}">
-                                                    <button type="button" class="btn btn-success">
-                                                        <i class="icon-image2"></i> View Folder
+                                                <li ng-click="EditData(data)" class="mt-10">
+                                                    <button type="button" class="btn btn-primary">
+                                                        <i class="icon-pencil7"></i> Edit
                                                     </button>
-                                                </a>
-                                            </li>
-                                            <li ng-click="EditData(data)" class="mt-10">
-                                                <button type="button" class="btn btn-primary">
-                                                    <i class="icon-pencil7"></i> Edit
-                                                </button>
-                                            </li>
-                                            <li ng-click="DeleteData(data.Id)" class="mt-10">
-                                                <button type="button" class="btn btn-danger">
-                                                    <i class="icon-trash"></i> Delete
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                                </li>
+                                                <li ng-click="DeleteData(data.Id)" class="mt-10">
+                                                    <button type="button" class="btn btn-danger">
+                                                        <i class="icon-trash"></i> Delete
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Photo</th>
+                                        <th>Name</th>
+                                        <th>Allow Download</th>
+                                        <th>WatterMark </th>
+                                        <th style="min-width:130px;">Action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-            
         </div>
-        <!-- /basic tabs -->
+        
     </div>
-    <!-- /content area -->
-    <!--Add Modal Popup-->
-    <div class="container ">
-        <div class="modal fade col-md-12 col-sm-12 col-xs-12" id="myModal" role="dialog">
-            <div class="modal-dialog modal-lg">
-                <!-- Modal content-->
+
+    <div class="m-b-10">
+        <p class="font-secondary">
+        
+        </p>
+        <!-- Large modal -->
+       
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="myModal"
+             aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Add Event</h4>
+                        <h5 class="modal-title" id="myLargeModalLabel">Add Event</h5>
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal form-validate-jquery" ng-submit="SaveData()">
                             <fieldset class="content-group">
                                 <div class="col-md-12">
-                                    <div class="form-group col-lg-6" ng-show="showStudio">
-                                        <label class="control-label col-lg-12">Studio <span class="text-danger">*</span></label>
-                                        <div class="col-lg-12">
-                                            <select class="form-control ng-pristine ng-valid ng-touched" ng-model="StudioId" ng-change="GetData()"
-                                                    ng-options="data.Id as data.Name for data in StudioList">
-                                                <option value="" disabled="" ng-selected="true" class="" selected="selected"> Select</option>
-                                            </select>
+                                    <div class="form-row">
+                                        <div class="form-group col-lg-6" ng-show="showStudio">
+                                            <label class="control-label col-lg-12">Studio <span class="text-danger">*</span></label>
+                                            <div class="col-lg-12">
+                                                <select class="form-control ng-pristine ng-valid ng-touched" ng-model="StudioId" ng-change="GetData()"
+                                                        ng-options="data.Id as data.Name for data in StudioList">
+                                                    <option value="" disabled="" ng-selected="true" class="" selected="selected"> Select</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <label class="control-label col-lg-12">Title <span class="text-danger">*</span></label>
-                                        <div class="col-lg-12">
-                                            <input type="text" name="basic" ng-model="Title" class="form-control"
-                                                   required="required" placeholder="Title">
+                                        <div class="form-group col-lg-6">
+                                            <label class="control-label col-lg-12">Title <span class="text-danger">*</span></label>
+                                            <div class="col-lg-12">
+                                                <input type="text" name="basic" ng-model="Title" class="form-control"
+                                                       required="required" placeholder="Title">
+                                            </div>
                                         </div>
-                                    </div>
-                                    @*<div class="form-group col-lg-6">
-                                        <label class="control-label col-lg-12">Gallery Pin </label>
-                                        <div class="col-lg-12">
-                                            <input type="text" name="basic" ng-model="GalleryPin" class="form-control"
-                                                   placeholder="GalleryPin">
+                                        @*<div class="form-group col-lg-6">
+                <label class="control-label col-lg-12">Gallery Pin </label>
+                <div class="col-lg-12">
+                    <input type="text" name="basic" ng-model="GalleryPin" class="form-control"
+                           placeholder="GalleryPin">
+                </div>
+            </div>
+            <div class="form-group col-lg-6">
+                <label class="control-label col-lg-12">Selection Pin </label>
+                <div class="col-lg-12">
+                    <input type="text" name="basic" ng-model="SelectionPin" class="form-control"
+                           placeholder="SelectionPin">
+                </div>
+            </div>*@
+                                        <div class="form-group col-lg-6">
+                                            <label class="control-label col-lg-12">Allow Download <span class="text-danger">*</span></label>
+                                            <div class="col-lg-12">
+                                                <button type="button" class="btn" ng-class="AllowDownload == false ? 'btn-success' : btn" ng-click="AllowDownload = false">No</button>
+                                                <button type="button" class="btn" ng-class="AllowDownload == true ? 'btn-success' : btn" ng-click="AllowDownload = true">Yes</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <label class="control-label col-lg-12">Selection Pin </label>
-                                        <div class="col-lg-12">
-                                            <input type="text" name="basic" ng-model="SelectionPin" class="form-control"
-                                                   placeholder="SelectionPin">
+                                        <div class="form-group col-lg-6">
+                                            <label class="control-label col-lg-12">WatterMark <span class="text-danger">*</span></label>
+                                            <div class="col-lg-12">
+                                                <button type="button" class="btn" ng-class="WatterMark == 'None' ? 'btn-success' : btn" ng-click="WatterMark = 'None'">None</button>
+                                                <button type="button" class="btn" ng-class="WatterMark == 'Studio Name' ? 'btn-success' : btn" ng-click="WatterMark = 'Studio Name'">Studio Name</button>
+                                                <button type="button" class="btn" ng-class="WatterMark == 'Studio Logo' ? 'btn-success' : btn" ng-click="WatterMark = 'Studio Logo'">Studio Logo</button>
+                                            </div>
                                         </div>
-                                    </div>*@
-                                    <div class="form-group col-lg-6">
-                                        <label class="control-label col-lg-12">Allow Download <span class="text-danger">*</span></label>
-                                        <div class="col-lg-12">
-                                            <button type="button" class="btn" ng-class="AllowDownload == false ? 'btn-success' : btn" ng-click="AllowDownload = false">No</button>
-                                            <button type="button" class="btn" ng-class="AllowDownload == true ? 'btn-success' : btn" ng-click="AllowDownload = true">Yes</button>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <label class="control-label col-lg-12">WatterMark <span class="text-danger">*</span></label>
-                                        <div class="col-lg-12">
-                                            <button type="button" class="btn" ng-class="WatterMark == 'None' ? 'btn-success' : btn" ng-click="WatterMark = 'None'">None</button>
-                                            <button type="button" class="btn" ng-class="WatterMark == 'Studio Name' ? 'btn-success' : btn" ng-click="WatterMark = 'Studio Name'">Studio Name</button>
-                                            <button type="button" class="btn" ng-class="WatterMark == 'Studio Logo' ? 'btn-success' : btn" ng-click="WatterMark = 'Studio Logo'">Studio Logo</button>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <label class="control-label col-lg-12">Cover Image <span class="text-danger">*</span></label>
-                                        <div class="col-lg-12">
-                                            <input id="File1" type="file" file-model="myFile" />
+                                        <div class="form-group col-lg-6">
+                                            <label class="control-label col-lg-12">Cover Image <span class="text-danger">*</span></label>
+                                            <div class="col-lg-12">
+                                                <input id="File1" type="file" file-model="myFile" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -189,11 +202,12 @@
                             </div>
                         </form>
                     </div>
+                    
                 </div>
-
             </div>
         </div>
-
+       
     </div>
-    <!--Add Modal Popup End-->
-</div>
+
+
+</section>

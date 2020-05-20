@@ -29,7 +29,7 @@ body{
 	margin-top: 7%;
 }
 .active{
-	box-shadow: 0 0px 20px #818378 inset !important;
+	box-shadow: 0 0px 20px #edf2f9 inset !important;
 }
 .eachImage {
     float: left;

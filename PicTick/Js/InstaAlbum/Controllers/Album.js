@@ -164,6 +164,10 @@
             showWarningMessage("No Photo Selected Yet !");
     }
 
+    $scope.OpenPopUp = function () {
+        $scope.Clear();
+    }
+
     $scope.SaveData = function () {
         HomeService.SaveAlbumData($scope);
         $('#myModal').modal('hide');
@@ -184,7 +188,8 @@
     }
 
     $scope.EditData = function (data) {
-        $('#myModal').modal('toggle');
+        //$('#myModal').click();
+        //$('#myModal').modal('toggle');
         $scope.Id = data.Id;
         $scope.Name = data.Name;
         $scope.Date = new Date(data.Date);

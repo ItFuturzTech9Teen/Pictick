@@ -117,7 +117,7 @@
     }
 
     $scope.EditData = function (data) {
-        $('#myModal').modal('toggle');
+        //$('#myModal').modal('toggle');
         $scope.Id = data.Id;
         $scope.Title = data.Title;
        

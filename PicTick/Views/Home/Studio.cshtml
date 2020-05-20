@@ -4,65 +4,155 @@
 
 <script src="~/Js/InstaAlbum/Services/HomeService.js"></script>
 <script src="~/Js/InstaAlbum/Controllers/Studio.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"></script>
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.1/css/jquery.dataTables.css" />
 
-<div class="content-wrapper" ng-controller="StudioController">
-    <!-- Page header -->
-    <div class="page-header">
-        <div class="page-header-content">
-            <div class="page-title">
-                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Home</span> - Studio</h4>
+
+<section class="admin-content" ng-controller="StudioController">
+    <div class="bg-dark" style="background-color:#33000F;">
+        <div class="container  m-b-30">
+            <div class="row">
+                <div class="col-8 text-white p-t-40 p-b-90">
+
+                </div>
+                <div class="col-md-4 text-white p-t-40 p-b-90">
+                    <div class="text-md-right">
+
+                        <button type="button" class="btn btn-primary" data-toggle="modal" ng-click="OpenPopUp()"
+                                data-target="#myModal">
+                            <i class="mdi mdi-plus"></i> New Studio
+                        </button>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <!-- /page header -->
-    <!-- Content area -->
-    <div class="content">
-        <!-- Basic tabs -->
+    <div class="container  pull-up">
         <div class="row">
-            <div class="col-md-4">
-                <div class="panel panel-flat">
-                    <div class="panel-heading">
-                        <h6 class="panel-title">Add Studio</h6>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-md-4" style="padding-bottom:15px;">
+                            <input type="text" id="" class="form-control form-control-sm" placeholder="Search Here" ng-model="Search" />
+                        </div>
+                        <div class="table-responsive " id="export">
+                            <table class="table table-hover ">
+                                <thead>
+                                    <tr style="color:#F05352;">
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Mobile</th>
+                                        <th>UserName</th>
+                                        <th>Password</th>
+
+                                        <th style="min-width:130px;">Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="data in DataList | filter:Search">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{data.Name}}</td>
+                                        <td>{{data.Mobile}}</td>
+                                        <td>{{data.UserName}}</td>
+                                        <td>{{data.Password}}</td>
+                                        <td>
+                                            <ul class="icons-list">
+                                                <li ng-click="EditData(data)">
+                                                    <a data-popup="tooltip" title="Edit">
+                                                        <i class="icon-pencil7"></i>
+                                                    </a>
+                                                </li>
+                                                <li ng-click="DeleteData(data.Id)">
+                                                    <a data-popup="tooltip" title="Remove">
+                                                        <i class="icon-trash"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Mobile</th>
+                                        <th>UserName</th>
+                                        <th>Password</th>
+
+                                        <th style="min-width:130px;">Action</th>
+
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
-                    <div class="panel-body">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="m-b-10">
+        <p class="font-secondary">
+
+        </p>
+        <!-- Large modal -->
+
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="myModal"
+             aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myLargeModalLabel">Add Studio</h5>
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
                         <form class="form-horizontal form-validate-jquery" ng-submit="SaveData()">
                             <fieldset class="content-group">
-                                <div class="form-group">
-                                    <label class="control-label col-lg-3">Name <span class="text-danger">*</span></label>
-                                    <div class="col-lg-9">
-                                        <input type="text" name="basic" ng-model="Name" class="form-control"
-                                               required="required" placeholder="Name">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-lg-3">Mobile <span class="text-danger">*</span></label>
-                                    <div class="col-lg-9">
-                                        <input type="text" name="basic" ng-model="Mobile" class="form-control"
-                                               required="required" placeholder="Mobile">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-lg-3">User Name <span class="text-danger">*</span></label>
-                                    <div class="col-lg-9">
-                                        <input type="text" name="basic" ng-model="UserName" class="form-control"
-                                               required="required" placeholder="UserName">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-lg-3">Password <span class="text-danger">*</span></label>
-                                    <div class="col-lg-9">
-                                        <input type="text" name="basic" ng-model="Password" class="form-control"
-                                               required="required" placeholder="Password">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-lg-3">Address <span class="text-danger">*</span></label>
-                                    <div class="col-lg-9">
-                                        <textarea rows="2" cols="20" name="basic" ng-model="Address" class="form-control"
-                                                  required="required" placeholder="Address"></textarea>
-                                    </div>
-                                </div>
+                                <div class="form-row">
 
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label col-lg-12">Name <span class="text-danger">*</span></label>
+                                        <div class="col-lg-9">
+                                            <input type="text" name="basic" ng-model="Name" class="form-control"
+                                                   required="required" placeholder="Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label col-lg-12">Mobile</label>
+                                        <div class="col-lg-9">
+                                            <input type="text" name="basic" ng-model="Mobile" class="form-control" maxlength="10"
+                                                    placeholder="Mobile">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label col-lg-12">User Name <span class="text-danger">*</span></label>
+                                        <div class="col-lg-9">
+                                            <input type="text" name="basic" ng-model="UserName" class="form-control"
+                                                   required="required" placeholder="UserName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label col-lg-12">Password <span class="text-danger">*</span></label>
+                                        <div class="col-lg-9">
+                                            <input type="text" name="basic" ng-model="Password" class="form-control"
+                                                   required="required" placeholder="Password">
+                                        </div>
+                                    </div>
+                                    @*<div class="form-group col-lg-6">
+                                        <label class="control-label col-lg-12">Address <span class="text-danger">*</span></label>
+                                        <div class="col-lg-9">
+                                            <textarea rows="2" cols="20" name="basic" ng-model="Address" class="form-control"
+                                                      required="required" placeholder="Address"></textarea>
+                                        </div>
+                                    </div>*@
+                                </div>
                             </fieldset>
                             <div class="text-right">
                                 <button type="reset" ng-click="Clear()" class="btn btn-default" id="reset">
@@ -71,62 +161,60 @@
                                 <button type="submit" class="btn btn-primary">Submit <i class="icon-arrow-right14 position-right"></i></button>
                             </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="panel panel-flat">
-                    <div class="panel-heading">
-                        <h5 class="panel-title">Studio List</h5>
-                    </div>
-                    <div class="table-responsive">
-                        <div class="col-md-5 float-right">
-                            <input type="text" ng-model="Search" placeholder="Search..." class="form-control" />
-                        </div>
-                        <table class="table">
-                            <thead>
-                                <tr class="border-solid bg-col-Grey">
-                                    <th>No</th>
-                                    <th>Name</th>
-                                    <th>Mobile</th>
-                                    <th>UserName</th>
-                                    <th>Password</th>
-                                    <th>Address</th>
 
-                                    <th style="min-width:130px;">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="data in DataList | filter:Search">
-                                    <td>{{$index+1}}</td>
-                                    <td>{{data.Name}}</td>
-                                    <td>{{data.Mobile}}</td>
-                                    <td>{{data.UserName}}</td>
-                                    <td>{{data.Password}}</td>
-                                    <td>{{data.Address}}</td>
-                                    <td>
-                                        <ul class="icons-list">
-                                            <li ng-click="EditData(data)">
-                                                <a data-popup="tooltip" title="Edit">
-                                                    <i class="icon-pencil7"></i>
-                                                </a>
-                                            </li>
-                                            <li ng-click="DeleteData(data.Id)">
-                                                <a data-popup="tooltip" title="Remove">
-                                                    <i class="icon-trash"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
+
                 </div>
             </div>
         </div>
-        <!-- /basic tabs -->
-    </div>
-    <!-- /content area -->
-</div>
 
+
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="myAssignModal"
+             aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myLargeModalLabel">Album Detail</h5>
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row col-lg-12">
+                            <div style="padding:10px;margin:5px;background-color: #343a40;" class="badge"
+                                 ng-repeat="data in CustomerGalleryList">
+                                <span class="badge badge-dark font-20">
+                                    <div class="custom-control custom-checkbox">
+                                        <div class="form-group">
+                                            <label>{{data.Title}}</label><br />
+                                            <label class="ui-switch switch-solid-primary switch-large">
+                                                <input type="checkbox" ng-checked="data.IsSelected == 1 ? true : false"
+                                                       ng-change="SetCustomerGallery(data)"
+                                                       ng-model="data.IsSelected"> <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <button type="reset" ng-click="Clear()" class="btn btn-prev" id="reset">
+                                Cancel <i class="icon-reload-alt position-right"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>

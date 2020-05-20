@@ -12,6 +12,10 @@
     }
 
     //Satart Dashboard
+    this.GetDashboardCount = function (studioId) {
+        return $http.get(API_URL + '/HomeAPI/GetDashboardCount?StudioId=' + studioId);
+    }
+
     this.GetDashboardAlbumList = function (studioId) {
         return $http.get(API_URL + '/HomeAPI/GetDashboardAlbumList?StudioId=' + studioId);
     }
@@ -29,7 +33,7 @@
 
     this.SaveStudioData = function (scope) {
         var jsonData = {
-            "Id": scope.Id, "Name": scope.Name, "Mobile": scope.Mobile, "Address": scope.Address,
+            "Id": scope.Id, "Name": scope.Name, "Mobile": scope.Mobile,
             "UserName": scope.UserName, "Password": scope.Password
         };
 
@@ -822,15 +826,11 @@
         ProdImgData.append('Id', scope.StudioId);
         ProdImgData.append('Name', scope.Name);
         ProdImgData.append('Mobile', scope.Mobile);
-        ProdImgData.append('Address', scope.Address);
         ProdImgData.append('Email', scope.Email);
         ProdImgData.append('About', scope.About);
         ProdImgData.append('Services', scope.Services);
         ProdImgData.append('Website', scope.Website);
         ProdImgData.append('StudioOwner', scope.StudioOwner);
-        ProdImgData.append('StateId', scope.StateId);
-        ProdImgData.append('CityId', scope.CityId);
-        ProdImgData.append('PinCode', scope.PinCode);
         ProdImgData.append('InviteMessage', scope.InviteMessage);
 
         var xhr = new XMLHttpRequest;

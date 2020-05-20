@@ -1349,5 +1349,28 @@ namespace PicTick.Controllers
                 return resultData;
             }
         }
+
+        [HttpGet]
+        public ResultData UpdateCustomerData(long customerId, string name, string mobile, string email)
+        {
+            ResultData resultData = new ResultData();
+            try
+            {
+                db.UpdateCustomerData(customerId, name, mobile, email);
+                resultData.Message = "Successfully !";
+                resultData.IsSuccess = true;
+                resultData.Data = 1;
+                return resultData;
+
+            }
+            catch (Exception ex)
+            {
+                resultData.Message = ex.Message.ToString();
+                resultData.IsSuccess = false;
+                resultData.Data = 0;
+                return resultData;
+            }
+        }
+
     }
 }

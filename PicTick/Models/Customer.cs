@@ -26,5 +26,7 @@ namespace PicTick.Models
         public string FCMToken { get; set; }
         public string Type { get; set; }
         public string InviteStatus { get; set; }
+        public Nullable<long> PhotographerId { get; set; }
+        public string Image { get; set; }
     }
 }

@@ -5,144 +5,164 @@
 <script src="~/Js/InstaAlbum/Services/HomeService.js"></script>
 <script src="~/Js/InstaAlbum/Controllers/Customer.js"></script>
 
-<div class="content-wrapper" ng-controller="CustomerController">
-    <!-- Page header -->
-    <div class="page-header">
-        <div class="page-header-content">
-            <div class="page-title col-lg-12">
-                <a data-popup="tooltip" title="Bank Data" class="pull-right"
-                   ng-click="Clear()" data-toggle="modal" data-target="#myAddModal">
-                    <button type="button" class="btn btn-warning">
-                        <i class="icon-plus2"></i> New Customer
-                    </button>
-                </a>
-                <div class="col-md-6 pull-left">
-                    <input type="text" ng-model="Search" placeholder="Search..." class="form-control" />
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /page header -->
-    <!-- Content area -->
-    <div class="content">
-        <!-- Basic tabs -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-flat">
-                    <div class="panel-heading">
-                        <h5 class="panel-title">Customer List</h5>
-                    </div>
-                    <div class="table-responsive">
-                        <div class="col-md-5 float-right">
-                            <input type="text" ng-model="Search" placeholder="Search..." class="form-control" />
-                        </div>
-                        <table class="table">
-                            <thead>
-                                <tr class="border-solid bg-col-Grey">
-                                    <th>No</th>
-                                    <th>Name</th>
-                                    <th>Mobile</th>
-                                    <th>Email</th>
-                                    <th>UserName</th>
-                                    <th>Password</th>
+<section class="admin-content" ng-controller="CustomerController">
+    <div class="bg-dark" style="background-color:#33000F;">
+        <div class="container  m-b-30">
+            <div class="row">
+                <div class="col-8 text-white p-t-40 p-b-90">
 
-                                    <th style="min-width:130px;">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="data in DataList | filter:Search">
-                                    <td>{{$index+1}}</td>
-                                    <td>{{data.Name}}</td>
-                                    <td>{{data.Mobile}}</td>
-                                    <td>{{data.Email}}</td>
-                                    <td>{{data.UserName}}</td>
-                                    <td>{{data.Password}}</td>
-                                    <td>
-                                        <ul class="icons-list">
-                                            <li class="mr-10">
-                                                <a data-popup="tooltip" title="Select Album" ng-click="GetCustomerGalleryList(data)"
-                                                   data-toggle="modal" data-target="#myModal">
-                                                    <i class="icon-camera"></i>
-                                                </a>
-                                            </li>
-                                            <li ng-click="EditData(data)" class="mr-10">
-                                                <a data-popup="tooltip" title="Edit">
-                                                    <i class="icon-pencil7"></i>
-                                                </a>
-                                            </li>
-                                            <li ng-click="DeleteData(data.Id)">
-                                                <a data-popup="tooltip" title="Remove">
-                                                    <i class="icon-trash"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                </div>
+                <div class="col-md-4 text-white p-t-40 p-b-90">
+                    <div class="text-md-right">
+
+                        <button type="button" class="btn btn-primary" data-toggle="modal" ng-click="OpenPopUp()"
+                                data-target="#myModal">
+                            <i class="mdi mdi-plus"></i> New Customer
+                        </button>
+
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /basic tabs -->
     </div>
-    <!-- /content area -->
-    <!--Add Modal Popup-->
-    <div class="container ">
-        <div class="modal fade col-md-12 col-sm-12 col-xs-12" id="myAddModal" role="dialog">
-            <div class="modal-dialog modal-lg">
-                <!-- Modal content-->
+    <div class="container  pull-up">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive p-t-10">
+                            <table id="example" class="table" style="width:100%">
+                                <thead>
+                                    <tr style="color:#F05352;">
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Mobile</th>
+                                        <th>Email</th>
+                                        <th>UserName</th>
+                                        <th>Password</th>
+
+                                        <th style="min-width:130px;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="data in DataList | filter:Search">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{data.Name}}</td>
+                                        <td>{{data.Mobile}}</td>
+                                        <td>{{data.Email}}</td>
+                                        <td>{{data.UserName}}</td>
+                                        <td>{{data.Password}}</td>
+                                        <td>
+                                            <ul class="icons-list">
+                                                <li class="mr-10">
+                                                    <a data-popup="tooltip" title="Select Album" ng-click="GetCustomerGalleryList(data)"
+                                                       data-toggle="modal" data-target="#myAssignModal">
+                                                        <i class="icon-camera"></i>
+                                                    </a>
+                                                </li>
+                                                <li ng-click="EditData(data)" class="mr-10">
+                                                    <a data-popup="tooltip" title="Edit">
+                                                        <i class="icon-pencil7"></i>
+                                                    </a>
+                                                </li>
+                                                <li ng-click="DeleteData(data.Id)">
+                                                    <a data-popup="tooltip" title="Remove">
+                                                        <i class="icon-trash"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Mobile</th>
+                                        <th>Email</th>
+                                        <th>UserName</th>
+                                        <th>Password</th>
+
+                                        <th style="min-width:130px;">Action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="m-b-10">
+        <p class="font-secondary">
+
+        </p>
+        <!-- Large modal -->
+
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="myModal"
+             aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Add Album</h4>
+                        <h5 class="modal-title" id="myLargeModalLabel">Add Event</h5>
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal form-validate-jquery" ng-submit="SaveData()">
                             <fieldset class="content-group">
-                                <div class="form-group col-lg-6" ng-show="showStudio">
-                                    <label class="control-label col-lg-12">Studio <span class="text-danger">*</span></label>
-                                    <div class="col-lg-12">
-                                        <select class="form-control ng-pristine ng-valid ng-touched" ng-model="StudioId" ng-change="GetAlbumList()"
-                                                ng-options="data.Id as data.Name for data in StudioList">
-                                            <option value="" disabled="" ng-selected="true" class="" selected="selected"> Select</option>
-                                        </select>
+                                <div class="form-row">
+
+                                    <div class="form-group col-lg-6" ng-show="showStudio">
+                                        <label class="control-label col-lg-12">Studio <span class="text-danger">*</span></label>
+                                        <div class="col-lg-12">
+                                            <select class="form-control ng-pristine ng-valid ng-touched" ng-model="StudioId" ng-change="GetAlbumList()"
+                                                    ng-options="data.Id as data.Name for data in StudioList">
+                                                <option value="" disabled="" ng-selected="true" class="" selected="selected"> Select</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label class="control-label col-lg-12">Name <span class="text-danger">*</span></label>
-                                    <div class="col-lg-12">
-                                        <input type="text" name="basic" ng-model="Name" class="form-control"
-                                               required="required" placeholder="Name">
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label col-lg-12">Name <span class="text-danger">*</span></label>
+                                        <div class="col-lg-12">
+                                            <input type="text" name="basic" ng-model="Name" class="form-control"
+                                                   required="required" placeholder="Name">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label class="control-label col-lg-12">Mobile <span class="text-danger">*</span></label>
-                                    <div class="col-lg-12">
-                                        <input type="text" name="basic" ng-model="Mobile" class="form-control"
-                                               required="required" placeholder="Mobile">
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label col-lg-12">Mobile <span class="text-danger">*</span></label>
+                                        <div class="col-lg-12">
+                                            <input type="text" name="basic" ng-model="Mobile" class="form-control"
+                                                 min="10"  required="required" placeholder="Mobile">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label class="control-label col-lg-12">Email <span class="text-danger">*</span></label>
-                                    <div class="col-lg-12">
-                                        <input type="text" name="basic" ng-model="Email" class="form-control"
-                                               required="required" placeholder="Email">
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label col-lg-12">Email <span class="text-danger">*</span></label>
+                                        <div class="col-lg-12">
+                                            <input type="text" name="basic" ng-model="Email" class="form-control"
+                                                   required="required" placeholder="Email">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label class="control-label col-lg-12">User Name <span class="text-danger">*</span></label>
-                                    <div class="col-lg-12">
-                                        <input type="text" name="basic" ng-model="UserName" class="form-control"
-                                               required="required" placeholder="UserName">
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label col-lg-12">User Name <span class="text-danger">*</span></label>
+                                        <div class="col-lg-12">
+                                            <input type="text" name="basic" ng-model="UserName" class="form-control"
+                                                   required="required" placeholder="UserName">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label class="control-label col-lg-12">Password <span class="text-danger">*</span></label>
-                                    <div class="col-lg-12">
-                                        <input type="text" name="basic" ng-model="Password" class="form-control"
-                                               required="required" placeholder="Password">
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label col-lg-12">Password <span class="text-danger">*</span></label>
+                                        <div class="col-lg-12">
+                                            <input type="text" name="basic" ng-model="Password" class="form-control"
+                                                   required="required" placeholder="Password">
+                                        </div>
                                     </div>
+
                                 </div>
                             </fieldset>
                             <div class="text-right">
@@ -152,23 +172,24 @@
                                 <button type="submit" class="btn btn-primary">Submit <i class="icon-arrow-right14 position-right"></i></button>
                             </div>
                         </form>
-                    </div>
-                </div>
 
+                    </div>
+
+                </div>
             </div>
         </div>
 
-    </div>
-    <!--Add Modal Popup End-->
-    <!--Pop Up-->
-    <div class="container ">
-        <div class="modal fade col-md-12 col-sm-12 col-xs-12" id="myModal" role="dialog">
-            <div class="modal-dialog" style="width:900px">
-                <!-- Modal content-->
+
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="myAssignModal"
+             aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Album Detail</h4>
+                        <h5 class="modal-title" id="myLargeModalLabel">Album Detail</h5>
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <div class="row col-lg-12">
@@ -188,14 +209,19 @@
                                 </span>
                             </div>
                         </div>
+                        <div class="text-right">
+                                <button type="reset" ng-click="Clear()" class="btn btn-prev" id="reset">
+                                    Cancel <i class="icon-reload-alt position-right"></i>
+                                </button>
+                                
+                            </div>
+                       
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+
                 </div>
             </div>
         </div>
-
     </div>
-    <!--PopUp Over-->
-</div>
+
+
+</section>

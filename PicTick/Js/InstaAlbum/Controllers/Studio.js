@@ -36,6 +36,7 @@
 
     $scope.SaveData = function () {
         HomeService.SaveStudioData($scope);
+        $('#myModal').modal('hide');
     }
 
     $scope.DeleteData = function (id) {
@@ -46,6 +47,7 @@
     }
 
     $scope.EditData = function (data) {
+        $('#myModal').modal('toggle');
         $scope.Id = data.Id;
         $scope.Name = data.Name;
         $scope.Mobile = data.Mobile;

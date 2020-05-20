@@ -7,107 +7,110 @@
         <h6 class="panel-title">Add Organization Detail</h6>
     </div>
     <div class="panel-body">
-        <form class=" form-validate-jquery" ng-submit="SaveData()">
-            @*<fieldset class="content-group">*@
+        <form class="form-horizontal form-validate-jquery" ng-submit="SaveData()">
+            <fieldset class="content-group">
+                <div class="form-row">
 
-            <div class="col-sm-12 col-lg-12">
-
-                <div class="form-group col-sm-4 col-lg-4">
-                    <label class="titleFont">Studio Name</label>
-                    <div>
-                        <input type="text" name="basic" ng-model="Name" class="form-control"
-                               required="required" placeholder="Name">
+                    <div class="form-group col-lg-4">
+                        <label class="control-label col-lg-12">Studio Name <span class="text-danger">*</span></label>
+                        <div class="col-lg-12">
+                            <input type="text" name="basic" ng-model="Name" class="form-control"
+                                   required="required" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label class="control-label col-lg-12">Studio Logo </label>
+                        <div class="col-lg-12">
+                            <input id="File1" type="file" multiple file-model="myFile" />
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label class="control-label col-lg-12">ContactNo <span class="text-danger">*</span></label>
+                        <div class="col-lg-12">
+                            <input type="text" name="basic" ng-model="Mobile" class="form-control"
+                                   required="required" placeholder="ContactNo">
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label class="control-label col-lg-12">About </label>
+                        <div class="col-lg-12">
+                            <textarea rows="2" cols="20" name="basic" ng-model="About" class="form-control"
+                                       placeholder="About"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label class="control-label col-lg-12">Services </label>
+                        <div class="col-lg-12">
+                            <textarea rows="2" cols="20" name="basic" ng-model="Services" class="form-control"
+                                     placeholder="Services"></textarea>
+                        </div>
+                    </div>
+                    @*<div class="form-group col-lg-4">
+                        <label class="control-label col-lg-12">Address <span class="text-danger">*</span></label>
+                        <div class="col-lg-12">
+                            <textarea rows="2" cols="20" name="basic" ng-model="Address" class="form-control"
+                                      required="required" placeholder="Address"></textarea>
+                        </div>
+                    </div>*@
+                    <div class="form-group col-lg-4">
+                        <label class="control-label col-lg-12">Email <span class="text-danger">*</span></label>
+                        <div class="col-lg-12">
+                            <input type="text" name="basic" ng-model="Email" class="form-control"
+                                   required="required" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label class="control-label col-lg-12">Website  <span class="text-danger">*</span></label>
+                        <div class="col-lg-12">
+                            <input type="text" name="basic" ng-model="Website" class="form-control"
+                                   placeholder="Website">
+                        </div>
+                    </div>
+                    @*<div class="form-group col-lg-4">
+                        <label class="control-label col-lg-12">State <span class="text-danger">*</span></label>
+                        <div class="col-lg-12">
+                            <select class="form-control " ng-model="StateId" ng-change="GetCityList()"
+                                    ng-options="data.Id as data.Name for data in StateList">
+                                <option value="" disabled="" ng-selected="true" class="" selected="selected"> Select</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label class="control-label col-lg-12">City <span class="text-danger">*</span></label>
+                        <div class="col-lg-12">
+                            <select class="form-control ng-pristine ng-valid ng-touched" ng-model="CityId"
+                                    ng-options="data.Id as data.Name for data in CityList">
+                                <option value="" disabled="" ng-selected="true" class="" selected="selected"> Select</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label class="control-label col-lg-12">LatLong <span class="text-danger">*</span></label>
+                        <div class="col-lg-12">
+                            <input type="text" name="basic" ng-model="LatLong" class="form-control"
+                                   required="required" placeholder="LatLong">
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label class="control-label col-lg-12">PinCode  <span class="text-danger">*</span></label>
+                        <div class="col-lg-12">
+                            <input type="text" name="basic" ng-model="PinCode" class="form-control"
+                                   required="required" placeholder="PinCode">
+                        </div>
+                    </div>*@
+                    <div class="form-group col-lg-4">
+                        <label class="control-label col-lg-12">Invite Message <span class="text-danger">*</span></label>
+                        <div class="col-lg-12">
+                            <textarea rows="2" cols="20" name="basic" ng-model="InviteMessage" class="form-control"
+                                      required="required" placeholder="Invite Message"></textarea>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group col-sm-4 col-lg-4">
-                    <label class="titleFont">Studio Logo</label>
-                    <div>
-                        <input id="File1" type="file" multiple file-model="myFile" />
-                    </div>
-                </div>
-                <div class="form-group col-sm-4 col-lg-4">
-                    <label class="titleFont">ContactNo</label>
-                    <div>
-                        <input type="text" name="basic" ng-model="Mobile" class="form-control"
-                               required="required" placeholder="ContactNo">
-                    </div>
-                </div>
-                <div class="form-group col-sm-4 col-lg-4">
-                    <label class="titleFont">About</label>
-                    <div>
-                        <textarea rows="2" cols="20" name="basic" ng-model="About" class="form-control"
-                                  required="required" placeholder="About"></textarea>
-                    </div>
-                </div>
-
-                <div class="form-group col-sm-4 col-lg-4">
-                    <label class="titleFont">Services</label>
-                    <div>
-                        <textarea rows="2" cols="20" name="basic" ng-model="Services" class="form-control"
-                                  required="required" placeholder="Services"></textarea>
-                        @*<div>Please type and hit enter to add multiple services</div>*@
-                    </div>
-                </div>
-                <div class="form-group col-sm-4 col-lg-4">
-                    <label class="titleFont">Address</label>
-                    <div>
-                        <textarea rows="2" cols="20" name="basic" ng-model="Address" class="form-control"
-                                  required="required" placeholder="Address"></textarea>
-                        @*<div>Please type and hit enter to add multiple services</div>*@
-                    </div>
-                </div>
-                <div class="form-group col-sm-4 col-lg-4">
-                    <label class="titleFont">Email </label>
-                    <div>
-                        <input type="text" name="basic" ng-model="Email" class="form-control"
-                               required="required" placeholder="Email">
-                    </div>
-                </div>
-                <div class="form-group col-sm-4 col-lg-4">
-                    <label class="titleFont">Website </label>
-                    <div>
-                        <input type="text" name="basic" ng-model="Website" class="form-control"
-                               required="required" placeholder="Website">
-                    </div>
-                </div>
-                <div class="form-group col-sm-4 col-lg-4">
-                    <label class="titleFont">State </label>
-                    <div>
-                        <select class="form-control " ng-model="StateId" ng-change="GetCityList()"
-                                ng-options="data.Id as data.Name for data in StateList">
-                            <option value="" disabled="" ng-selected="true" class="" selected="selected"> Select</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group col-sm-4 col-lg-4">
-                    <label class="titleFont">City </label>
-                    <div>
-                        <select class="form-control ng-pristine ng-valid ng-touched" ng-model="CityId"
-                                ng-options="data.Id as data.Name for data in CityList">
-                            <option value="" disabled="" ng-selected="true" class="" selected="selected"> Select</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group col-sm-4 col-lg-4">
-                    <label class="titleFont">PinCode </label>
-                    <div>
-                        <input type="text" name="basic" ng-model="PinCode" class="form-control"
-                               required="required" placeholder="PinCode">
-                    </div>
-                </div>
-                <div class="form-group col-sm-4 col-lg-4">
-                    <label class="titleFont">Invite Message </label>
-                    <div>
-                        <textarea rows="2" cols="20" name="basic" ng-model="InviteMessage" class="form-control"
-                                  required="required" placeholder="Invite Message"></textarea>
-                        
-                    </div>
-                </div>
-            </div>
-
-            @*</fieldset>*@
-            <div class="text-right">
-                <button type="reset" ng-click="Clear()" class="btn btn-default" id="reset">Cancel <i class="icon-reload-alt position-right"></i></button>
+            </fieldset>
+            <div class="text-right" style="margin-bottom:10px;margin-right:10px;">
+                <button type="reset" ng-click="Clear()" class="btn btn-prev" id="reset">
+                    Cancel <i class="icon-reload-alt position-right"></i>
+                </button>
                 <button type="submit" class="btn btn-primary">Submit <i class="icon-arrow-right14 position-right"></i></button>
             </div>
         </form>

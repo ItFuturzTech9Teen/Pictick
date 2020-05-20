@@ -4,161 +4,256 @@
 <head>
     <script src="~/Js/InstaAlbum/Services/HomeService.js"></script>
     <script src="~/Js/InstaAlbum/Controllers/DashBoard.js"></script>
+    <link href="~/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
 </head>
-<div class="content-wrapper" ng-controller="DashBoardController">
-    <!-- Page header -->
-    <div class="page-header">
-        <div class="page-header-content">
-            <div class="page-title">
-                <h4><i class="icon-home position-left"></i> <span class="text-semibold">Dashboard</span></h4>
+<section class="admin-content " ng-controller="DashBoardController">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-lg-6 col-xlg-4">
+                <h3 class=""></h3>
+                <p class="text-muted">
+                    <h4><i class="icon-home position-left"></i> <span class="text-semibold">Dashboard</span></h4> 
+                </p>
             </div>
         </div>
-    </div>
-    <!-- /page header -->
-    <!-- Content area -->
-    <div class="content">
         <div class="row">
-            <a href="~/Studio" ng-show="IsAdmin">
-                <div class="col-lg-3">
-                    <div class="panel border-grey invoice-grid timeline-content">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h2 class="text-semibold no-margin-top">
-                                        <i class="icon-video-camera icon-2x"></i>
-                                    </h2>
-                                    <span class="f-s-20">Studio</span>
+            <div class="col-xlg-12  m-b-30 col-lg-12">
+             
+                <!-- /page header -->
+                <!-- Content area -->
+                <div class="content">
+                    <a href="~/Studio" ng-show="IsAdmin" style="color:#EF4D55;">
+                        <div class="col-md-4">
+                            <!--widget card begin-->
+                            <div class="card m-b-30">
+                                <div class="card-body ">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <h6 class="fw-600">Studio</h6>
+                                            <p class="text-muted">
+                                                All Studio
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5 my-auto text-right">
+                                            <h4 class="text-success">{{StudioCount}}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="progress" style="height: 5px">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: {{StudioPer}}%" aria-valuenow="0"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="row m-t-10">
+                                        <div class="col-md-7">
+                                            <p class="text-muted">
+                                               
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5 text-right">
+                                            <p class="text-danger">{{StudioPer}}%</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <!--widget card ends-->
                         </div>
-                    </div>
-                </div>
-            </a>
-            <a href="~/Gallery" ng-hide="IsAdmin">
-                <div class="col-lg-2">
-                    <div class="panel border-grey invoice-grid timeline-content">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h2 class="text-semibold no-margin-top">
-                                        <i class="icon-images2 icon-2x"></i>
-                                    </h2>
-                                    <span class="f-s-20">Event</span>
+                    </a>
+                    <a href="~/Gallery" ng-hide="IsAdmin" style="color:#EF4D55;">
+                        <div class="col-md-4">
+                            <!--widget card begin-->
+                            <div class="card m-b-30">
+                                <div class="card-body ">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <h6 class="fw-600">Events</h6>
+                                            <p class="text-muted">
+                                                All Events
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5 my-auto text-right">
+                                            <h4 class="text-success">{{EventCount}}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="progress" style="height: 5px">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: {{EventPer}}%" aria-valuenow="0"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="row m-t-10">
+                                        <div class="col-md-7">
+                                            <p class="text-muted">
+
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5 text-right">
+                                            <p class="text-success">{{EventPer}}%</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <!--widget card ends-->
                         </div>
-                    </div>
-                </div>
-            </a>
-            @*<a href="~/Gallery" ng-hide="IsAdmin">
-                <div class="col-lg-2">
-                    <div class="panel border-grey invoice-grid timeline-content">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h2 class="text-semibold no-margin-top">
-                                        <i class="icon-image2 icon-2x"></i>
-                                    </h2>
-                                    <span class="f-s-20">Album</span>
+                    </a>
+                    <a href="~/Customer" ng-hide="IsAdmin" style="color:#EF4D55;">
+                        <div class="col-md-4">
+                            <!--widget card begin-->
+                            <div class="card m-b-30">
+                                <div class="card-body ">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <h6 class="fw-600">Customers</h6>
+                                            <p class="text-muted">
+                                                All Customers
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5 my-auto text-right">
+                                            <h4 class="text-primary">{{CustomerCount}}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="progress" style="height: 5px">
+                                        <div class="progress-bar" role="progressbar" style="width: {{CustomerPer}}%" aria-valuenow="0"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="row m-t-10">
+                                        <div class="col-md-7">
+                                            <p class="text-muted">
+
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5 text-right">
+                                            <p class="text-primary">{{CustomerPer}}%</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <!--widget card ends-->
                         </div>
-                    </div>
-                </div>
-            </a>*@
-            <a href="~/Customer" ng-hide="IsAdmin">
-                <div class="col-lg-2">
-                    <div class="panel border-grey invoice-grid timeline-content">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h2 class="text-semibold no-margin-top">
-                                        <i class="icon-user-tie icon-2x"></i>
-                                    </h2>
-                                    <span class="f-s-20">Customer</span>
+                    </a>
+                    <a href="~/Portfolio" ng-hide="IsAdmin" style="color:#EF4D55;">
+                        <div class="col-md-4">
+                            <!--widget card begin-->
+                            <div class="card m-b-30">
+                                <div class="card-body ">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <h6 class="fw-600">Portfolio</h6>
+                                            <p class="text-muted">
+                                                All Portfolio
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5 my-auto text-right">
+                                            <h4 class="text-primary">{{PortfolioCount}}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="progress" style="height: 5px">
+                                        <div class="progress-bar" role="progressbar" style="width: {{PortfolioPer}}%" aria-valuenow="0"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="row m-t-10">
+                                        <div class="col-md-7">
+                                            <p class="text-muted">
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5 text-right">
+                                            <p class="text-primary">{{PortfolioPer}}%</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <!--widget card ends-->
                         </div>
-                    </div>
-                </div>
-            </a>
-            <a href="~/StudioAbout" ng-hide="IsAdmin">
-                <div class="col-lg-2">
-                    <div class="panel border-grey invoice-grid timeline-content">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h2 class="text-semibold no-margin-top">
-                                        <i class="icon-design icon-2x"></i>
-                                    </h2>
-                                    <span class="f-s-20">Studio Description</span>
+                    </a>
+                    <a href="~/StudioAbout" ng-hide="IsAdmin" style="color:#EF4D55;">
+                        <div class="col-md-4">
+                            <!--widget card begin-->
+                            <div class="card m-b-30">
+                                <div class="card-body ">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <h2 class="text-semibold no-margin-top">
+                                                <i class="icon-design icon-2x"></i>
+                                            </h2>
+                                            <h6 class="fw-600" style="color:black;">Studio Description</h6>
+                                            <p class="text-muted">
+
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5 my-auto text-right">
+                                            <h4 class="text-primary"></h4>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
+                            <!--widget card ends-->
                         </div>
-                    </div>
-                </div>
-            </a>
-            <a href="~/Portfolio" ng-hide="IsAdmin">
-                <div class="col-lg-2">
-                    <div class="panel border-grey invoice-grid timeline-content">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h2 class="text-semibold no-margin-top">
-                                        <i class="icon-portfolio icon-2x"></i>
-                                    </h2>
-                                    <span class="f-s-20">Portfolio</span>
+                    </a>
+                    <a href="~/Organization" ng-hide="IsAdmin" style="color:#EF4D55;">
+                        <div class="col-md-4">
+                            <!--widget card begin-->
+                            <div class="card m-b-30">
+                                <div class="card-body ">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <h2 class="text-semibold no-margin-top">
+                                                <i class="icon-make-group icon-2x"></i>
+                                            </h2>
+                                            <h6 class="fw-600" style="color:black;">Organization</h6>
+                                            <p class="text-muted">
+
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5 my-auto text-right">
+                                            <h4 class="text-primary"></h4>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
+                            <!--widget card ends-->
                         </div>
-                    </div>
-                </div>
-            </a>
-            <a href="~/Organization" ng-hide="IsAdmin">
-                <div class="col-lg-2">
-                    <div class="panel border-grey invoice-grid timeline-content">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h2 class="text-semibold no-margin-top">
-                                        <i class="icon-make-group icon-2x"></i>
-                                    </h2>
-                                    <span class="f-s-20">Organization</span>
+                    </a>
+                    <a href="~/Appointment" ng-hide="IsAdmin" style="color:#EF4D55;">
+                        <div class="col-md-4">
+                            <!--widget card begin-->
+                            <div class="card m-b-30">
+                                <div class="card-body ">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <h2 class="text-semibold no-margin-top">
+                                                <i class="icon-calendar icon-2x"></i>
+                                            </h2>
+                                            <h6 class="fw-600" style="color:black;">Appointment</h6>
+                                            <p class="text-muted">
+
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5 my-auto text-right">
+                                            <h4 class="text-primary"></h4>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
+                            <!--widget card ends-->
                         </div>
-                    </div>
+                    </a>
                 </div>
-            </a>
-            <a href="~/Appointment" ng-hide="IsAdmin">
-                <div class="col-lg-2">
-                    <div class="panel border-grey invoice-grid timeline-content">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h2 class="text-semibold no-margin-top">
-                                        <i class="icon-calendar icon-2x"></i>
-                                    </h2>
-                                    <span class="f-s-20">Appointments</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
+                <!-- /content area -->
+
+            </div>
+
         </div>
-        <div class="row" ng-hide="IsAdmin">
+        <div class="row" ng-hide="IsAdmin" style="margin-top:-75px;">
             <div class="col-lg-3" ng-repeat="data in DataList">
                 <div class="panel border-grey invoice-grid timeline-content">
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-sm-12">
-                                <span class="f-s-20">{{data.Name}}</span><br />
+                                <span class="f-s-20" style="color:#EF4D55;">{{data.Name}}</span><br />
                                 <label class="f-s-20">{{data.SelectedAlbumPhotoCount}} / {{data.AlbumPhotoCount}}</label>
                             </div>
                             <hr class="col-sm-11" style="margin-top: 3px;margin-bottom: 5px;" />
                             <div class="col-sm-12" ng-repeat="customer in data.CustomerList">
-                                <span>{{customer.Name}}</span><br />
+                                <span style="color:#EF4D55;">{{customer.Name}}</span><br />
                                 <label style="font-size:15px;">{{customer.Mobile}}</label>
                             </div><br />
                         </div>
@@ -167,5 +262,4 @@
             </div>
         </div>
     </div>
-    <!-- /content area -->
-</div>
+</section>

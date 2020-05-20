@@ -106,7 +106,7 @@
 
     $scope.SaveData = function () {
         HomeService.SaveCustomerData($scope);
-        $('#myAddModal').modal('hide');
+        $('#myModal').modal('hide');
     }
 
     $scope.DeleteData = function (id) {
@@ -117,7 +117,7 @@
     }
 
     $scope.EditData = function (data) {
-        $('#myAddModal').modal('toggle');
+        $('#myModal').modal('toggle');
         $scope.Id = data.Id;
         $scope.Name = data.Name;
         $scope.Mobile = data.Mobile;

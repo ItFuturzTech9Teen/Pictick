@@ -15,10 +15,8 @@ namespace PicTick.Models
     public partial class Studio
     {
         public long Id { get; set; }
-        public Nullable<long> StateId { get; set; }
         public string Name { get; set; }
         public string Mobile { get; set; }
-        public string Address { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string StudioLogo { get; set; }
@@ -27,9 +25,6 @@ namespace PicTick.Models
         public string Email { get; set; }
         public string Website { get; set; }
         public string StudioOwner { get; set; }
-        public string Country { get; set; }
-        public Nullable<long> CityId { get; set; }
-        public string PinCode { get; set; }
         public string InviteMessage { get; set; }
         public string WaterMark { get; set; }
         public string Position { get; set; }

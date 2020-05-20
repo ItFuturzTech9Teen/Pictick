@@ -57,11 +57,7 @@
                     $scope.About = data.Data.About;
                     $scope.Website = data.Data.Website;
                     $scope.StudioOwner = data.Data.StudioOwner;
-                    $scope.StateId = data.Data.StateId;
-                    $scope.CityId = data.Data.CityId;
-                    $scope.PinCode = data.Data.PinCode;
                     $scope.Services = data.Data.Services;
-                    $scope.Address = data.Data.Address;
                     $scope.WaterMark = data.Data.WaterMark;
                     $scope.Position = data.Data.Position;
                     $scope.FontName = data.Data.Font;
@@ -158,8 +154,6 @@
 
     $scope.Clear = function () {
         $scope.Id = 0;
-        $scope.StateId = 0;
-        $scope.CityId = 0;
         $scope.Name = "";
         $scope.Mobile = "";
         $scope.Email = "";
@@ -167,9 +161,7 @@
         $scope.About = "";
         $scope.Website = "";
         $scope.StudioOwner = "";
-        $scope.PinCode = "";
-        $scope.Services = "";
-        $scope.Address = "";
+        $scope.Services = 
         $scope.InviteMessage = "";
     }
     $scope.Clear();

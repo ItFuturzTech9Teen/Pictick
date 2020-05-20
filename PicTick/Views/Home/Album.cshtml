@@ -7,92 +7,108 @@
 <script src="~/Js/InstaAlbum/Controllers/Album.js"></script>
 <link href="~/assets/dragdropfileupload/style.css" rel="stylesheet" />
 
-<div class="content-wrapper" ng-controller="AlbumController">
-    <!-- Page header -->
-    <div class="page-header">
-        <div class="page-header-content">
-            <div class="page-title col-lg-12">
-                <a data-popup="tooltip" title="Bank Data" class="pull-right" ng-show="GalleryId > 0"
-                   ng-click="Clear()" data-toggle="modal" data-target="#myModal">
-                    <button type="button" class="btn btn-warning">
-                        <i class="icon-plus2"></i> New Folder
-                    </button>
-                </a>
-                <div class="col-md-6 pull-left">
-                    <input type="text" ng-model="Search" placeholder="Search..." class="form-control" />
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /page header -->
-    <!-- Content area -->
-    <div class="content">
-        <!-- Basic tabs -->
-        <div class="row">
-            <div class="col-lg-6" ng-repeat="data in DataList | filter:Search">
-                <div class="panel border-grey invoice-grid timeline-content">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <span class="f-s-20">{{data.Name}}</span><br />
-                                <label class="f-s-20">Selected : {{data.SelectedCount}} / {{data.AllCount}}</label>
-                            </div>
-                            <hr class="col-sm-11" style="margin-top: 3px;margin-bottom: 5px;" />
-                            <div class="col-sm-12">
-                                <div class="col-sm-5">
-                                    <img ng-src='~/{{data.Photo}}'
-                                         style="width:100%;height:160px;border-radius:10px;" />
-                                </div>
-                                <div class="col-sm-3 ">
-                                    <button type="button" class="btn btn-info col-sm-12 mt-5" ng-click="EditData(data)">
-                                        <i class="icon-pencil7"></i> Edit Folder
-                                    </button>
-                                    <button type="button" class="btn btn-danger col-sm-12 mt-5" ng-click="DeleteData(data.Id)">
-                                        <i class="icon-trash"></i> Delete Folder
-                                    </button>
-                                    <button type="button" class="btn btn-primary col-sm-12 mt-5" ng-click="GetPhotoData(data.Id)">
-                                        <i class="icon-image3"></i> Photo
-                                    </button>
-                                   
-                                </div>
-                                <div class="col-sm-4 pull-right">
-                                    <button type="button" class="btn btn-prev col-sm-12 mt-5" style="background-color:#58DCD7;color:white;">
-                                        <i class="icon-eye"></i> Live Priview
-                                    </button>
-                                    <button type="button" class="btn btn-prev col-sm-12 mt-5" style="background-color:#E75545;color:white;">
-                                        <i class="icon-share3"></i> Share
-                                    </button>
-                                    <button type="button" class="btn btn-prev col-sm-12 mt-5" style="background-color:#38BCE8;color:white;" ng-click="ExportFile(data.Id,data.SelectedCount)">
-                                        <i class="icon-file-download"></i> Export Selected Photo
-                                    </button>
-                                </div>
-                            </div>
-                            @*<div class="col-sm-12  mt-10">
-                                <button type="button" class="btn btn-prev col-sm-4">
-                                    <i class="icon-eye"></i> Live Priview
-                                </button>
-                                <button type="button" class="btn btn-prev col-sm-4 ml-5 mr-5">
-                                    <i class="icon-share3"></i> Share
-                                </button>
+<link href="~/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-                            </div>*@
-                        </div>
+<section class="admin-content" ng-controller="AlbumController">
+    <div class="bg-dark" style="background-color:#33000F;">
+        <div class="container  m-b-30">
+            <div class="row">
+                <div class="col-8 text-white p-t-40 p-b-90">
+
+                </div>
+                <div class="col-md-4 text-white p-t-40 p-b-90">
+                    <div class="text-md-right">
+
+                        <button type="button" class="btn btn-primary" data-toggle="modal" ng-click="OpenPopUp()"
+                                data-target="#myModal">
+                            <i class="mdi mdi-plus"></i> New Folder
+                        </button>
+
+
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /basic tabs -->
     </div>
-    <!-- /content area -->
-    <!--Add Modal Popup-->
-    <div class="container ">
-        <div class="modal fade col-md-12 col-sm-12 col-xs-12" id="myModal" role="dialog">
-            <div class="modal-dialog modal-lg">
-                <!-- Modal content-->
+    <div class="container  pull-up">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-lg-6" ng-repeat="data in DataList | filter:Search" style="margin-top:10px;">
+                            <div class="panel border-grey invoice-grid timeline-content" style="border: 1px solid;border-radius: 6px;">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <span class="f-s-20">{{data.Name}}</span><br />
+                                            <label class="f-s-20">Selected : {{data.SelectedCount}} / {{data.AllCount}}</label>
+                                        </div>
+                                        <hr class="col-sm-11" style="margin-top: 3px;margin-bottom: 5px;" />
+                                        <div class="col-sm-12">
+                                            <div class="col-sm-6">
+                                                <img ng-src='~/{{data.Photo}}'
+                                                     style="width:100%;height:160px;border-radius:10px;" />
+                                            </div>
+                                            <div class="col-sm-6 ">
+                                                <button type="button" class="btn btn-info col-sm-12 mt-5" data-toggle="modal" data-target="#myModal" ng-click="EditData(data)">
+                                                    <i class="icon-pencil7"></i> Edit Folder
+                                                </button>
+                                                <button type="button" class="btn btn-danger col-sm-12 mt-5" ng-click="DeleteData(data.Id)">
+                                                    <i class="icon-trash"></i> Delete Folder
+                                                </button>
+                                                <button type="button" class="btn btn-primary col-sm-12 mt-5" data-toggle="modal" data-target="#myPhotoModal" ng-click="GetPhotoData(data.Id)" style="background-color:#58DCD7;color:white;">
+                                                    <i class="icon-image3"></i> Photo
+                                                </button>
+                                                <button type="button" class="btn btn-prev col-sm-12 mt-5" style="background-color:#38BCE8;color:white;" ng-click="ExportFile(data.Id,data.SelectedCount)">
+                                                    <i class="icon-file-download"></i> Export Selected Photo
+
+                                                </button>
+                                            </div>
+                                            @*<div class="col-sm-4 pull-right">
+                                                    @*<button type="button" class="btn btn-prev col-sm-12 mt-5" style="background-color:#58DCD7;color:white;">
+                                                        <i class="icon-eye"></i> Live Priview
+                                                    </button>
+                                                    <button type="button" class="btn btn-prev col-sm-12 mt-5" style="background-color:#E75545;color:white;">
+                                                        <i class="icon-share3"></i> Share
+                                                    </button>*
+                                                    <button type="button" class="btn btn-prev col-sm-12 mt-5" style="background-color:#38BCE8;color:white;" ng-click="ExportFile(data.Id,data.SelectedCount)">
+                                                        <i class="icon-file-download"></i> Export Selected Photo
+                                                    </button>
+                                                </div>*@
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="m-b-10">
+        <p class="font-secondary">
+
+        </p>
+        <!-- Large modal -->
+
+        <div class="modal fade bd-example-modal-lg" role="dialog" id="myModal"
+             aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Add Folder</h4>
+                        <h5 class="modal-title" id="myLargeModalLabel">Add Folder</h5>
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal form-validate-jquery" ng-submit="SaveData()">
@@ -133,91 +149,84 @@
                             </div>
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>
 
-    </div>
-    <!--Add Modal Popup End-->
-    <!--Image Modal Popup-->
-    <div class="container">
-        <div class="modal fade col-md-12 col-sm-12 col-xs-12" id="myPhotoModal" role="dialog">
-            <div class="modal-dialog modal-lg">
-                <!-- Modal content-->
+        <div class="modal fade bd-example-modal-lg" role="dialog" id="myPhotoModal"
+             aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
-                    @*<div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Album Photo</h4>
-                        </div>*@
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myLargeModalLabel">Add Folder</h5>
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <div class="modal-body">
-                        <div class="navbar navbar-default navbar-xs content-group">
-                            <ul class="nav navbar-nav visible-xs-block">
-                                <li class="full-width text-center"><a data-toggle="collapse" data-target="#navbar-filter"><i class="icon-menu7"></i></a></li>
-                            </ul>
-                            <div class="navbar-collapse collapse" id="navbar-filter">
-                                <ul class="nav navbar-nav bg-col-designmaster">
-                                    <li class="active">
-                                        <a id="togList" href="#ViewPhoto" data-toggle="tab">
-                                            <i class="icon-images3 position-left"></i> All Photo
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a id="togList" href="#SelectedPhoto" data-toggle="tab">
-                                            <i class="icon-image-compare position-left"></i> Selected Photo
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a id="togAdd" href="#AddPhoto" data-toggle="tab">
-                                            <i class="icon-plus22 position-left"></i> Add Photo
-                                        </a>
-                                    </li>
-                                </ul>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab-z" data-toggle="tab" href="#ViewPhoto" role="tab"
+                                   aria-controls="navbar-filter" aria-selected="true">
+                                    <i class="icon-images3 position-left"></i> All Photo
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab-z" data-toggle="tab" href="#SelectedPhoto" role="tab"
+                                   aria-controls="profile" aria-selected="false">
+                                    <i class="icon-image-compare position-left"></i> Selected Photo
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="contact-tab-z" data-toggle="tab" href="#AddPhoto" role="tab"
+                                   aria-controls="contact" aria-selected="false">
+                                    <i class="icon-plus22 position-left"></i> Add Photo
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent1">
+                            <div class="tab-pane fade show active" id="ViewPhoto" role="tabpanel"
+                                 aria-labelledby="home-tab">
+
+                                <div class="panel panel-flat">
+
+                                    <div class="panel-body">
+                                        <div class="raw">
+                                            <div class="col-lg-3 mb-10" ng-repeat="data in AlbumPhotoList">
+                                                <a ng-href='~/{{data.Photo}}' target="_blank">
+                                                    <img ng-src='~/{{data.Photo}}' width="100%" />
+                                                </a>
+                                                <button type="button" class="btn btn-danger mt-5"
+                                                        ng-click="DeletePhoto(data.Id)">
+                                                    <i class="icon-trash"></i> Delete
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                        </div>
-                        <div class="tabbable">
-                            <div class="tab-content">
-                                <div class="tab-pane fade in active" id="ViewPhoto">
-                                    <div class="panel panel-flat">
-                                        @*<div class="panel-heading">
-                                                <h6 class="panel-title">Basic Information</h6>
-                                            </div>*@
-                                        <div class="panel-body">
-                                            <div class="raw">
-                                                <div class="col-lg-3 mb-10" ng-repeat="data in AlbumPhotoList">
-                                                    <a ng-href='~/{{data.Photo}}' target="_blank">
-                                                        <img ng-src='~/{{data.Photo}}' width="100%" />
-                                                    </a>
-                                                    <button type="button" class="btn btn-danger mt-5"
-                                                            ng-click="DeletePhoto(data.Id)">
-                                                        <i class="icon-trash"></i> Delete
-                                                    </button>
-                                                </div>
+                            <div class="tab-pane fade" id="SelectedPhoto" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="panel panel-flat">
+                                    <div class="panel-body">
+                                        <div class="raw">
+                                            <div class="col-lg-3 mb-10" ng-repeat="data in SelectedPhotoList">
+                                                <a ng-href='~/{{data.Photo}}' target="_blank">
+                                                    <img ng-src='~/{{data.Photo}}' width="100%" />
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="tab-pane fade in" id="SelectedPhoto">
-                                    <div class="panel panel-flat">
-                                        <div class="panel-body">
-                                            <div class="raw">
-                                                <div class="col-lg-3 mb-10" ng-repeat="data in SelectedPhotoList">
-                                                    <a ng-href='~/{{data.Photo}}' target="_blank">
-                                                        <img ng-src='~/{{data.Photo}}' width="100%" />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="tab-pane  p-20" id="AddPhoto" role="tabpanel">
-                                    <div class="card-body" style="">
-                                        <div class="panel-body">
-                                            <div id="dropbox">
-                                                <div class="text">
-                                                    Drop Images Here
-                                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="AddPhoto"  role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="card-body" style="">
+                                    <div class="panel-body">
+                                        <div id="dropbox">
+                                            <div class="text">
+                                                Drop Images Here
                                             </div>
                                         </div>
                                     </div>
@@ -225,12 +234,242 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="icon-stack-cancel position-right"></i></button>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+@*<div class="content-wrapper" ng-controller="AlbumController">
+        <!-- Page header -->
+        <div class="page-header">
+            <div class="page-header-content">
+                <div class="page-title col-lg-12">
+                    <a data-popup="tooltip" title="Bank Data" class="pull-right" ng-show="GalleryId > 0"
+                       ng-click="Clear()" data-toggle="modal" data-target="#myModal">
+                        <button type="button" class="btn btn-warning">
+                            <i class="icon-plus2"></i> New Folder
+                        </button>
+                    </a>
+                    <div class="col-md-6 pull-left">
+                        <input type="text" ng-model="Search" placeholder="Search..." class="form-control" />
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--Add Modal Popup End-->
-</div>
+        <!-- /page header -->
+        <!-- Content area -->
+        <div class="content">
+            <!-- Basic tabs -->
+            <div class="row">
+                <div class="col-lg-6" ng-repeat="data in DataList | filter:Search">
+                    <div class="panel border-grey invoice-grid timeline-content">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <span class="f-s-20">{{data.Name}}</span><br />
+                                    <label class="f-s-20">Selected : {{data.SelectedCount}} / {{data.AllCount}}</label>
+                                </div>
+                                <hr class="col-sm-11" style="margin-top: 3px;margin-bottom: 5px;" />
+                                <div class="col-sm-12">
+                                    <div class="col-sm-5">
+                                        <img ng-src='~/{{data.Photo}}'
+                                             style="width:100%;height:160px;border-radius:10px;" />
+                                    </div>
+                                    <div class="col-sm-3 ">
+                                        <button type="button" class="btn btn-info col-sm-12 mt-5" ng-click="EditData(data)">
+                                            <i class="icon-pencil7"></i> Edit Folder
+                                        </button>
+                                        <button type="button" class="btn btn-danger col-sm-12 mt-5" ng-click="DeleteData(data.Id)">
+                                            <i class="icon-trash"></i> Delete Folder
+                                        </button>
+                                        <button type="button" class="btn btn-primary col-sm-12 mt-5" ng-click="GetPhotoData(data.Id)">
+                                            <i class="icon-image3"></i> Photo
+                                        </button>
+
+                                    </div>
+                                    <div class="col-sm-4 pull-right">
+                                        <button type="button" class="btn btn-prev col-sm-12 mt-5" style="background-color:#58DCD7;color:white;">
+                                            <i class="icon-eye"></i> Live Priview
+                                        </button>
+                                        <button type="button" class="btn btn-prev col-sm-12 mt-5" style="background-color:#E75545;color:white;">
+                                            <i class="icon-share3"></i> Share
+                                        </button>
+                                        <button type="button" class="btn btn-prev col-sm-12 mt-5" style="background-color:#38BCE8;color:white;" ng-click="ExportFile(data.Id,data.SelectedCount)">
+                                            <i class="icon-file-download"></i> Export Selected Photo
+                                        </button>
+                                    </div>
+                                </div>
+                                @*<div class="col-sm-12  mt-10">
+                                    <button type="button" class="btn btn-prev col-sm-4">
+                                        <i class="icon-eye"></i> Live Priview
+                                    </button>
+                                    <button type="button" class="btn btn-prev col-sm-4 ml-5 mr-5">
+                                        <i class="icon-share3"></i> Share
+                                    </button>
+
+                                </div>*
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /basic tabs -->
+        </div>
+        <!-- /content area -->
+        <!--Add Modal Popup-->
+        <div class="container ">
+            <div class="modal fade col-md-12 col-sm-12 col-xs-12" id="myModal" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Folder</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal form-validate-jquery" ng-submit="SaveData()">
+                                <fieldset class="content-group">
+                                    <div class="form-group col-lg-6" ng-show="showStudio">
+                                        <label class="control-label col-lg-12">Studio <span class="text-danger">*</span></label>
+                                        <div class=" col-lg-12">
+                                            <select class="form-control ng-pristine ng-valid ng-touched" ng-model="StudioId" ng-change="GetData()"
+                                                    ng-options="data.Id as data.Name for data in StudioList">
+                                                <option value="" disabled="" ng-selected="true" class="" selected="selected"> Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label  col-lg-12">Name <span class="text-danger">*</span></label>
+                                        <div class=" col-lg-12">
+                                            <input type="text" name="basic" ng-model="Name" class="form-control"
+                                                   required="required" placeholder="Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label col-lg-12">Date <span class="text-danger">*</span></label>
+                                        <div class="col-lg-12">
+                                            <input type="date" name="basic" ng-model="Date" class="form-control"
+                                                   required="required" placeholder="Date">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label col-lg-12">Cover Image <span class="text-danger">*</span></label>
+                                        <div class="col-lg-12">
+                                            <input id="File1" type="file" file-model="myFile" />
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="text-right">
+                                    <button type="button" class="btn btn-danger" ng-click="Clear()" data-dismiss="modal">Close <i class="icon-stack-cancel position-right"></i></button>
+                                    <button type="submit" class="btn btn-primary">Submit <i class="icon-arrow-right14 position-right"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--Add Modal Popup End-->
+        <!--Image Modal Popup-->
+        <div class="container">
+            <div class="modal fade col-md-12 col-sm-12 col-xs-12" id="myPhotoModal" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        @*<div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Album Photo</h4>
+                            </div>*
+                        <div class="modal-body">
+                            <div class="navbar navbar-default navbar-xs content-group">
+                                <ul class="nav navbar-nav visible-xs-block">
+                                    <li class="full-width text-center"><a data-toggle="collapse" data-target="#navbar-filter"><i class="icon-menu7"></i></a></li>
+                                </ul>
+                                <div class="navbar-collapse collapse" id="navbar-filter">
+                                    <ul class="nav navbar-nav bg-col-designmaster">
+                                        <li class="active">
+                                            <a id="togList" href="#ViewPhoto" data-toggle="tab">
+                                                <i class="icon-images3 position-left"></i> All Photo
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a id="togList" href="#SelectedPhoto" data-toggle="tab">
+                                                <i class="icon-image-compare position-left"></i> Selected Photo
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a id="togAdd" href="#AddPhoto" data-toggle="tab">
+                                                <i class="icon-plus22 position-left"></i> Add Photo
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tabbable">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade in active" id="ViewPhoto">
+                                        <div class="panel panel-flat">
+                                            @*<div class="panel-heading">
+                                                    <h6 class="panel-title">Basic Information</h6>
+                                                </div>*
+                                            <div class="panel-body">
+                                                <div class="raw">
+                                                    <div class="col-lg-3 mb-10" ng-repeat="data in AlbumPhotoList">
+                                                        <a ng-href='~/{{data.Photo}}' target="_blank">
+                                                            <img ng-src='~/{{data.Photo}}' width="100%" />
+                                                        </a>
+                                                        <button type="button" class="btn btn-danger mt-5"
+                                                                ng-click="DeletePhoto(data.Id)">
+                                                            <i class="icon-trash"></i> Delete
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane fade in" id="SelectedPhoto">
+                                        <div class="panel panel-flat">
+                                            <div class="panel-body">
+                                                <div class="raw">
+                                                    <div class="col-lg-3 mb-10" ng-repeat="data in SelectedPhotoList">
+                                                        <a ng-href='~/{{data.Photo}}' target="_blank">
+                                                            <img ng-src='~/{{data.Photo}}' width="100%" />
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane  p-20" id="AddPhoto" role="tabpanel">
+                                        <div class="card-body" style="">
+                                            <div class="panel-body">
+                                                <div id="dropbox">
+                                                    <div class="text">
+                                                        Drop Images Here
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="icon-stack-cancel position-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Add Modal Popup End-->
+    </div>*@

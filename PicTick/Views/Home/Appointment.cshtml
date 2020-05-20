@@ -6,38 +6,38 @@
 <script src="~/Js/InstaAlbum/Services/HomeService.js"></script>
 <script src="~/Js/InstaAlbum/Controllers/Appointment.js"></script>
 
-<div class="content-wrapper" ng-controller="AppointmentController">
-    <!-- Page header -->
-    <div class="page-header">
-        <div class="page-header-content">
-            <div class="page-title">
-                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Home</span> - Appointment</h4>
+<section class="admin-content" ng-controller="AppointmentController">
+    <div class="bg-dark" style="background-color:#33000F;">
+        <div class="container  m-b-30">
+            <div class="row">
+                <div class="col-8 text-white p-t-40 p-b-90">
+                    <h2>Appointmnet List</h2>
+                </div>
+                <div class="col-md-4 text-white p-t-40 p-b-90">
+                    <div class="text-md-right">
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <!-- /page header -->
-    <!-- Content area -->
-    <div class="content">
-        <!-- Basic tabs -->
+    <div class="container  pull-up">
         <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="panel panel-flat">
-                    <div class="panel-heading">
-                        <h5 class="panel-title">Appointment List</h5>
-                    </div>
-                    <div class="table-responsive">
-                        <div class="col-md-5 float-right">
+            <div class="col-12">
+                <div class="card">
+                    
+                    <div class="card-body">
+                        <div class="col-md-5 float-left" style="margin-bottom:10px;">
                             <input type="text" ng-model="Search" placeholder="Search..." class="form-control" />
-
                         </div>
-                        <div class="col-md-2 float-right">
+                        <div class="col-md-2 float-right" style="margin-bottom:10px;">
                             <input type="date" name="basic" ng-model="CurrentDate" class="form-control" ng-change="GetData()"
                                    required="required" placeholder="Date">
 
                         </div>
-                        <table class="table">
+                        <table class="table" style="width:100%">
                             <thead>
-                                <tr class="border-solid bg-col-Grey">
+                                <tr style="color:#F05352;">
                                     <th>No</th>
                                     <th>Name</th>
                                     <th>AppointmentSlot</th>
@@ -53,18 +53,30 @@
                                     <td>{{data.Date | date:'dd-MM-yyyy'}}</td>
                                     <td>{{data.Description}}</td>
 
-                                </tr>
+
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>AppointmentSlot</th>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                </tr>
+                            </tfoot>
                         </table>
+
+
                     </div>
                 </div>
             </div>
-
-
         </div>
-        <!-- /basic tabs -->
+
     </div>
-    <!-- /content area -->
-</div>
+
+
+
+
+</section>
 
 

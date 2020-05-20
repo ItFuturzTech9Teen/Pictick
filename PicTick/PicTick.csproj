@@ -152,6 +152,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\angular-datatables.min.js" />
     <Content Include="assets\css\bootstrap.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\colors.css" />
@@ -164,14 +165,17 @@
     <Content Include="assets\css\icons\icomoon\fonts\icomoone627.svg" />
     <Content Include="assets\css\icons\icomoon\styles.css" />
     <Content Include="assets\css\main.min.css" />
+    <Content Include="assets\datatables.bootstrap.css" />
     <Content Include="assets\demo_data\jquery_ui\autocomplete.html" />
     <Content Include="assets\demo_data\maps\vector\gdp_demo_data.js" />
     <Content Include="assets\demo_data\wizard\education.html" />
     <Content Include="assets\dragdropfileupload\filereader.js" />
     <Content Include="assets\dragdropfileupload\script.js" />
     <Content Include="assets\dragdropfileupload\style.css" />
+    <Content Include="assets\images\backgrounds\adminback.jpg" />
     <Content Include="assets\images\backgrounds\boxed_bg.png" />
     <Content Include="assets\images\backgrounds\boxed_bg_retina.png" />
+    <Content Include="assets\images\backgrounds\loginback.jpg" />
     <Content Include="assets\images\backgrounds\seamless.png" />
     <Content Include="assets\images\brands\amazon.png" />
     <Content Include="assets\images\brands\bing.png" />
@@ -259,7 +263,10 @@
     <Content Include="assets\images\logo_demo.png" />
     <Content Include="assets\images\logo_icon_light.png" />
     <Content Include="assets\images\logo_light.png" />
+    <Content Include="assets\images\piclogo.png" />
+    <Content Include="assets\images\picticklogo.png" />
     <Content Include="assets\images\signature.png" />
+    <Content Include="assets\jquery.dataTables.min.js" />
     <Content Include="assets\js\charts\c3\c3_advanced.js" />
     <Content Include="assets\js\charts\c3\c3_axis.js" />
     <Content Include="assets\js\charts\c3\c3_bars_pies.js" />
@@ -727,6 +734,19 @@
     <Content Include="assets\js\plugins\visualization\dimple\dimple.min.js" />
     <Content Include="assets\js\plugins\visualization\echarts\echarts.js" />
     <Content Include="assets\js\plugins\visualization\sparkline.min.js" />
+    <Content Include="assets\newcss\0940f25997c8e50e65e95510b30245d116f639f0\light\assets\fonts\feather\feather-icons.css" />
+    <Content Include="assets\newcss\13fc3abb600e389b43865b1fa1697fc8f5ebf063.css" />
+    <Content Include="assets\newcss\16e33a95bb46f814f87079394f72ef62972bd197\light\assets\css\atmos.min.css" />
+    <Content Include="assets\newcss\291bbeead57f19651f311362abe809b67adc3fb5.css" />
+    <Content Include="assets\newcss\30bc673ce76f73ecf02568498f6b139269f6e4c7.css" />
+    <Content Include="assets\newcss\478ccdc1892151837f9e7163badb055b8a1833a5\crisp\assets\vendor\pace\pace.css" />
+    <Content Include="assets\newcss\548117a22d5d22545a0ab2dddf8940a2e32c04ed\default\assets\fonts\materialdesignicons\materialdesignicons.min.css" />
+    <Content Include="assets\newjs\3d1965f9e8e63c62b671967aafcad6603deec90c\theme\html\assets\js\pace.min.js" />
+    <Content Include="assets\newjs\67402a3f617470ab013a6bebaa4dd07784dd9948\light\assets\js\dashboard-02.js" />
+    <Content Include="assets\newjs\9556cd6744b0b19628598270bd385082cda6a269.js" />
+    <Content Include="assets\newjs\ba78fede76f682cd388ed2abbfd1e1568e76f8a4.js" />
+    <Content Include="assets\newjs\c36248babf70a3c7ad1dcd98d4250fa60842eea9\crisp\assets\vendor\apexchart\apexcharts.min.js" />
+    <Content Include="assets\newjs\d2615b2cee9677b0a037aa64fdcf79f8a72312ac\crisp\assets\js\modal-data.js" />
     <Content Include="assets\ui-bootstrap-tpls-2.5.0.min.js" />
     <Content Include="assets\ui.select\dist\select.css" />
     <Content Include="assets\ui.select\dist\select.js" />
@@ -854,6 +874,19 @@
     <Content Include="Sound\BGTrack2.mp3" />
     <Content Include="Sound\BGTrack3.mp3" />
     <Content Include="UploadImages\AlbumCover\cover.jpg" />
+    <Content Include="UploadImages\AlbumThumb\Testing Folder\app.png" />
+    <Content Include="UploadImages\AlbumThumb\Testing Folder\cup.png" />
+    <Content Include="UploadImages\AlbumThumb\Testing Folder\Final PicTik Logo.png" />
+    <Content Include="UploadImages\AlbumThumb\Testing Folder\linked.jpg" />
+    <Content Include="UploadImages\AlbumThumb\Testing Folder\Pick N Deliver.png" />
+    <Content Include="UploadImages\AlbumThumb\Testing Folder\security.png" />
+    <Content Include="UploadImages\Album\Testing Folder\app.png" />
+    <Content Include="UploadImages\Album\Testing Folder\cup.png" />
+    <Content Include="UploadImages\Album\Testing Folder\Final PicTik Logo.png" />
+    <Content Include="UploadImages\Album\Testing Folder\linked.jpg" />
+    <Content Include="UploadImages\Album\Testing Folder\Pick N Deliver.png" />
+    <Content Include="UploadImages\Album\Testing Folder\security.png" />
+    <Content Include="UploadImages\Customer\logo.png" />
     <Content Include="UploadImages\GalleryCover\010A7402.jpg" />
     <Content Include="UploadImages\GalleryCover\3A1A4083.jpg" />
     <Content Include="UploadImages\GalleryCover\59f49b845517d724dc1564752574e022.jpeg" />
@@ -891,6 +924,7 @@
     <Compile Include="Controllers\AppAPIController.cs" />
     <Compile Include="Controllers\HomeAPIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PhotographerAPIController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -928,6 +962,9 @@
       <DependentUpon>PicTickModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Constants.cs" />
+    <Compile Include="Models\Contest.cs">
+      <DependentUpon>PicTickModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Customer.cs">
       <DependentUpon>PicTickModel.tt</DependentUpon>
     </Compile>
@@ -970,7 +1007,13 @@
     <Compile Include="Models\GetCustomerFcmTokenByGallery_Result.cs">
       <DependentUpon>PicTickModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetCustomerGalleryData_Result.cs">
+      <DependentUpon>PicTickModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetCustomerGallery_Result.cs">
+      <DependentUpon>PicTickModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetDashboardCount_Result.cs">
       <DependentUpon>PicTickModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetGalleryCustomer_Result.cs">
@@ -979,10 +1022,19 @@
     <Compile Include="Models\GetGallerySelectedCount_Result.cs">
       <DependentUpon>PicTickModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetPhotographerByStudioAndBranch_Result.cs">
+      <DependentUpon>PicTickModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetStudioAddressBranch_Result.cs">
+      <DependentUpon>PicTickModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetStudioAdvertisement_Result.cs">
       <DependentUpon>PicTickModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Notification.cs">
+      <DependentUpon>PicTickModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Photographer.cs">
       <DependentUpon>PicTickModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PicTickModel.Context.cs">
@@ -1015,6 +1067,9 @@
       <DependentUpon>PicTickModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudioAbout.cs">
+      <DependentUpon>PicTickModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StudioAddress.cs">
       <DependentUpon>PicTickModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudioSocialLink.cs">
@@ -1242,9 +1297,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="UploadImages\AlbumThumb\" />
-    <Folder Include="UploadImages\Album\" />
     <Folder Include="UploadImages\Category\" />
+    <Folder Include="UploadImages\Contest\" />
+    <Folder Include="UploadImages\Photographer\" />
     <Folder Include="UploadImages\PortfolioThumb\" />
     <Folder Include="UploadImages\StudioSocialLink\" />
     <Folder Include="UploadImages\Studio\" />

@@ -19,6 +19,9 @@ namespace PicTick.Models
         public static string FileTypeStudioSocialLinkPhotos = "StudioSocialLinkPhotos";
         public static string FileTypeVideo = "Video";
         public static string FileTypeWaterMark = "WaterMark";
+        public static string FileTypePhotographer = "Photographer";
+        public static string FileTypeCustomer = "Customer";
+        public static string FileTypeContest = "Contest";
         public static string SMSUserName = "";
         public static string SMSPassword = "";
         public static string SMSSenderID = "";
